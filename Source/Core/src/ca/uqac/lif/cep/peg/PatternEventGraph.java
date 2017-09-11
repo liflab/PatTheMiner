@@ -17,7 +17,7 @@
  */
 package ca.uqac.lif.cep.peg;
 
-import java.util.Collection;
+import java.util.HashSet;
 import java.util.Queue;
 import java.util.Set;
 
@@ -128,14 +128,36 @@ public class PatternEventGraph<S,T,U,V,W> extends SingleProcessor
 		super(1, 1);
 	}
 
-	
 	@SuppressWarnings("unchecked")
-	public void mine(Collection<Sequence<V>> sequences) throws PegException
+	public void mine(Set<Sequence<S>> sequences) throws PegException
 	{
 		Object[] result = new Object[1];
+		Set<Sequence<T>> transformed_sequences = new HashSet<Sequence<T>>();
+		for (Sequence<S> in_seq : sequences)
+		{
+			Processor pre_proc = m_preprocessing.clone();
+			Pushable p = pre_proc.getPushableInput();
+			QueueSink sink = new QueueSink();
+			try
+			{
+				Connector.connect(pre_proc, OUTPUT, sink, INPUT);
+			}
+			catch (ConnectorException e)
+			{
+				throw new PegException(e);
+			}
+			for (S event : in_seq)
+			{
+				p.push(event);
+			}
+			Queue<T> queue = (Queue<T>) sink.getQueue();
+			Sequence<T> out_seq = new Sequence<T>();
+			out_seq.addAll(queue);
+			transformed_sequences.add(out_seq);
+		}
 		try
 		{
-			m_miningFunction.compute(new Object[]{sequences}, result);
+			m_miningFunction.compute(new Object[]{transformed_sequences}, result);
 		}
 		catch (FunctionException e)
 		{

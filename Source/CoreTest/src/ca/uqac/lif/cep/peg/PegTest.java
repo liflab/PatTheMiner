@@ -23,6 +23,8 @@ import java.util.HashSet;
 import java.util.Queue;
 import java.util.Set;
 
+import org.apache.commons.math3.ml.clustering.DoublePoint;
+import org.apache.commons.math3.ml.distance.EuclideanDistance;
 import org.junit.Test;
 
 import static ca.uqac.lif.cep.Connector.INPUT;
@@ -45,7 +47,12 @@ import ca.uqac.lif.cep.ltl.TrooleanCast;
 import ca.uqac.lif.cep.numbers.Addition;
 import ca.uqac.lif.cep.numbers.Division;
 import ca.uqac.lif.cep.numbers.IsGreaterThan;
+import ca.uqac.lif.cep.numbers.IsLessThan;
 import ca.uqac.lif.cep.numbers.Subtraction;
+import ca.uqac.lif.cep.peg.ml.DistanceToClosest;
+import ca.uqac.lif.cep.peg.ml.KMeans;
+import ca.uqac.lif.cep.peg.ml.KMeansTest;
+import ca.uqac.lif.cep.peg.ml.MeanAndVariance;
 import ca.uqac.lif.cep.tmf.Fork;
 import ca.uqac.lif.cep.tmf.Passthrough;
 import ca.uqac.lif.cep.tmf.QueueSink;
@@ -181,6 +188,63 @@ public class PegTest
 		assertEquals(Troolean.Value.TRUE, outcome);
 		p.push(10); // Running avg > 0.667
 		outcome = (Troolean.Value) queue.remove();
+		assertEquals(Troolean.Value.FALSE, outcome);
+	}
+	
+	/**
+	 * We create a PEG that:
+	 * <ol>
+	 * <li>Computes the running average and variance of each sequence in a
+	 * reference set, resulting in a two-dimensional feature vector</li>
+	 * <li>Applies <i>k</i>-means clustering (with <i>k</i>=2) to find the
+	 * centroids of this set of feature vectors</li>
+	 * <li>On a sequence that is read event by event, returns {@code FALSE}
+	 * whenever the feature vector made of its running average/variance is
+	 * at an Euclidean distance of more than <i>d<sub>T</sub></i> to the
+	 * closest centroid (for some threshold <i>d<sub>T</sub></i>)</li>
+	 * </ol>
+	 * @throws PegException 
+	 * @throws ConnectorException 
+	 */
+	@SuppressWarnings("rawtypes")
+	@Test
+	public void testClustering() throws PegException, ConnectorException
+	{
+		Troolean.Value outcome;
+		Set<Sequence<Number>> sequences = KMeansTest.generateSequences();
+		PatternEventGraph<Number,DoublePoint,Set,DoublePoint,Number> peg = new PatternEventGraph<Number,DoublePoint,Set,DoublePoint,Number>();
+		peg.setPreprocessing(new MeanAndVariance());
+		peg.setMiningFunction(new KMeans(2));
+		peg.setTraceProcessor(new Passthrough(1));
+		peg.setDissimilarityFunction(new DistanceToClosest(new EuclideanDistance()));
+		peg.mine(sequences);
+		peg.setThreshold(5);
+		peg.setPartialOrder(new FunctionTree(TrooleanCast.instance, IsLessThan.instance));
+		peg.connect();
+		QueueSink sink = new QueueSink(1);
+		Connector.connect(peg, sink);
+		Pushable p = peg.getPushableInput();
+		Queue<Object> queue = sink.getQueue();
+		p.push(1);
+		outcome = (Troolean.Value) queue.remove();
+		assertEquals(Troolean.Value.TRUE, outcome);
+		p.push(1);
+		outcome = (Troolean.Value) queue.remove();
+		assertEquals(Troolean.Value.TRUE, outcome);
+		p.push(1);
+		outcome = (Troolean.Value) queue.remove();
+		assertEquals(Troolean.Value.TRUE, outcome);
+		// Now we push events that will slowly pull the running average
+		// away from the cluster centroids, so that the distance to the closest
+		// center becomes larger than the threshold
+		p.push(5);
+		outcome = (Troolean.Value) queue.remove(); // avg = 2, close enough
+		assertEquals(Troolean.Value.TRUE, outcome);
+		p.push(5);
+		outcome = (Troolean.Value) queue.remove(); // avg = 2.6, still close enough
+		assertEquals(Troolean.Value.TRUE, outcome);
+		p.push(23);
+		outcome = (Troolean.Value) queue.remove(); // avg = 6, too far
 		assertEquals(Troolean.Value.FALSE, outcome);
 	}
 	
