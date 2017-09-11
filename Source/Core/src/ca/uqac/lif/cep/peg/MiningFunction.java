@@ -32,7 +32,7 @@ public abstract class MiningFunction<T,U> extends UnaryFunction<Set,U>
 	}
 
 	@Override
-	public U getValue(Set x) throws FunctionException
+	public final U getValue(Set x) throws FunctionException
 	{
 		Set<Sequence<T>> sequences = new HashSet<Sequence<T>>();
 		for (Object o : x)
