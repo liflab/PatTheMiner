@@ -20,6 +20,8 @@ package ca.uqac.lif.cep.peg;
 import java.util.HashSet;
 import java.util.Queue;
 import java.util.Set;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import static ca.uqac.lif.cep.Connector.INPUT;
 import static ca.uqac.lif.cep.Connector.LEFT;
@@ -31,6 +33,8 @@ import ca.uqac.lif.cep.Processor;
 import ca.uqac.lif.cep.ProcessorException;
 import ca.uqac.lif.cep.Pushable;
 import ca.uqac.lif.cep.SingleProcessor;
+import ca.uqac.lif.cep.concurrency.ThreadManager;
+import ca.uqac.lif.cep.concurrency.ThreadManager.ManagedThread;
 import ca.uqac.lif.cep.functions.BinaryFunction;
 import ca.uqac.lif.cep.functions.Function;
 import ca.uqac.lif.cep.functions.FunctionException;
@@ -51,6 +55,11 @@ import ca.uqac.lif.cep.tmf.QueueSink;
  */
 public class PatternEventGraph<S,T,U,V,W> extends SingleProcessor
 {
+	/**
+	 * A manager for the threads used in this PEG
+	 */
+	protected transient ThreadManager m_manager;
+	
 	/**
 	 * A processor that performs a pre-processing of every trace.
 	 * Input type: {@code S}, output type: {@code T}. By default,
@@ -126,6 +135,7 @@ public class PatternEventGraph<S,T,U,V,W> extends SingleProcessor
 	public PatternEventGraph()
 	{
 		super(1, 1);
+		m_manager = ThreadManager.defaultManager;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -133,28 +143,22 @@ public class PatternEventGraph<S,T,U,V,W> extends SingleProcessor
 	{
 		Object[] result = new Object[1];
 		Set<Sequence<T>> transformed_sequences = new HashSet<Sequence<T>>();
+		Lock lock = new ReentrantLock();
 		for (Sequence<S> in_seq : sequences)
 		{
-			Processor pre_proc = m_preprocessing.clone();
-			Pushable p = pre_proc.getPushableInput();
-			QueueSink sink = new QueueSink();
-			try
+			PreprocessRunnable pr = new PreprocessRunnable(in_seq, transformed_sequences, lock);
+			ManagedThread t = m_manager.tryNewThread(pr);
+			if (t == null)
 			{
-				Connector.connect(pre_proc, OUTPUT, sink, INPUT);
+				mine(in_seq, transformed_sequences, lock);
 			}
-			catch (ConnectorException e)
+			else
 			{
-				throw new PegException(e);
+				pr.setThread(t);
+				t.start();
 			}
-			for (S event : in_seq)
-			{
-				p.push(event);
-			}
-			Queue<T> queue = (Queue<T>) sink.getQueue();
-			Sequence<T> out_seq = new Sequence<T>();
-			out_seq.addAll(queue);
-			transformed_sequences.add(out_seq);
 		}
+		m_manager.waitForAll();
 		try
 		{
 			m_miningFunction.compute(new Object[]{transformed_sequences}, result);
@@ -164,6 +168,33 @@ public class PatternEventGraph<S,T,U,V,W> extends SingleProcessor
 			throw new PegException(e);
 		}
 		m_pattern = (U) result[0];
+	}
+	
+	protected void mine(Sequence<S> in_seq, Set<Sequence<T>> transformed_sequences, Lock lock)
+	{
+		Processor pre_proc = m_preprocessing.clone();
+		Pushable p = pre_proc.getPushableInput();
+		QueueSink sink = new QueueSink();
+		try
+		{
+			Connector.connect(pre_proc, OUTPUT, sink, INPUT);
+		}
+		catch (ConnectorException e)
+		{
+			// TODO: Silently fail
+			return;
+		}
+		for (S event : in_seq)
+		{
+			p.push(event);
+		}
+		@SuppressWarnings("unchecked")
+		Queue<T> queue = (Queue<T>) sink.getQueue();
+		Sequence<T> out_seq = new Sequence<T>();
+		out_seq.addAll(queue);
+		lock.lock();
+		transformed_sequences.add(out_seq);
+		lock.unlock();
 	}
 	
 	/**
@@ -313,4 +344,54 @@ public class PatternEventGraph<S,T,U,V,W> extends SingleProcessor
 		return m_pattern;
 	}
 	
+	/**
+	 * Sets the thread manager to be used by this PEG.
+	 * @param manager The manager
+	 * @return This PEG
+	 */
+	public PatternEventGraph<S,T,U,V,W> setManager(ThreadManager manager)
+	{
+		m_manager = manager;
+		return this;
+	}
+	
+	protected class PreprocessRunnable implements Runnable
+	{
+		protected final Sequence<S> m_sequence;
+		
+		protected final Lock m_lock;
+		
+		protected final Set<Sequence<T>> m_transformedSequences;
+		
+		protected ManagedThread m_thread = null;
+		
+		public PreprocessRunnable(Sequence<S> sequence, Set<Sequence<T>> out_set, Lock lock)
+		{
+			super();
+			m_sequence = sequence;
+			m_lock = lock;
+			m_transformedSequences = out_set;
+		}
+		
+		public void setThread(ManagedThread thread)
+		{
+			m_thread = thread;
+		}
+		
+		@Override
+		public void run()
+		{
+			mine(m_sequence, m_transformedSequences, m_lock);
+			if (m_thread != null)
+			{
+				m_thread.dispose();
+			}
+		}
+	}
+
+	@Override
+	public void reset()
+	{
+		super.reset();		
+	}
 }

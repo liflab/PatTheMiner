@@ -22,11 +22,11 @@ import java.util.Set;
 
 import org.apache.commons.math3.ml.clustering.DoublePoint;
 
-import ca.uqac.lif.cep.peg.MiningFunction;
+import ca.uqac.lif.cep.peg.SetMiningFunction;
 import ca.uqac.lif.cep.peg.Sequence;
 
 @SuppressWarnings("rawtypes")
-public abstract class ClusteringFunction extends MiningFunction<DoublePoint,Set>
+public abstract class ClusteringFunction extends SetMiningFunction<DoublePoint,Set>
 {
 	protected ClusteringFunction()
 	{

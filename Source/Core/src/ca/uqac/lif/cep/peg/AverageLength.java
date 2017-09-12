@@ -23,7 +23,7 @@ import java.util.Set;
  * Mining function that computes the average values in a set of
  * sequences.
  */
-public class AverageLength extends MiningFunction<Object,Number>
+public class AverageLength extends SetMiningFunction<Object,Number>
 {
 	public static final AverageLength instance = new AverageLength();
 	

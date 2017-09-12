@@ -23,10 +23,17 @@ import java.util.Set;
 import ca.uqac.lif.cep.functions.FunctionException;
 import ca.uqac.lif.cep.functions.UnaryFunction;
 
+/**
+ * Generic object representing the mining of a pattern on a set of sequences.
+ * @author Sylvain Hallé
+ *
+ * @param <T> The type of the events in the input sequences
+ * @param <U> The type of the pattern that is mined from the set of sequences
+ */
 @SuppressWarnings("rawtypes")
-public abstract class MiningFunction<T,U> extends UnaryFunction<Set,U>
+public abstract class SetMiningFunction<T,U> extends UnaryFunction<Set,U>
 {
-	public MiningFunction(Class<U> u)
+	public SetMiningFunction(Class<U> u)
 	{
 		super(Set.class, u);
 	}

@@ -38,6 +38,7 @@ import ca.uqac.lif.cep.Processor;
 import ca.uqac.lif.cep.ProcessorException;
 import ca.uqac.lif.cep.Pushable;
 import ca.uqac.lif.cep.UniformProcessor;
+import ca.uqac.lif.cep.concurrency.ThreadManager;
 import ca.uqac.lif.cep.functions.CumulativeFunction;
 import ca.uqac.lif.cep.functions.CumulativeProcessor;
 import ca.uqac.lif.cep.functions.FunctionProcessor;
@@ -73,7 +74,7 @@ public class PegTest
 	public void testAverageLength() throws PegException, ConnectorException
 	{
 		Troolean.Value outcome;
-		Set<Sequence<Number>> sequences = generateSequences();
+		Set<Sequence<Number>> sequences = generateSequences(3);
 		PatternEventGraph<Number,Number,Number,Number,Number> peg = new PatternEventGraph<Number,Number,Number,Number,Number>();
 		peg.setMiningFunction(AverageLength.instance);
 		peg.setTraceProcessor(new Counter());
@@ -112,7 +113,7 @@ public class PegTest
 	public void testAverageValues() throws PegException, ConnectorException
 	{
 		Troolean.Value outcome;
-		Set<Sequence<Number>> sequences = generateSequences();
+		Set<Sequence<Number>> sequences = generateSequences(3);
 		PatternEventGraph<Number,Number,Number,Number,Number> peg = new PatternEventGraph<Number,Number,Number,Number,Number>();
 		peg.setMiningFunction(AverageValues.instance);
 		peg.setTraceProcessor(new Passthrough(1));
@@ -139,6 +140,45 @@ public class PegTest
 	}
 	
 	/**
+	 * Same as {@link #testAverageValues()}, except that we give a thread
+	 * manager to check if multi-threading works.
+	 * @throws PegException
+	 * @throws ConnectorException
+	 */
+	@Test
+	public void testMultithread() throws PegException, ConnectorException
+	{
+		Set<Sequence<Number>> sequences = generateSequences(2000);
+		PatternEventGraph<Number,Number,Number,Number,Number> peg = new PatternEventGraph<Number,Number,Number,Number,Number>();
+		peg.setMiningFunction(AverageValues.instance);
+		peg.setTraceProcessor(new Passthrough(1));
+		peg.setDissimilarityFunction(Subtraction.instance);
+		long time_beg = System.currentTimeMillis();
+		peg.mine(sequences);
+		long time_end = System.currentTimeMillis();
+		long duration_monothread = time_end - time_beg;
+		// Now do the same thing with 2 threads
+		peg.reset();
+		ThreadManager manager = new ThreadManager(2);
+		Thread manager_thread = new Thread(manager);
+		peg.setManager(manager);
+		manager_thread.start();
+		time_beg = System.currentTimeMillis();
+		peg.mine(sequences);
+		time_end = System.currentTimeMillis();
+		//long duration_twothreads = time_end - time_beg;
+		//System.out.println("Requested : " + manager.getNumThreadsRequested());
+		//System.out.println("Granted : " + manager.getNumThreadsGranted());
+		// We deem that multi-threading works if we have been granted more than 4 threadsthe time taken is
+		assertTrue(manager.getNumThreadsGranted() > 4);
+		//float speedup = (float) duration_monothread / (float) duration_twothreads;
+		//System.out.println(duration_monothread);
+		//System.out.println(duration_twothreads);
+		//System.out.println(speedup);
+		//assertTrue(speedup > 1.5);		
+	}
+	
+	/**
 	 * We create a PEG that compares the values in the current trace to
 	 * the average of the values in the traces from some dummy set.
 	 * The PEG should output false
@@ -152,7 +192,7 @@ public class PegTest
 	public void testAverageRunning() throws PegException, ConnectorException
 	{
 		Troolean.Value outcome;
-		Set<Sequence<Number>> sequences = generateSequences();
+		Set<Sequence<Number>> sequences = generateSequences(3);
 		PatternEventGraph<Number,Number,Number,Number,Number> peg = new PatternEventGraph<Number,Number,Number,Number,Number>();
 		peg.setMiningFunction(AverageValues.instance);
 		GroupProcessor running_average = new GroupProcessor(1, 1);
@@ -248,10 +288,10 @@ public class PegTest
 		assertEquals(Troolean.Value.FALSE, outcome);
 	}
 	
-	public static Set<Sequence<Number>> generateSequences()
+	public static Set<Sequence<Number>> generateSequences(int how_many)
 	{
 		Set<Sequence<Number>> sequences = new HashSet<Sequence<Number>>();
-		for (int i = 1; i <= 3; i++)
+		for (int i = 1; i <= how_many; i++)
 		{
 			Sequence<Number> seq = new Sequence<Number>();
 			for (int j = 0; j < i; j++)
