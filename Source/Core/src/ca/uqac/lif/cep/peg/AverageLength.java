@@ -20,7 +20,7 @@ package ca.uqac.lif.cep.peg;
 import java.util.Set;
 
 /**
- * Mining function that computes the average values in a set of
+ * Mining function that computes the average length of a set of
  * sequences.
  */
 public class AverageLength extends SetMiningFunction<Object,Number>
