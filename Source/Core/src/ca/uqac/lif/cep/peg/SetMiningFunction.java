@@ -24,7 +24,7 @@ import ca.uqac.lif.cep.functions.FunctionException;
 import ca.uqac.lif.cep.functions.UnaryFunction;
 
 /**
- * Generic object representing the mining of a pattern on a set of sequences.
+ * Extracts a pattern from a set of sequences.
  * @author Sylvain Hallé
  *
  * @param <T> The type of the events in the input sequences
@@ -55,6 +55,7 @@ public abstract class SetMiningFunction<T,U> extends UnaryFunction<Set,U>
 	 * Performs mining on a set of sequences
 	 * @param sequences The sequences
 	 * @return
+	 * @throws FunctionException 
 	 */
-	public abstract U mine(Set<Sequence<T>> sequences);
+	public abstract U mine(Set<Sequence<T>> sequences) throws FunctionException;
 }
