@@ -28,7 +28,10 @@ import ca.uqac.lif.cep.tmf.Fork;
 /**
  * Processor that outputs a n-dimensional {@code DoublePoint} out of a
  * stream of numbers, containing the first <i>n</i> running statistical
- * moments of the stream.
+ * moments of the stream. It is represented graphically as follows:
+ * <p>
+ * <img src="{@docRoot}/doc-files/RunningMoments.png" alt="Processor">
+ * 
  * @author Sylvain Hallé
  */
 public class RunningMoments extends GroupProcessor

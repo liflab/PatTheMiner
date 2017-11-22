@@ -23,7 +23,7 @@ import ca.uqac.lif.cep.tmf.Window;
  * @param <Q> The type returned by the beta processor
  * @param <R> The type returned by the distance function
  */
-public class TooFarFromTrend<P,Q,R> extends GroupProcessor
+public class TrendDistance<P,Q,R> extends GroupProcessor
 {
 	/**
 	 * 
@@ -34,7 +34,7 @@ public class TooFarFromTrend<P,Q,R> extends GroupProcessor
 	 * @param d
 	 * @param comp
 	 */
-	public TooFarFromTrend(P pattern, int n, Processor beta, Function delta, R d, BinaryFunction<R,R,Boolean> comp)
+	public TrendDistance(P pattern, int n, Processor beta, Function delta, R d, BinaryFunction<R,R,Boolean> comp)
 	{
 		super(1, 1);
 		try
