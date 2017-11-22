@@ -17,9 +17,14 @@
  */
 package ca.uqac.lif.cep.peg;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 
 import ca.uqac.lif.cep.functions.BinaryFunction;
+import ca.uqac.lif.cep.functions.FunctionException;
+import ca.uqac.lif.cep.functions.UnaryFunction;
 
 /**
  * Computes the distance between two maps. If <i>M</i><sub>1</sub> and
@@ -81,6 +86,36 @@ public class MapDistance extends BinaryFunction<HashMap,HashMap,Number>
 			map.put(keys_and_values[i], keys_and_values[i+1]);
 		}
 		return map;
+	}
+	
+	/**
+	 * From an array whose keys are strings, extracts a list of values,
+	 * placed in increasing key order.
+	 */	
+	public static class ToValueArray extends UnaryFunction<HashMap,ArrayList>
+	{
+		public static final transient ToValueArray instance = new ToValueArray();
+		
+		protected ToValueArray()
+		{
+			super(HashMap.class, ArrayList.class);
+		}
+
+		@SuppressWarnings("unchecked")
+		@Override
+		public ArrayList getValue(HashMap x) throws FunctionException 
+		{
+			ArrayList<Object> sorted_values = new ArrayList<Object>();
+			List<String> sorted_keys = new ArrayList<String>();
+			sorted_keys.addAll(x.keySet());
+			Collections.sort(sorted_keys);
+			for (String key : sorted_keys)
+			{
+				sorted_values.add(x.get(key));
+			}
+			return sorted_values;
+		}
+		
 	}
 
 }

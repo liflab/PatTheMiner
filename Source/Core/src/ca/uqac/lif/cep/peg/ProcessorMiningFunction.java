@@ -30,7 +30,6 @@ import ca.uqac.lif.cep.concurrency.ThreadManager;
 import ca.uqac.lif.cep.concurrency.ThreadManager.ManagedThread;
 import ca.uqac.lif.cep.functions.FunctionException;
 import ca.uqac.lif.cep.sets.Multiset;
-import ca.uqac.lif.cep.sets.ProcessOnSet;
 import ca.uqac.lif.cep.tmf.SinkLast;
 
 /**
@@ -113,17 +112,17 @@ public class ProcessorMiningFunction<T,U> extends SetMiningFunction<T,U> impleme
 			}
 		}
 		m_manager.waitForAll();
-		ProcessOnSet pos = new ProcessOnSet(m_combineProcessor);
+		m_combineProcessor.reset();
 		SinkLast sink = new SinkLast();
 		try 
 		{
-			Connector.connect(pos, sink);
+			Connector.connect(m_combineProcessor, sink);
 		}
 		catch (ConnectorException e)
 		{
 			throw new FunctionException(e);
 		}
-		Pushable p = pos.getPushableInput();
+		Pushable p = m_combineProcessor.getPushableInput();
 		p.push(m_collectedValues);
 		Object[] values = sink.getLast();
 		if (values != null)
