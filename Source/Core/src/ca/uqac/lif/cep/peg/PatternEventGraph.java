@@ -28,7 +28,6 @@ import static ca.uqac.lif.cep.Connector.LEFT;
 import static ca.uqac.lif.cep.Connector.OUTPUT;
 import static ca.uqac.lif.cep.Connector.RIGHT;
 import ca.uqac.lif.cep.Connector;
-import ca.uqac.lif.cep.Connector.ConnectorException;
 import ca.uqac.lif.cep.Processor;
 import ca.uqac.lif.cep.ProcessorException;
 import ca.uqac.lif.cep.Pushable;
@@ -55,6 +54,11 @@ import ca.uqac.lif.cep.tmf.QueueSink;
  */
 public class PatternEventGraph<S,T,U,V,W> extends SingleProcessor
 {
+	/**
+	 * Dummy UID
+	 */
+	private static final long serialVersionUID = -2439853528568558086L;
+
 	/**
 	 * A manager for the threads used in this PEG
 	 */
@@ -161,7 +165,7 @@ public class PatternEventGraph<S,T,U,V,W> extends SingleProcessor
 		m_manager.waitForAll();
 		try
 		{
-			m_miningFunction.compute(new Object[]{transformed_sequences}, result);
+			m_miningFunction.evaluate(new Object[]{transformed_sequences}, result);
 		}
 		catch (FunctionException e)
 		{
@@ -172,18 +176,10 @@ public class PatternEventGraph<S,T,U,V,W> extends SingleProcessor
 	
 	protected void mine(Sequence<S> in_seq, Set<Sequence<T>> transformed_sequences, Lock lock)
 	{
-		Processor pre_proc = m_preprocessing.clone();
+		Processor pre_proc = m_preprocessing.duplicate();
 		Pushable p = pre_proc.getPushableInput();
 		QueueSink sink = new QueueSink();
-		try
-		{
-			Connector.connect(pre_proc, OUTPUT, sink, INPUT);
-		}
-		catch (ConnectorException e)
-		{
-			// TODO: Silently fail
-			return;
-		}
+		Connector.connect(pre_proc, OUTPUT, sink, INPUT);
 		for (S event : in_seq)
 		{
 			p.push(event);
@@ -203,12 +199,11 @@ public class PatternEventGraph<S,T,U,V,W> extends SingleProcessor
 	 * once, after all the necessary elements have been specified (mining function,
 	 * trace function, dissimilarity function, partial order,
 	 * pre-processing function).
-	 * @throws ConnectorException
 	 */
-	public void connect() throws ConnectorException
+	public void connect()
 	{
 		//Processor p_alpha = m_preprocessing.clone();
-		Processor p_beta = m_preprocessing.clone();
+		Processor p_beta = m_preprocessing.duplicate();
 		m_tracePushable = p_beta.getPushableInput();
 		Connector.connect(p_beta, OUTPUT, m_traceFunction, INPUT);
 		FunctionProcessor diss_p = new FunctionProcessor(m_dissimilarityFunction);
@@ -237,7 +232,7 @@ public class PatternEventGraph<S,T,U,V,W> extends SingleProcessor
 	}
 
 	@Override
-	public Processor clone()
+	public Processor duplicate()
 	{
 		// TODO Auto-generated method stub
 		return null;

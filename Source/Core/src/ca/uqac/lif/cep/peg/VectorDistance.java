@@ -30,6 +30,11 @@ import ca.uqac.lif.cep.functions.BinaryFunction;
 @SuppressWarnings("rawtypes")
 public abstract class VectorDistance extends BinaryFunction<Vector,Vector,Number>
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5924476898720749254L;
+
 	protected VectorDistance()
 	{
 		super(Vector.class, Vector.class, Number.class);

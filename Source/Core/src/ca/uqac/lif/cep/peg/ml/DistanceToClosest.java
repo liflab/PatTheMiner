@@ -10,6 +10,10 @@ import ca.uqac.lif.cep.functions.BinaryFunction;
 @SuppressWarnings("rawtypes")
 public class DistanceToClosest extends BinaryFunction<Set, DoublePoint, Number>
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5074861152956056123L;
 	protected DistanceMeasure m_measure;
 	
 	public DistanceToClosest(DistanceMeasure measure)

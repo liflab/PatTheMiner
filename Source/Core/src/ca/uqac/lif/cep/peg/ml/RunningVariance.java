@@ -22,7 +22,6 @@ import static ca.uqac.lif.cep.Connector.LEFT;
 import static ca.uqac.lif.cep.Connector.OUTPUT;
 import static ca.uqac.lif.cep.Connector.RIGHT;
 import ca.uqac.lif.cep.Connector;
-import ca.uqac.lif.cep.Connector.ConnectorException;
 import ca.uqac.lif.cep.GroupProcessor;
 import ca.uqac.lif.cep.functions.ArgumentPlaceholder;
 import ca.uqac.lif.cep.functions.Constant;
@@ -42,28 +41,26 @@ import ca.uqac.lif.cep.tmf.Fork;
  */
 public class RunningVariance extends GroupProcessor
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6671060553021773522L;
+
 	public RunningVariance()
 	{
 		super(1, 1);
-		try
-		{
-			Fork f = new Fork(2);
-			StatMoment sm_1 = new StatMoment(1);
-			StatMoment sm_2 = new StatMoment(2);
-			Connector.connect(f, LEFT, sm_1, INPUT);
-			Connector.connect(f, RIGHT, sm_2, INPUT);
-			FunctionProcessor square = new FunctionProcessor(new FunctionTree(Power.instance, new ArgumentPlaceholder(0), new Constant(2)));
-			Connector.connect(sm_1, OUTPUT, square, INPUT);
-			FunctionProcessor minus = new FunctionProcessor(Subtraction.instance);
-			Connector.connect(square, OUTPUT, minus, RIGHT);
-			Connector.connect(sm_2, OUTPUT, minus, LEFT);
-			associateInput(INPUT, f, INPUT);
-			associateOutput(OUTPUT, minus, OUTPUT);
-			addProcessors(f, sm_1, sm_2, square, minus);
-		}
-		catch (ConnectorException e)
-		{
-			// Fail silently
-		}
+		Fork f = new Fork(2);
+		StatMoment sm_1 = new StatMoment(1);
+		StatMoment sm_2 = new StatMoment(2);
+		Connector.connect(f, LEFT, sm_1, INPUT);
+		Connector.connect(f, RIGHT, sm_2, INPUT);
+		FunctionProcessor square = new FunctionProcessor(new FunctionTree(Power.instance, new ArgumentPlaceholder(0), new Constant(2)));
+		Connector.connect(sm_1, OUTPUT, square, INPUT);
+		FunctionProcessor minus = new FunctionProcessor(Subtraction.instance);
+		Connector.connect(square, OUTPUT, minus, RIGHT);
+		Connector.connect(sm_2, OUTPUT, minus, LEFT);
+		associateInput(INPUT, f, INPUT);
+		associateOutput(OUTPUT, minus, OUTPUT);
+		addProcessors(f, sm_1, sm_2, square, minus);
 	}
 }

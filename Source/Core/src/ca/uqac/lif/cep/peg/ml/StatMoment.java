@@ -27,6 +27,11 @@ import ca.uqac.lif.cep.UniformProcessor;
  */
 public class StatMoment extends UniformProcessor
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7769980524185280772L;
+
 	protected int m_order;
 	
 	protected double m_sum;

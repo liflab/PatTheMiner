@@ -26,7 +26,6 @@ import org.apache.commons.math3.ml.clustering.DoublePoint;
 import org.apache.commons.math3.ml.clustering.KMeansPlusPlusClusterer;
 
 import ca.uqac.lif.cep.functions.UnaryFunction;
-import ca.uqac.lif.cep.sets.Multiset;
 
 /**
  * Computes the <a href="https://en.wikipedia.org/wiki/K-means_clustering"><i>K</i>-means
@@ -43,6 +42,10 @@ import ca.uqac.lif.cep.sets.Multiset;
  */
 public class KMeansFunction extends UnaryFunction<Multiset,Multiset>
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3978398886125912461L;
 	/**
 	 * The number of clusters to compute
 	 */

@@ -28,6 +28,10 @@ import org.apache.commons.math3.ml.clustering.KMeansPlusPlusClusterer;
 public class KMeans extends ClusteringFunction
 {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2837095140235044456L;
+	/**
 	 * The number of clusters to compute
 	 */
 	protected int m_k;

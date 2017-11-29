@@ -28,6 +28,11 @@ import ca.uqac.lif.cep.functions.FunctionException;
 public class JoinVectors extends Function
 {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5147207820256390437L;
+
+	/**
 	 * The input arity of this function
 	 */
 	protected int m_inArity;

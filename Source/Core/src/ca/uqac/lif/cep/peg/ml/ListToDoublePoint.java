@@ -31,6 +31,10 @@ import ca.uqac.lif.cep.functions.UnaryFunction;
 @SuppressWarnings("rawtypes")
 public class ListToDoublePoint extends UnaryFunction<ArrayList,DoublePoint>
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1520444324754482729L;
 	public static final ListToDoublePoint instance = new ListToDoublePoint();
 	
 	private ListToDoublePoint()

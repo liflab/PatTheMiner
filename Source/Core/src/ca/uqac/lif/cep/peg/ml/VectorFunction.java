@@ -33,6 +33,11 @@ import ca.uqac.lif.cep.peg.Sequence;
 @SuppressWarnings("rawtypes")
 public abstract class VectorFunction<T> extends UnaryFunction<Sequence,Sequence>
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3406455364767595046L;
+
 	public VectorFunction()
 	{
 		super(Sequence.class, Sequence.class);

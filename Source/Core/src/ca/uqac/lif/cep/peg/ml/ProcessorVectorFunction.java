@@ -22,7 +22,6 @@ import org.apache.commons.math3.ml.clustering.DoublePoint;
 import static ca.uqac.lif.cep.Connector.INPUT;
 import static ca.uqac.lif.cep.Connector.OUTPUT;
 import ca.uqac.lif.cep.Connector;
-import ca.uqac.lif.cep.Connector.ConnectorException;
 import ca.uqac.lif.cep.Processor;
 import ca.uqac.lif.cep.Pushable;
 import ca.uqac.lif.cep.peg.Sequence;
@@ -40,6 +39,10 @@ import ca.uqac.lif.cep.tmf.SinkLast;
  */
 public class ProcessorVectorFunction<T> extends VectorFunction<T>
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -95729489115981511L;
 	protected Processor m_processor;
 	
 	public ProcessorVectorFunction(Processor p)
@@ -51,18 +54,10 @@ public class ProcessorVectorFunction<T> extends VectorFunction<T>
 	@Override
 	public DoublePoint computeVector(Sequence<T> sequence)
 	{
-		Processor proc = m_processor.clone();
+		Processor proc = m_processor.duplicate();
 		Pushable p = proc.getPushableInput();
 		SinkLast sink = new SinkLast();
-		try
-		{
-			Connector.connect(proc, OUTPUT, sink, INPUT);
-		}
-		catch (ConnectorException e1)
-		{
-			// Can't connect: return an empty point
-			return new DoublePoint(new double[]{});
-		}
+		Connector.connect(proc, OUTPUT, sink, INPUT);
 		for (T e : sequence)
 		{
 			p.push(e);

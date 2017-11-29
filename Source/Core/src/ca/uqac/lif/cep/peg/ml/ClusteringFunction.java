@@ -28,6 +28,11 @@ import ca.uqac.lif.cep.peg.Sequence;
 @SuppressWarnings("rawtypes")
 public abstract class ClusteringFunction extends SetMiningFunction<DoublePoint,Set>
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5327879467251187952L;
+
 	protected ClusteringFunction()
 	{
 		super(Set.class);
