@@ -36,11 +36,6 @@ import ca.uqac.lif.cep.tmf.Fork;
  */
 public class MeanAndVariance extends GroupProcessor
 {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -6043957816082489158L;
-
 	public MeanAndVariance()
 	{
 		super(1, 1);

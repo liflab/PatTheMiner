@@ -33,11 +33,6 @@ import ca.uqac.lif.cep.functions.UnaryFunction;
 @SuppressWarnings("rawtypes")
 public abstract class SetMiningFunction<T,U> extends UnaryFunction<Set,U>
 {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -6895170777692128662L;
-
 	public SetMiningFunction(Class<U> u)
 	{
 		super(Set.class, u);

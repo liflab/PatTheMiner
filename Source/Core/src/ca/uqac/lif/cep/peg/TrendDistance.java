@@ -25,11 +25,6 @@ import ca.uqac.lif.cep.tmf.Window;
 public class TrendDistance<P,Q,R> extends GroupProcessor
 {
 	/**
-	 * Dummy UID
-	 */
-	private static final long serialVersionUID = 8480298807338952130L;
-
-	/**
 	 * 
 	 * @param pattern
 	 * @param n

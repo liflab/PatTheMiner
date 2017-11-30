@@ -25,10 +25,6 @@ import java.util.Set;
  */
 public class AverageValues extends SetMiningFunction<Number,Number>
 {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -817942745172116941L;
 	public static final AverageValues instance = new AverageValues();
 	
 	private AverageValues()

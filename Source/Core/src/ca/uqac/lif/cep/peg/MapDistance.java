@@ -44,10 +44,6 @@ import ca.uqac.lif.cep.functions.UnaryFunction;
 public class MapDistance extends BinaryFunction<HashMap,HashMap,Number>
 {
 	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 6892304236212291698L;
-	/**
 	 * A single instance of this function
 	 */
 	public static final transient MapDistance instance = new MapDistance();
@@ -98,10 +94,6 @@ public class MapDistance extends BinaryFunction<HashMap,HashMap,Number>
 	 */	
 	public static class ToValueArray extends UnaryFunction<HashMap,ArrayList>
 	{
-		/**
-		 * 
-		 */
-		private static final long serialVersionUID = 787471508670260433L;
 		public static final transient ToValueArray instance = new ToValueArray();
 		
 		protected ToValueArray()

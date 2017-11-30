@@ -39,10 +39,6 @@ import ca.uqac.lif.cep.tmf.SinkLast;
  */
 public class ProcessorVectorFunction<T> extends VectorFunction<T>
 {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -95729489115981511L;
 	protected Processor m_processor;
 	
 	public ProcessorVectorFunction(Processor p)

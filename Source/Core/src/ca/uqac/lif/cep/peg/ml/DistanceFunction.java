@@ -12,10 +12,6 @@ import ca.uqac.lif.cep.functions.BinaryFunction;
  */
 public class DistanceFunction extends BinaryFunction<DoublePoint,DoublePoint,Double>
 {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -8709843508000000588L;
 	protected DistanceMeasure m_measure;
 	
 	public DistanceFunction(DistanceMeasure measure)

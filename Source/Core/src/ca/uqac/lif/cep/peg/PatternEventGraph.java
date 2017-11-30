@@ -55,11 +55,6 @@ import ca.uqac.lif.cep.tmf.QueueSink;
 public class PatternEventGraph<S,T,U,V,W> extends SingleProcessor
 {
 	/**
-	 * Dummy UID
-	 */
-	private static final long serialVersionUID = -2439853528568558086L;
-
-	/**
 	 * A manager for the threads used in this PEG
 	 */
 	protected transient ThreadManager m_manager;

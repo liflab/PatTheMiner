@@ -38,10 +38,6 @@ import ca.uqac.lif.cep.functions.UnaryFunction;
 public class DoublePointCast extends UnaryFunction<Object,DoublePoint>
 {
 	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 2276328301740838266L;
-	/**
 	 * The unique instance of this function
 	 */
 	public static final DoublePointCast instance = new DoublePointCast();

@@ -36,10 +36,6 @@ import ca.uqac.lif.cep.tmf.Fork;
 public class RunningMoments extends GroupProcessor
 {
 	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 8541219655574563632L;
-	/**
 	 * The number of statistical moments to compute
 	 */
 	protected int m_numMoments = 1;

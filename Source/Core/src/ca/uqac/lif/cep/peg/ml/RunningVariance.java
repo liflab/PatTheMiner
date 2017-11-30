@@ -41,11 +41,6 @@ import ca.uqac.lif.cep.tmf.Fork;
  */
 public class RunningVariance extends GroupProcessor
 {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 6671060553021773522L;
-
 	public RunningVariance()
 	{
 		super(1, 1);

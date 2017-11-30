@@ -25,10 +25,6 @@ import java.util.Set;
  */
 public class AverageLength extends SetMiningFunction<Object,Number>
 {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -7728345781356102094L;
 	public static final AverageLength instance = new AverageLength();
 	
 	private AverageLength()
