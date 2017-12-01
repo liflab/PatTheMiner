@@ -17,6 +17,7 @@
  */
 package ca.uqac.lif.cep.peg;
 
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -41,11 +42,6 @@ import ca.uqac.lif.cep.tmf.SinkLast;
 public class ProcessorMiningFunction<T,U> extends SetMiningFunction<T,U> implements ThreadManageable
 {
 	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -1867744726693897309L;
-
-	/**
 	 * The processor that is run on every trace
 	 */
 	protected Processor m_traceProcessor;
@@ -64,7 +60,7 @@ public class ProcessorMiningFunction<T,U> extends SetMiningFunction<T,U> impleme
 	/**
 	 * A set that will gather the values computed by each trace processor
 	 */
-	protected Multiset m_collectedValues;
+	protected Set<U> m_collectedValues;
 
 	protected U m_defaultValue = null;
 
@@ -80,7 +76,7 @@ public class ProcessorMiningFunction<T,U> extends SetMiningFunction<T,U> impleme
 		m_traceProcessor = trace_processor;
 		m_combineProcessor = combine_processor;
 		m_manager = ThreadManager.defaultManager;
-		m_collectedValues = new Multiset();
+		m_collectedValues = new HashSet<U>();
 		m_defaultValue = default_value;
 	}
 
@@ -149,7 +145,8 @@ public class ProcessorMiningFunction<T,U> extends SetMiningFunction<T,U> impleme
 			{
 				p.push(event);
 			}
-			Object o = sink.getLast()[0];
+			@SuppressWarnings("unchecked")
+			U o = (U) sink.getLast()[0];
 			if (o != null)
 			{
 				m_collectedValues.add(o);
