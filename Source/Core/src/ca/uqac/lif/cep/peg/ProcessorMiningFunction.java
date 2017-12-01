@@ -22,6 +22,7 @@ import java.util.Iterator;
 import java.util.Set;
 
 import ca.uqac.lif.cep.Connector;
+import ca.uqac.lif.cep.Connector.ConnectorException;
 import ca.uqac.lif.cep.Processor;
 import ca.uqac.lif.cep.Pushable;
 import ca.uqac.lif.cep.concurrency.ExceptionRunnable;
@@ -60,15 +61,15 @@ public class ProcessorMiningFunction<T,U> extends SetMiningFunction<T,U> impleme
 	/**
 	 * A set that will gather the values computed by each trace processor
 	 */
-	protected Set<U> m_collectedValues;
-
+	protected HashSet<U> m_collectedValues;
+	
 	protected U m_defaultValue = null;
 
 	public ProcessorMiningFunction(Processor trace_processor, Processor combine_processor)
 	{
 		this(trace_processor, combine_processor, null);
 	}
-
+	
 	@SuppressWarnings("unchecked")
 	public ProcessorMiningFunction(Processor trace_processor, Processor combine_processor, U default_value)
 	{
@@ -79,7 +80,7 @@ public class ProcessorMiningFunction<T,U> extends SetMiningFunction<T,U> impleme
 		m_collectedValues = new HashSet<U>();
 		m_defaultValue = default_value;
 	}
-
+	
 	public void setDefaultValue(U value)
 	{
 		m_defaultValue = value;
@@ -113,7 +114,14 @@ public class ProcessorMiningFunction<T,U> extends SetMiningFunction<T,U> impleme
 		m_manager.waitForAll();
 		m_combineProcessor.reset();
 		SinkLast sink = new SinkLast();
-		Connector.connect(m_combineProcessor, sink);
+		try 
+		{
+			Connector.connect(m_combineProcessor, sink);
+		}
+		catch (ConnectorException e)
+		{
+			throw new FunctionException(e);
+		}
 		Pushable p = m_combineProcessor.getPushableInput();
 		p.push(m_collectedValues);
 		Object[] values = sink.getLast();
@@ -135,7 +143,7 @@ public class ProcessorMiningFunction<T,U> extends SetMiningFunction<T,U> impleme
 		}
 
 		@Override
-		public void tryToRun() 
+		public void tryToRun() throws ConnectorException 
 		{
 			Processor proc = m_traceProcessor.duplicate();
 			SinkLast sink = new SinkLast();

@@ -40,7 +40,8 @@ import ca.uqac.lif.cep.functions.UnaryFunction;
  * 
  * @author Sylvain Hallé
  */
-public class KMeansFunction extends UnaryFunction<Multiset,Multiset>
+@SuppressWarnings("rawtypes")
+public class KMeansFunction extends UnaryFunction<Set,Set>
 {
 	/**
 	 * 
@@ -58,12 +59,12 @@ public class KMeansFunction extends UnaryFunction<Multiset,Multiset>
 	 */
 	public KMeansFunction(int k)
 	{
-		super(Multiset.class, Multiset.class);
+		super(Set.class, Set.class);
 		m_k = k;
 	}
 	
 	@Override
-	public Multiset getValue(Multiset points)
+	public Set<?> getValue(Set points)
 	{
 		KMeansPlusPlusClusterer<DoublePoint> clusterer = new KMeansPlusPlusClusterer<DoublePoint>(m_k);
 		Set<DoublePoint> d_points = new HashSet<DoublePoint>();
@@ -72,7 +73,7 @@ public class KMeansFunction extends UnaryFunction<Multiset,Multiset>
 			d_points.add(DoublePointCast.getDoublePoint(o));
 		}
 		List<CentroidCluster<DoublePoint>> clusters = clusterer.cluster(d_points);
-		Multiset centers = new Multiset();
+		Set<DoublePoint> centers = new HashSet<DoublePoint>();
 		for (CentroidCluster<DoublePoint> cluster : clusters)
 		{
 			centers.add((DoublePoint) cluster.getCenter());

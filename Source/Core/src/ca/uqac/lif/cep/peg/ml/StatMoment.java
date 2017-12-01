@@ -61,7 +61,7 @@ public class StatMoment extends UniformProcessor
 	}
 
 	@Override
-	public StatMoment clone()
+	public StatMoment duplicate()
 	{
 		return new StatMoment(m_order);
 	}
