@@ -44,10 +44,6 @@ import ca.uqac.lif.cep.functions.UnaryFunction;
 public class KMeansFunction extends UnaryFunction<Set,Set>
 {
 	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 3978398886125912461L;
-	/**
 	 * The number of clusters to compute
 	 */
 	protected int m_k;

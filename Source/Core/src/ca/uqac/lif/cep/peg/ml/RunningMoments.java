@@ -21,7 +21,7 @@ import static ca.uqac.lif.cep.Connector.INPUT;
 import static ca.uqac.lif.cep.Connector.OUTPUT;
 import ca.uqac.lif.cep.Connector;
 import ca.uqac.lif.cep.GroupProcessor;
-import ca.uqac.lif.cep.functions.FunctionProcessor;
+import ca.uqac.lif.cep.functions.ApplyFunction;
 import ca.uqac.lif.cep.tmf.Fork;
 
 /**
@@ -46,12 +46,12 @@ public class RunningMoments extends GroupProcessor
 		m_numMoments = num_moments;
 		Fork f = new Fork(m_numMoments);
 		associateInput(INPUT, f, INPUT);
-		FunctionProcessor join = new FunctionProcessor(new JoinVectors(m_numMoments));
+		ApplyFunction join = new ApplyFunction(new JoinVectors(m_numMoments));
 		for (int i = 1; i <= m_numMoments; i++)
 		{
 			StatMoment avg = new StatMoment(i);
 			Connector.connect(f, i - 1, avg, INPUT);
-			FunctionProcessor cast = new FunctionProcessor(DoublePointCast.instance);
+			ApplyFunction cast = new ApplyFunction(DoublePointCast.instance);
 			Connector.connect(avg, OUTPUT, cast, INPUT);
 			Connector.connect(cast, OUTPUT, join, i - 1);
 			addProcessors(avg, cast);

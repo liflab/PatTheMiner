@@ -23,8 +23,8 @@ import static ca.uqac.lif.cep.Connector.OUTPUT;
 import static ca.uqac.lif.cep.Connector.RIGHT;
 import ca.uqac.lif.cep.Connector;
 import ca.uqac.lif.cep.GroupProcessor;
-import ca.uqac.lif.cep.functions.ArgumentPlaceholder;
-import ca.uqac.lif.cep.functions.FunctionProcessor;
+import ca.uqac.lif.cep.functions.StreamVariable;
+import ca.uqac.lif.cep.functions.ApplyFunction;
 import ca.uqac.lif.cep.functions.FunctionTree;
 import ca.uqac.lif.cep.tmf.Fork;
 
@@ -46,9 +46,9 @@ public class MeanAndVariance extends GroupProcessor
 		RunningVariance var = new RunningVariance();
 		Connector.connect(f, RIGHT, var, INPUT);
 		FunctionTree join = new FunctionTree(new JoinVectors(2),
-				new FunctionTree(DoublePointCast.instance, new ArgumentPlaceholder(0)),
-				new FunctionTree(DoublePointCast.instance, new ArgumentPlaceholder(1)));
-		FunctionProcessor join_p = new FunctionProcessor(join);
+				new FunctionTree(DoublePointCast.instance, new StreamVariable(0)),
+				new FunctionTree(DoublePointCast.instance, new StreamVariable(1)));
+		ApplyFunction join_p = new ApplyFunction(join);
 		Connector.connect(avg, OUTPUT, join_p, LEFT);
 		Connector.connect(var, OUTPUT, join_p, RIGHT);
 		associateOutput(OUTPUT, join_p, OUTPUT);

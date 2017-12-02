@@ -6,11 +6,11 @@ import static ca.uqac.lif.cep.Connector.OUTPUT;
 import ca.uqac.lif.cep.Connector;
 import ca.uqac.lif.cep.GroupProcessor;
 import ca.uqac.lif.cep.Processor;
-import ca.uqac.lif.cep.functions.ArgumentPlaceholder;
+import ca.uqac.lif.cep.functions.StreamVariable;
 import ca.uqac.lif.cep.functions.BinaryFunction;
 import ca.uqac.lif.cep.functions.Constant;
 import ca.uqac.lif.cep.functions.Function;
-import ca.uqac.lif.cep.functions.FunctionProcessor;
+import ca.uqac.lif.cep.functions.ApplyFunction;
 import ca.uqac.lif.cep.functions.FunctionTree;
 import ca.uqac.lif.cep.tmf.Window;
 
@@ -38,13 +38,13 @@ public class TrendDistance<P,Q,R> extends GroupProcessor
 		super(1, 1);
 		Window wp = new Window(beta, n);
 		associateInput(INPUT, wp, INPUT);
-		FunctionProcessor distance = new FunctionProcessor(new FunctionTree(delta,
+		ApplyFunction distance = new ApplyFunction(new FunctionTree(delta,
 				new Constant(pattern),
-				new ArgumentPlaceholder(0)
+				new StreamVariable(0)
 				));
 		Connector.connect(wp, distance);
-		FunctionProcessor too_far = new FunctionProcessor(new FunctionTree(comp,
-				new ArgumentPlaceholder(0),
+		ApplyFunction too_far = new ApplyFunction(new FunctionTree(comp,
+				new StreamVariable(0),
 				new Constant(d)
 				));
 		Connector.connect(distance, too_far);
