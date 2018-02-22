@@ -1,6 +1,6 @@
 /*
     A BeepBeep palette for mining event traces
-    Copyright (C) 2017 Sylvain Hallé
+    Copyright (C) 2017 Sylvain Hallï¿½
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Lesser General Public License as published
@@ -41,7 +41,7 @@ import ca.uqac.lif.cep.UniformProcessor;
 import ca.uqac.lif.cep.concurrency.ThreadManager;
 import ca.uqac.lif.cep.functions.CumulativeFunction;
 import ca.uqac.lif.cep.functions.CumulativeProcessor;
-import ca.uqac.lif.cep.functions.FunctionProcessor;
+import ca.uqac.lif.cep.functions.ApplyFunction;
 import ca.uqac.lif.cep.functions.FunctionTree;
 import ca.uqac.lif.cep.ltl.Troolean;
 import ca.uqac.lif.cep.ltl.TrooleanCast;
@@ -203,7 +203,7 @@ public class PegTest
 			Counter cnt = new Counter(1);
 			Connector.connect(f, LEFT, sum, INPUT);
 			Connector.connect(f, RIGHT, cnt, INPUT);
-			FunctionProcessor div = new FunctionProcessor(Division.instance);
+			ApplyFunction div = new ApplyFunction(Division.instance);
 			Connector.connect(sum, OUTPUT, div, LEFT);
 			Connector.connect(cnt, OUTPUT, div, RIGHT);
 			running_average.associateOutput(OUTPUT, div, OUTPUT);
