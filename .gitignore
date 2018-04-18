@@ -15,7 +15,7 @@
 # Auto-generated folders
 /doc/
 /lib/
-/deps/
+/dep/
 /tests/
 
 # Top-level jar, but not jars in subfolders (if any)

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+  Configuration file for AntRun.
+  
+  Use this file to override the default properties contained
+  in build.xml. For example, to override the build.jar.filename
+  property (which sets the name of the compiled jar file), add
+  an element
+  
+  <jar>
+    <filename>foo</filename>
+  </jar>
+  
+  inside the <build> element.
+  
+  **Caveat emptor:** in some cases, changing this file and running ant
+  again will result in Ant using a cached version of the old file! Run
+  "ant dummy" to make sure that the correct data is being read. Otherwise
+  you might need to run "ant clean" and start over.
+-->
+<build>
+  <!-- Uncomment any of these if you want to override the build
+       script's default values -->
+
+  <!-- The project's name -->
+  <name>Pat The Miner</name>
+  
+  <!-- The project's author. Currently this only
+  shows up in the footer of the Javadoc documentation. -->
+  <!-- <author>Marty McFly</author> -->
+  
+  <!-- The project's main class -->
+  <mainclass>ca.uqac.lif.cep.peg.TrendDistance</mainclass>
+  
+  <!--
+    Write JAR dependencies here.
+  -->
+  <dependencies>
+    <dependency>
+      <!-- This entry points to a nonexistent class on purpose, to test
+      whether the detection/download of dependencies works. Delete this in
+      a real-world project.
+      -->
+      <name>Apache Commons Math</name>
+      <classname>org.apache.commons.math3.ml.clustering.Cluster</classname>
+      <files>
+        <zip>http://mirror.csclub.uwaterloo.ca/apache/commons/math/binaries/commons-math3-3.6.1-bin.zip</zip>
+      </files>
+    </dependency>
+  </dependencies>
+</build>
