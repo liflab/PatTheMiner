@@ -98,7 +98,7 @@ public class JoinVectors extends Function
 	}
 
 	@Override
-	public JoinVectors duplicate()
+	public JoinVectors duplicate(boolean with_state)
 	{
 		return new JoinVectors(m_inArity);
 	}

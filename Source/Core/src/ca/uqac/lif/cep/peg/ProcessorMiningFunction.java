@@ -17,18 +17,22 @@
  */
 package ca.uqac.lif.cep.peg;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 import ca.uqac.lif.cep.Connector;
 import ca.uqac.lif.cep.Connector.ConnectorException;
 import ca.uqac.lif.cep.Processor;
+import ca.uqac.lif.cep.ProcessorException;
 import ca.uqac.lif.cep.Pushable;
-import ca.uqac.lif.cep.concurrency.ExceptionRunnable;
-import ca.uqac.lif.cep.concurrency.ThreadManageable;
-import ca.uqac.lif.cep.concurrency.ThreadManager;
-import ca.uqac.lif.cep.concurrency.ThreadManager.ManagedThread;
 import ca.uqac.lif.cep.functions.FunctionException;
 import ca.uqac.lif.cep.tmf.SinkLast;
 
@@ -40,7 +44,7 @@ import ca.uqac.lif.cep.tmf.SinkLast;
  * @param <T> The type of the events in the input sequences
  * @param <U>The type of the pattern that is mined from the set of sequences
  */
-public class ProcessorMiningFunction<T,U> extends SetMiningFunction<T,U> implements ThreadManageable
+public class ProcessorMiningFunction<T,U> extends SetMiningFunction<T,U>
 {
 	/**
 	 * The processor that is run on every trace
@@ -56,7 +60,7 @@ public class ProcessorMiningFunction<T,U> extends SetMiningFunction<T,U> impleme
 	/**
 	 * A thread manager
 	 */
-	protected ThreadManager m_manager;
+	protected ExecutorService m_service;
 
 	/**
 	 * A set that will gather the values computed by each trace processor
@@ -76,9 +80,10 @@ public class ProcessorMiningFunction<T,U> extends SetMiningFunction<T,U> impleme
 		super((Class<U>) combine_processor.getOutputType(0).getClass());
 		m_traceProcessor = trace_processor;
 		m_combineProcessor = combine_processor;
-		m_manager = ThreadManager.defaultManager;
+		m_service = null;
 		m_collectedValues = new HashSet<U>();
 		m_defaultValue = default_value;
+		m_service = Executors.newCachedThreadPool();
 	}
 	
 	public void setDefaultValue(U value)
@@ -86,10 +91,9 @@ public class ProcessorMiningFunction<T,U> extends SetMiningFunction<T,U> impleme
 		m_defaultValue = value;
 	}
 
-	@Override
-	public void setThreadManager(ThreadManager manager)
+	public void setThreadManager(ExecutorService manager)
 	{
-		m_manager = manager;
+		m_service = manager;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -97,21 +101,29 @@ public class ProcessorMiningFunction<T,U> extends SetMiningFunction<T,U> impleme
 	public Object mine(@SuppressWarnings("rawtypes") Set sequences) throws FunctionException
 	{
 		Iterator<Sequence<T>> it = sequences.iterator();
+		List<Future<U>> futures = new ArrayList<Future<U>>();
 		while (it.hasNext())
 		{
 			Sequence<T> seq = it.next();
-			ProcessorRunnable pr = new ProcessorRunnable(seq);
-			ManagedThread th = m_manager.tryNewThread(pr);
-			if (th != null)
+			SequenceCallable pr = new SequenceCallable(seq);
+			futures.add(m_service.submit(pr));
+		}
+		for (Future<U> fu : futures)
+		{
+			try 
 			{
-				th.start();
+				U u = fu.get();
+				m_collectedValues.add(u);
 			}
-			else
+			catch (InterruptedException e) 
 			{
-				pr.run();
+				throw new ProcessorException(e);
+			}
+			catch (ExecutionException e) 
+			{
+				throw new ProcessorException(e);
 			}
 		}
-		m_manager.waitForAll();
 		m_combineProcessor.reset();
 		SinkLast sink = new SinkLast();
 		try 
@@ -132,18 +144,18 @@ public class ProcessorMiningFunction<T,U> extends SetMiningFunction<T,U> impleme
 		return m_defaultValue;
 	}
 
-	protected class ProcessorRunnable extends ExceptionRunnable
+	protected class SequenceCallable implements Callable<U>
 	{
 		protected Sequence<T> m_sequence;
 
-		public ProcessorRunnable(Sequence<T> sequence)
+		public SequenceCallable(Sequence<T> sequence)
 		{
 			super();
 			m_sequence = sequence;
 		}
 
 		@Override
-		public void tryToRun() throws ConnectorException 
+		public U call() throws ConnectorException 
 		{
 			Processor proc = m_traceProcessor.duplicate();
 			SinkLast sink = new SinkLast();
@@ -155,10 +167,7 @@ public class ProcessorMiningFunction<T,U> extends SetMiningFunction<T,U> impleme
 			}
 			@SuppressWarnings("unchecked")
 			U o = (U) sink.getLast()[0];
-			if (o != null)
-			{
-				m_collectedValues.add(o);
-			}
+			return o;
 		}		
 	}
 }
