@@ -17,11 +17,16 @@
  */
 package ca.uqac.lif.cep.peg;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 import ca.uqac.lif.cep.Connector;
 import ca.uqac.lif.cep.Connector.ConnectorException;
@@ -51,11 +56,6 @@ public class ProcessorMiningFunction<T,U> extends SetMiningFunction<T,U>
 	 * "trace processor"
 	 */
 	protected Processor m_combineProcessor;
-
-	/**
-	 * A thread manager
-	 */
-	protected ExecutorService m_service;
 
 	/**
 	 * A set that will gather the values computed by each trace processor
