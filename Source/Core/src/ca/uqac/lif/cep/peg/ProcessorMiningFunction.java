@@ -17,16 +17,11 @@
  */
 package ca.uqac.lif.cep.peg;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 
 import ca.uqac.lif.cep.Connector;
 import ca.uqac.lif.cep.Connector.ConnectorException;
@@ -67,7 +62,15 @@ public class ProcessorMiningFunction<T,U> extends SetMiningFunction<T,U>
 	 */
 	protected HashSet<U> m_collectedValues;
 	
+	/**
+	 * The default value returned by the mining function
+	 */
 	protected U m_defaultValue = null;
+	
+	/**
+	 * An executor service to run multiple mining functions in parallel
+	 */
+	protected ExecutorService m_service;
 
 	public ProcessorMiningFunction(Processor trace_processor, Processor combine_processor)
 	{
