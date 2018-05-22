@@ -58,16 +58,19 @@ public class ProcessorMiningFunction<T,U> extends SetMiningFunction<T,U>
 	protected Processor m_combineProcessor;
 
 	/**
-	 * A thread manager
-	 */
-	protected ExecutorService m_service;
-
-	/**
 	 * A set that will gather the values computed by each trace processor
 	 */
 	protected HashSet<U> m_collectedValues;
 	
+	/**
+	 * The default value returned by the mining function
+	 */
 	protected U m_defaultValue = null;
+	
+	/**
+	 * An executor service to run multiple mining functions in parallel
+	 */
+	protected ExecutorService m_service;
 
 	public ProcessorMiningFunction(Processor trace_processor, Processor combine_processor)
 	{
