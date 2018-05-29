@@ -37,6 +37,14 @@
   -->
   <dependencies>
     <dependency>
+      <name>BeepBeep</name>
+      <classname>ca.uqac.lif.cep.Processor</classname>
+      <files>
+        <zip>https://github.com/liflab/beepbeep-3/releases/download/v0.8.1-alpha/beepbeep-3-0.8.1-alpha.zip</zip>
+      </files>
+      <bundle>false</bundle>
+    </dependency>
+    <dependency>
       <!-- This entry points to a nonexistent class on purpose, to test
       whether the detection/download of dependencies works. Delete this in
       a real-world project.
@@ -46,6 +54,7 @@
       <files>
         <zip>http://mirror.csclub.uwaterloo.ca/apache/commons/math/binaries/commons-math3-3.6.1-bin.zip</zip>
       </files>
+      <bundle>true</bundle>
     </dependency>
   </dependencies>
 </build>
