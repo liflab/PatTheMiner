@@ -17,6 +17,7 @@
  */
 package ca.uqac.lif.cep.peg.ml;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -41,7 +42,7 @@ import ca.uqac.lif.cep.functions.UnaryFunction;
  * @author Sylvain Hallé
  */
 @SuppressWarnings("rawtypes")
-public class KMeansFunction extends UnaryFunction<Set,Set>
+public class KMeansFunction extends UnaryFunction<Collection,Set>
 {
 	/**
 	 * The number of clusters to compute
@@ -55,12 +56,12 @@ public class KMeansFunction extends UnaryFunction<Set,Set>
 	 */
 	public KMeansFunction(int k)
 	{
-		super(Set.class, Set.class);
+		super(Collection.class, Set.class);
 		m_k = k;
 	}
 	
 	@Override
-	public Set<?> getValue(Set points)
+	public Set<?> getValue(Collection points)
 	{
 		KMeansPlusPlusClusterer<DoublePoint> clusterer = new KMeansPlusPlusClusterer<DoublePoint>(m_k);
 		Set<DoublePoint> d_points = new HashSet<DoublePoint>();

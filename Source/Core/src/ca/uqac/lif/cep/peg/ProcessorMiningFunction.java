@@ -25,7 +25,6 @@ import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 import ca.uqac.lif.cep.Connector;
@@ -46,131 +45,148 @@ import ca.uqac.lif.cep.tmf.SinkLast;
  */
 public class ProcessorMiningFunction<T,U> extends SetMiningFunction<T,U>
 {
-	/**
-	 * The processor that is run on every trace
-	 */
-	protected Processor m_traceProcessor;
+  /**
+   * The processor that is run on every trace
+   */
+  protected Processor m_traceProcessor;
 
-	/**
-	 * The processor used to combine the values computed by each
-	 * "trace processor"
-	 */
-	protected Processor m_combineProcessor;
+  /**
+   * The processor used to combine the values computed by each
+   * "trace processor"
+   */
+  protected Processor m_combineProcessor;
 
-	/**
-	 * A set that will gather the values computed by each trace processor
-	 */
-	protected HashSet<U> m_collectedValues;
-	
-	/**
-	 * The default value returned by the mining function
-	 */
-	protected U m_defaultValue = null;
-	
-	/**
-	 * An executor service to run multiple mining functions in parallel
-	 */
-	protected ExecutorService m_service;
+  /**
+   * A set that will gather the values computed by each trace processor
+   */
+  protected HashSet<U> m_collectedValues;
 
-	public ProcessorMiningFunction(Processor trace_processor, Processor combine_processor)
-	{
-		this(trace_processor, combine_processor, null);
-	}
-	
-	@SuppressWarnings("unchecked")
-	public ProcessorMiningFunction(Processor trace_processor, Processor combine_processor, U default_value)
-	{
-		super((Class<U>) combine_processor.getOutputType(0).getClass());
-		m_traceProcessor = trace_processor;
-		m_combineProcessor = combine_processor;
-		m_service = null;
-		m_collectedValues = new HashSet<U>();
-		m_defaultValue = default_value;
-		m_service = Executors.newCachedThreadPool();
-	}
-	
-	public void setDefaultValue(U value)
-	{
-		m_defaultValue = value;
-	}
+  /**
+   * The default value returned by the mining function
+   */
+  protected U m_defaultValue = null;
 
-	public void setThreadManager(ExecutorService manager)
-	{
-		m_service = manager;
-	}
+  /**
+   * An executor service to run multiple mining functions in parallel
+   */
+  protected ExecutorService m_service;
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public Object mine(@SuppressWarnings("rawtypes") Set sequences) throws FunctionException
-	{
-		Iterator<Sequence<T>> it = sequences.iterator();
-		List<Future<U>> futures = new ArrayList<Future<U>>();
-		while (it.hasNext())
-		{
-			Sequence<T> seq = it.next();
-			SequenceCallable pr = new SequenceCallable(seq);
-			futures.add(m_service.submit(pr));
-		}
-		for (Future<U> fu : futures)
-		{
-			try 
-			{
-				U u = fu.get();
-				m_collectedValues.add(u);
-			}
-			catch (InterruptedException e) 
-			{
-				throw new ProcessorException(e);
-			}
-			catch (ExecutionException e) 
-			{
-				throw new ProcessorException(e);
-			}
-		}
-		m_combineProcessor.reset();
-		SinkLast sink = new SinkLast();
-		try 
-		{
-			Connector.connect(m_combineProcessor, sink);
-		}
-		catch (ConnectorException e)
-		{
-			throw new FunctionException(e);
-		}
-		Pushable p = m_combineProcessor.getPushableInput();
-		p.push(m_collectedValues);
-		Object[] values = sink.getLast();
-		if (values != null)
-		{
-			return values[0];
-		}
-		return m_defaultValue;
-	}
+  public ProcessorMiningFunction(Processor trace_processor, Processor combine_processor)
+  {
+    this(trace_processor, combine_processor, null);
+  }
 
-	protected class SequenceCallable implements Callable<U>
-	{
-		protected Sequence<T> m_sequence;
+  @SuppressWarnings("unchecked")
+  public ProcessorMiningFunction(Processor trace_processor, Processor combine_processor, U default_value)
+  {
+    super((Class<U>) combine_processor.getOutputType(0).getClass());
+    m_traceProcessor = trace_processor;
+    m_combineProcessor = combine_processor;
+    m_service = null;
+    m_collectedValues = new HashSet<U>();
+    m_defaultValue = default_value;
+    m_service = null;
+  }
 
-		public SequenceCallable(Sequence<T> sequence)
-		{
-			super();
-			m_sequence = sequence;
-		}
+  public void setDefaultValue(U value)
+  {
+    m_defaultValue = value;
+  }
 
-		@Override
-		public U call() throws ConnectorException 
-		{
-			Processor proc = m_traceProcessor.duplicate();
-			SinkLast sink = new SinkLast();
-			Connector.connect(proc, sink);
-			Pushable p = proc.getPushableInput();
-			for (T event : m_sequence)
-			{
-				p.push(event);
-			}
-			@SuppressWarnings("unchecked")
-			U o = (U) sink.getLast()[0];
-			return o;
-		}		
-	}
+  public void setThreadManager(ExecutorService manager)
+  {
+    m_service = manager;
+  }
+
+  @SuppressWarnings("unchecked")
+  @Override
+  public Object mine(@SuppressWarnings("rawtypes") Set sequences) throws FunctionException
+  {
+    Iterator<Sequence<T>> it = sequences.iterator();
+    List<Future<U>> futures = new ArrayList<Future<U>>();
+    if (m_service == null)
+    {
+      // Single-threaded execution
+      while (it.hasNext())
+      {
+        Sequence<T> seq = it.next();
+        SequenceCallable pr = new SequenceCallable(seq);
+        m_collectedValues.add(pr.call());
+      }
+    }
+    else
+    {
+      // Multi-threaded execution
+      while (it.hasNext())
+      {
+        Sequence<T> seq = it.next();
+        SequenceCallable pr = new SequenceCallable(seq);
+        futures.add(m_service.submit(pr));
+      }
+      for (Future<U> fu : futures)
+      {
+        try 
+        {
+          U u = fu.get();
+          m_collectedValues.add(u);
+        }
+        catch (InterruptedException e) 
+        {
+          throw new ProcessorException(e);
+        }
+        catch (ExecutionException e) 
+        {
+          throw new ProcessorException(e);
+        }
+      }
+    }
+    m_combineProcessor.reset();
+    SinkLast sink = new SinkLast();
+    try 
+    {
+      Connector.connect(m_combineProcessor, sink);
+    }
+    catch (ConnectorException e)
+    {
+      throw new FunctionException(e);
+    }
+    Pushable p = m_combineProcessor.getPushableInput();
+    for (Object o : m_collectedValues)
+    {
+      p.push(o);
+    }
+    Object[] values = sink.getLast();
+    if (values != null)
+    {
+      return values[0];
+    }
+    return m_defaultValue;
+  }
+
+  protected class SequenceCallable implements Callable<U>
+  {
+    protected Sequence<T> m_sequence;
+
+    public SequenceCallable(Sequence<T> sequence)
+    {
+      super();
+      m_sequence = sequence;
+    }
+
+    @Override
+    public U call() throws ConnectorException 
+    {
+      Processor proc = m_traceProcessor.duplicate();
+      SinkLast sink = new SinkLast();
+      Connector.connect(proc, sink);
+      Pushable p = proc.getPushableInput();
+      for (T event : m_sequence)
+      {
+        p.push(event);
+      }
+      @SuppressWarnings("unchecked")
+      U o = (U) sink.getLast()[0];
+      return o;
+    }		
+  }
 }
