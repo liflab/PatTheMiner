@@ -23,6 +23,7 @@ import java.util.HashSet;
 import java.util.Set;
 import org.apache.commons.math3.ml.clustering.DoublePoint;
 import org.apache.commons.math3.ml.distance.EuclideanDistance;
+import org.apache.commons.math3.ml.distance.ManhattanDistance;
 import org.junit.Test;
 
 /**
@@ -68,6 +69,37 @@ public class SetPointDistanceTest
     Set<DoublePoint> c2 = getSet(getPoint(1, 1), getPoint(3, 1));
     double d = getDistance(spd, c1, c2);
     assertEquals(1d, d, 0.01d);
+  }
+  
+  @Test
+  public void test5a()
+  {
+    SetPointDistance spd = new SetPointDistance(new PointDistance(new EuclideanDistance()));
+    Set<DoublePoint> c1 = getSet(getPoint(1, 1), getPoint(2, 8), getPoint(3, 2), getPoint(6, 5));
+    Set<DoublePoint> c2 = getSet(getPoint(1, 3), getPoint(3, 4), getPoint(4, 7), getPoint(9, 6));
+    double d = getDistance(spd, c1, c2);
+    assertEquals(9.4d, d, 0.01d);
+  }
+  
+  @Test
+  public void test5b()
+  {
+    // Same as 5a, but with different ordering of points
+    SetPointDistance spd = new SetPointDistance(new PointDistance(new EuclideanDistance()));
+    Set<DoublePoint> c1 = getSet(getPoint(1, 1), getPoint(2, 8), getPoint(3, 2), getPoint(6, 5));
+    Set<DoublePoint> c2 = getSet(getPoint(9, 6), getPoint(1, 3), getPoint(4, 7), getPoint(3, 4));
+    double d = getDistance(spd, c1, c2);
+    assertEquals(9.4d, d, 0.01d);
+  }
+  
+  @Test
+  public void test6()
+  {
+    SetPointDistance spd = new SetPointDistance(new PointDistance(new ManhattanDistance()));
+    Set<DoublePoint> c1 = getSet(getPoint(1, 1), getPoint(2, 8), getPoint(3, 2), getPoint(6, 5));
+    Set<DoublePoint> c2 = getSet(getPoint(1, 3), getPoint(3, 4), getPoint(4, 7), getPoint(9, 6));
+    double d = getDistance(spd, c1, c2);
+    assertEquals(11d, d, 0.01d);
   }
   
   public static double getDistance(SetPointDistance spd, Set<DoublePoint> c1, Set<DoublePoint> c2)
