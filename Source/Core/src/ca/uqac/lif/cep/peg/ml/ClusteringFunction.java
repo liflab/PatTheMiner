@@ -21,8 +21,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.apache.commons.math3.ml.clustering.DoublePoint;
-
-import ca.uqac.lif.cep.peg.SetMiningFunction;
 import ca.uqac.lif.cep.peg.Sequence;
 
 @SuppressWarnings("rawtypes")

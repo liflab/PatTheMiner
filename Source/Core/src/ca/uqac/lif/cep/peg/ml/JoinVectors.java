@@ -94,6 +94,7 @@ public class JoinVectors extends Function
 	@Override
 	public void reset()
 	{
+	  super.reset();
 		m_size = -1;
 	}
 

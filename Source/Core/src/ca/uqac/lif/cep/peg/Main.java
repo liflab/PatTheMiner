@@ -17,6 +17,12 @@
  */
 package ca.uqac.lif.cep.peg;
 
+/**
+ * A "dummy" main class; it is only there to make the generated
+ * JAR runnable from the command line. In such a case, it simply
+ * displays a message indicating that the JAR is a library, not
+ * intended to be used as a stand-alone program.
+ */
 public class Main
 {
   /**
@@ -25,7 +31,7 @@ public class Main
   protected static final String VERSION_STRING = Main.class.getPackage().getImplementationVersion();
   
   /**
-   * Main method
+   * Main method.
    * @param args Command line arguments
    */
   public static void main(String[] args)

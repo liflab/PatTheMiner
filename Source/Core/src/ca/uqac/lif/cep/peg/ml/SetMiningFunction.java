@@ -15,13 +15,14 @@
     You should have received a copy of the GNU Lesser General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package ca.uqac.lif.cep.peg;
+package ca.uqac.lif.cep.peg.ml;
 
 import java.util.HashSet;
 import java.util.Set;
 
 import ca.uqac.lif.cep.functions.FunctionException;
 import ca.uqac.lif.cep.functions.UnaryFunction;
+import ca.uqac.lif.cep.peg.Sequence;
 
 /**
  * Extracts a pattern from a set of sequences.

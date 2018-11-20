@@ -22,6 +22,12 @@ import org.apache.commons.math3.ml.distance.DistanceMeasure;
 
 import ca.uqac.lif.cep.functions.BinaryFunction;
 
+/**
+ * Computes a distance metric over two <i>n</i>-dimensional points.
+ * This class is parameterized by the <em>distance measure</em> to
+ * be used; examples of distance measures are Euclidean distance or
+ * Manhattan distance (among others).
+ */
 public class PointDistance extends BinaryFunction<DoublePoint,DoublePoint,Number>
 {
   /**

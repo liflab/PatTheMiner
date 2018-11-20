@@ -32,7 +32,15 @@ import ca.uqac.lif.cep.functions.FunctionTree;
 import ca.uqac.lif.cep.tmf.Window;
 
 /**
- * 
+ * Processor that evaluates in real-time whether a trend computed
+ * over an input event stream is "close enough" to a reference
+ * trend.
+ * <p>
+ * Graphically, the computation made by the {@link TrendDistance}
+ * processor can be represented as follows:
+ * <p>
+ * <img src="{@docRoot}/doc-files/TrendDistance.png" alt="TrendDistance">
+ * <p>
  * @author Sylvain Hallé
  *
  * @param <P> The type of the pattern

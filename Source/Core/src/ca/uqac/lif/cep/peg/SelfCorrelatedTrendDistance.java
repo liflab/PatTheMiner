@@ -43,9 +43,29 @@ import ca.uqac.lif.cep.tmf.Window;
  */
 public class SelfCorrelatedTrendDistance<P,Q,R> extends GroupProcessor
 {
-  public SelfCorrelatedTrendDistance(int m, int n, Processor beta, Function delta, R d, BinaryFunction<R,R,Boolean> comp)
+  /*@ require m > 0
+   *@ require n > 0
+   */
+  public SelfCorrelatedTrendDistance(int m, int n, /*@ non_null @*/ Processor beta, /*@ non_null @*/ Function delta, R d, /*@ non_null @*/ BinaryFunction<R,R,Boolean> comp)
   {
     super(1, 1);
+    build(m, n, beta, delta, d, comp);
+  }
+
+  /*@ require m > 0
+   *@ require n > 0
+   */
+  public SelfCorrelatedTrendDistance(int m, int n, /*@ non_null @*/ Processor beta, /*@ non_null @*/ Function delta)
+  {
+    super(1, 1);
+    build(m, n, beta, delta, null, null);
+  }
+
+  /*@ require m > 0
+   *@ require n > 0
+   */
+  protected void build(int m, int n, /*@ non_null @*/ Processor beta, /*@ non_null @*/ Function delta, /*@ null @*/ R d, /*@ null @*/ BinaryFunction<R,R,Boolean> comp)
+  {
     Fork fork = new Fork(2);
     associateInput(INPUT, fork, INPUT);
     Trim trim = new Trim(m);
@@ -57,12 +77,20 @@ public class SelfCorrelatedTrendDistance<P,Q,R> extends GroupProcessor
     ApplyFunction distance = new ApplyFunction(delta);
     Connector.connect(win1, OUTPUT, distance, TOP);
     Connector.connect(win2, OUTPUT, distance, BOTTOM);
-    ApplyFunction too_far = new ApplyFunction(new FunctionTree(comp,
-        new StreamVariable(0),
-        new Constant(d)
-        ));
-    Connector.connect(distance, too_far);
-    associateOutput(OUTPUT, too_far, OUTPUT);
-    addProcessors(fork, trim, win1, win2, distance, too_far);
+    if (d != null && comp == null)
+    {
+      ApplyFunction too_far = new ApplyFunction(new FunctionTree(comp,
+          new StreamVariable(0),
+          new Constant(d)
+          ));
+      Connector.connect(distance, too_far);
+      associateOutput(OUTPUT, too_far, OUTPUT);
+      addProcessors(fork, trim, win1, win2, distance, too_far);
+    }
+    else
+    {
+      associateOutput(OUTPUT, distance, OUTPUT);
+      addProcessors(fork, trim, win1, win2, distance);
+    }
   }
 }

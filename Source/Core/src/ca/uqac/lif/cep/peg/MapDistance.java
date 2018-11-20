@@ -67,6 +67,14 @@ public class MapDistance extends BinaryFunction<HashMap,HashMap,Number>
 			}
 			distance += Math.abs(n1 - n2);
 		}
+		for (Object k: y.keySet())
+    {
+		  // We count only entries in y that are not in x
+      if (!x.containsKey(k))
+      {
+        distance += Math.abs(((Number) y.get(k)).intValue());
+      }
+    }
 		return distance;
 	}
 
