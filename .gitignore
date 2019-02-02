@@ -13,10 +13,10 @@
 .DS_Store
 
 # Auto-generated folders
-/doc/
-/lib/
-/dep/
-/tests/
+**/doc/
+**/lib/
+**/dep/
+**/tests/
 
 # Top-level jar, but not jars in subfolders (if any)
 *.jar
