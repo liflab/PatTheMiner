@@ -22,22 +22,62 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import ca.uqac.lif.cep.Connector;
+import ca.uqac.lif.cep.Pushable;
 import ca.uqac.lif.cep.tmf.SinkLast;
 import weka.classifiers.Classifier;
 import weka.classifiers.trees.Id3;
 import weka.core.Attribute;
+import weka.core.Instance;
 
 public class UpdateClassifierTest
 {
+  /**
+   * Comparing doubles with assertEquals requires a precision parameter
+   */
+  protected static final double EPSILON = 0.001d;
+  
   @Test
-  public void testUpdate1()
+  public void testUpdate1() throws Exception
   {
+    Attribute[] attributes = new Attribute[] {new Attribute("a"), UpdateClassifier.createAttribute("class", "A", "B")};
     Classifier cl = new Id3();
     Classifier cl_out;
-    UpdateClassifier uc = new UpdateClassifier(cl, "test", new Attribute("a"), new Attribute("class"));
+    UpdateClassifier uc = new UpdateClassifier(cl, "test", attributes);
     SinkLast sink = new SinkLast();
     Connector.connect(uc, sink);
+    Pushable p = uc.getPushableInput();
+    Object[] input_array = new Object[] {10, "A"};
+    p.push(input_array);
     cl_out = (Classifier) sink.getLast()[0];
-    
+    assertNotNull(cl_out);
+    // Create an instance and check what the classifier does with it
+    Instance inst = UpdateClassifier.createInstanceFromArray(uc.getDataset(), new Object[] {10, null}, attributes);
+    double d = cl_out.classifyInstance(inst);
+    assertEquals(0, d, EPSILON); // a=10 should be associated to class A
+  }
+  
+  @Test
+  public void testUpdate2() throws Exception
+  {
+    double d;
+    Instance inst;
+    Attribute[] attributes = new Attribute[] {UpdateClassifier.createAttribute("A", "foo", "bar"), UpdateClassifier.createAttribute("class", "Y", "Z")};
+    Classifier cl = new Id3();
+    Classifier cl_out;
+    UpdateClassifier uc = new UpdateClassifier(cl, "test", attributes);
+    SinkLast sink = new SinkLast();
+    Connector.connect(uc, sink);
+    Pushable p = uc.getPushableInput();
+    p.push(new Object[] {"foo", "Y"});
+    p.push(new Object[] {"bar", "Z"});
+    cl_out = (Classifier) sink.getLast()[0];
+    assertNotNull(cl_out);
+    // Create an instance and check what the classifier does with it
+    inst = UpdateClassifier.createInstanceFromArray(uc.getDataset(), new Object[] {"foo", null}, attributes);
+    d = cl_out.classifyInstance(inst);
+    assertEquals(0, d, EPSILON); // A=foo should be associated to class Y
+    inst = UpdateClassifier.createInstanceFromArray(uc.getDataset(), new Object[] {"bar", null}, attributes);
+    d = cl_out.classifyInstance(inst);
+    assertEquals(1, d, EPSILON); // A=bar should be associated to class Z
   }
 }
