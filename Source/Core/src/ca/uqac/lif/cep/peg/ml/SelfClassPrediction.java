@@ -17,17 +17,34 @@
  */
 package ca.uqac.lif.cep.peg.ml;
 
+import static ca.uqac.lif.cep.Connector.BOTTOM;
+import static ca.uqac.lif.cep.Connector.INPUT;
+import static ca.uqac.lif.cep.Connector.OUTPUT;
+import static ca.uqac.lif.cep.Connector.TOP;
 import ca.uqac.lif.cep.Connector;
 import ca.uqac.lif.cep.GroupProcessor;
 import ca.uqac.lif.cep.Processor;
-import ca.uqac.lif.cep.UniformProcessor;
-import weka.core.Instances;
+import ca.uqac.lif.cep.peg.weka.UpdateClassifier;
+import ca.uqac.lif.cep.tmf.Fork;
+import ca.uqac.lif.cep.tmf.Trim;
+import ca.uqac.lif.cep.tmf.Window;
 
-public class ClassPrediction extends GroupProcessor
+public class SelfClassPrediction extends GroupProcessor
 {
-  public ClassPrediction(Processor beta, Processor kappa, int t, int n, int m)
+  public SelfClassPrediction(Processor beta, Processor kappa, UpdateClassifier uc, int t, int n, int m)
   {
     super(1, 1);
+    Fork f1 = new Fork(2);
+    Trim trim = new Trim(t);
+    Connector.connect(f1, TOP, trim, INPUT);
+    Window win_top = new Window(kappa, n);
+    Connector.connect(trim, win_top);
+    Window win_bot = new Window(beta, m);
+    Connector.connect(f1, BOTTOM, win_bot, INPUT);
+    Fork f2 = new Fork(2);
+    Connector.connect(win_bot, f2);
+    
+    associateInput(INPUT, f1, INPUT);
   }
   
   
