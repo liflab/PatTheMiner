@@ -30,10 +30,18 @@
   <author>Sylvain Hall&#233;</author>
   
   <!-- The project's version number -->
-  <version>0.1</version>
+  <version>0.2</version>
   
   <!-- Installation folders -->
   <docdir>docs</docdir>
+  <libdir>Source/Core/lib</libdir>
+  <depdir>Source/Core/dep</depdir>
+  <srcdir>Source/Core/src</srcdir>
+  <test>
+    <libdir>Source/CoreTest/lib</libdir>
+    <depdir>Source/CoreTest/dep</depdir>
+    <srcdir>Source/CoreTest/src</srcdir>
+  </test>
   
   <!-- The project's main class -->
   <mainclass>ca.uqac.lif.cep.peg.Main</mainclass>
@@ -50,22 +58,64 @@
   -->
   <dependencies>
     <dependency>
+      <!-- Latest version of BeepBeep's core -->
       <name>BeepBeep</name>
       <classname>ca.uqac.lif.cep.Processor</classname>
       <files>
-        <zip>https://github.com/liflab/beepbeep-3/releases/download/v0.9-alpha/beepbeep-3-0.9-alpha.zip</zip>
+        <zip>https://github.com/liflab/beepbeep-3/releases/download/v0.10-alpha/beepbeep-3-0.10-alpha.zip</zip>
       </files>
       <bundle>false</bundle>
     </dependency>
     <dependency>
-      <!-- This entry points to a nonexistent class on purpose, to test
-      whether the detection/download of dependencies works. Delete this in
-      a real-world project.
-      -->
+      <!-- Apache Commons Math -->
       <name>Apache Commons Math</name>
       <classname>org.apache.commons.math3.ml.clustering.Cluster</classname>
       <files>
         <zip>http://mirror.csclub.uwaterloo.ca/apache/commons/math/binaries/commons-math3-3.6.1-bin.zip</zip>
+      </files>
+      <bundle>false</bundle>
+    </dependency>
+    <dependency>
+      <!-- Weka. A few notes:
+      
+           1. Version 3.6.x is downloaded, and not the latest version. This is
+           done on purpose, so that the library supports Java 1.6 (3.6 is the
+           latest Weka release that supports Java 1.6). Do not upgrade
+           to a newer version unless you know that you're doing!
+           
+           2. Weka is hosted on SourceForge, which by default does not provide
+           direct download links. Try one of the links below, which have been
+           obtained with the SourceForge Download Link Converter
+           (https://sourceforge.net/projects/sfdlc/) on 2/2/19. This is flaky,
+           as SF links tend to change from time to time.
+           
+           http://aarnet.dl.sourceforge.net/project/weka/weka-3-6/3.6.15/weka-3-6-15.zip
+           http://cdnetworks-kr-1.dl.sourceforge.net/project/weka/weka-3-6/3.6.15/weka-3-6-15.zip
+           http://cdnetworks-kr-2.dl.sourceforge.net/project/weka/weka-3-6/3.6.15/weka-3-6-15.zip
+           http://dfn.dl.sourceforge.net/project/weka/weka-3-6/3.6.15/weka-3-6-15.zip
+           http://freefr.dl.sourceforge.net/project/weka/weka-3-6/3.6.15/weka-3-6-15.zip
+           http://garr.dl.sourceforge.net/project/weka/weka-3-6/3.6.15/weka-3-6-15.zip
+           http://heanet.dl.sourceforge.net/project/weka/weka-3-6/3.6.15/weka-3-6-15.zip
+           http://hivelocity.dl.sourceforge.net/project/weka/weka-3-6/3.6.15/weka-3-6-15.zip
+           http://ignum.dl.sourceforge.net/project/weka/weka-3-6/3.6.15/weka-3-6-15.zip
+           http://internode.dl.sourceforge.net/project/weka/weka-3-6/3.6.15/weka-3-6-15.zip
+           http://iweb.dl.sourceforge.net/project/weka/weka-3-6/3.6.15/weka-3-6-15.zip
+           http://jaist.dl.sourceforge.net/project/weka/weka-3-6/3.6.15/weka-3-6-15.zip
+           http://kent.dl.sourceforge.net/project/weka/weka-3-6/3.6.15/weka-3-6-15.zip
+           http://nchc.dl.sourceforge.net/project/weka/weka-3-6/3.6.15/weka-3-6-15.zip
+           http://netcologne.dl.sourceforge.net/project/weka/weka-3-6/3.6.15/weka-3-6-15.zip
+           http://space.dl.sourceforge.net/project/weka/weka-3-6/3.6.15/weka-3-6-15.zip
+           http://superb-sea2.dl.sourceforge.net/project/weka/weka-3-6/3.6.15/weka-3-6-15.zip
+           http://switch.dl.sourceforge.net/project/weka/weka-3-6/3.6.15/weka-3-6-15.zip
+           http://tenet.dl.sourceforge.net/project/weka/weka-3-6/3.6.15/weka-3-6-15.zip
+           http://ufpr.dl.sourceforge.net/project/weka/weka-3-6/3.6.15/weka-3-6-15.zip
+           http://voxel.dl.sourceforge.net/project/weka/weka-3-6/3.6.15/weka-3-6-15.zip
+           http://waix.dl.sourceforge.net/project/weka/weka-3-6/3.6.15/weka-3-6-15.zip
+      -->
+      <name>Weka</name>
+      <classname>weka.core.Instances</classname>
+      <files>
+        <zip>http://managedway.dl.sourceforge.net/project/weka/weka-3-6/3.6.15/weka-3-6-15.zip</zip>
       </files>
       <bundle>false</bundle>
     </dependency>
