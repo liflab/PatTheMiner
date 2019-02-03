@@ -15,37 +15,41 @@
     You should have received a copy of the GNU Lesser General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package ca.uqac.lif.cep.peg.ml;
+package ca.uqac.lif.cep.peg.weka;
 
 import static ca.uqac.lif.cep.Connector.BOTTOM;
 import static ca.uqac.lif.cep.Connector.INPUT;
+import static ca.uqac.lif.cep.Connector.LEFT;
 import static ca.uqac.lif.cep.Connector.OUTPUT;
 import static ca.uqac.lif.cep.Connector.TOP;
 import ca.uqac.lif.cep.Connector;
 import ca.uqac.lif.cep.GroupProcessor;
 import ca.uqac.lif.cep.Processor;
-import ca.uqac.lif.cep.peg.weka.UpdateClassifier;
+import ca.uqac.lif.cep.functions.ApplyFunction;
 import ca.uqac.lif.cep.tmf.Fork;
-import ca.uqac.lif.cep.tmf.Trim;
+import ca.uqac.lif.cep.tmf.Insert;
 import ca.uqac.lif.cep.tmf.Window;
+import weka.classifiers.Classifier;
 
-public class SelfClassPrediction extends GroupProcessor
+/**
+ * <p>
+ * <img src="{@docRoot}/doc-files/SelfTrainedClassPrediction.png" alt="Processor chain">
+ */
+public class SelfTrainedClassPrediction extends GroupProcessor
 {
-  public SelfClassPrediction(Processor beta, Processor kappa, UpdateClassifier uc, int t, int n, int m)
+  public SelfTrainedClassPrediction(ClassifierTraining ct, Processor beta, Classifier c, int t, int n, int m)
   {
     super(1, 1);
-    Fork f1 = new Fork(2);
-    Trim trim = new Trim(t);
-    Connector.connect(f1, TOP, trim, INPUT);
-    Window win_top = new Window(kappa, n);
-    Connector.connect(trim, win_top);
-    Window win_bot = new Window(beta, m);
-    Connector.connect(f1, BOTTOM, win_bot, INPUT);
-    Fork f2 = new Fork(2);
-    Connector.connect(win_bot, f2);
-    
-    associateInput(INPUT, f1, INPUT);
+    Fork f = new Fork(2);
+    Connector.connect(f, TOP, ct, INPUT);
+    Window win = new Window(beta, m);
+    Connector.connect(f, BOTTOM, win, INPUT);
+    Insert ins = new Insert(t + n - m, c);
+    Connector.connect(ct, ins);
+    ApplyFunction af = new ApplyFunction(new WekaUtils.EvaluateClassifier(ct.getDataset(), ct.getAttributes()));
+    Connector.connect(ins, OUTPUT, af, LEFT);
+    Connector.connect(win, OUTPUT, af, BOTTOM);
+    associateInput(INPUT, f, INPUT);
+    associateOutput(OUTPUT, af, OUTPUT);
   }
-  
-  
 }

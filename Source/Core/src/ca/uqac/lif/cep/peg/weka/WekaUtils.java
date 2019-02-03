@@ -17,6 +17,10 @@
  */
 package ca.uqac.lif.cep.peg.weka;
 
+import ca.uqac.lif.cep.functions.BinaryFunction;
+import ca.uqac.lif.cep.functions.FunctionException;
+import java.util.Collection;
+import weka.classifiers.Classifier;
 import weka.core.Attribute;
 import weka.core.FastVector;
 import weka.core.Instance;
@@ -32,7 +36,7 @@ public class WekaUtils
     // Utility class, don't instantiate!
     throw new UnsupportedOperationException();
   }
-  
+
   /**
    * Creates a discrete attribute by giving its name and the list of possible
    * values. This is a utility method meant to simplify the creation of
@@ -87,7 +91,7 @@ public class WekaUtils
     }
     return ins;
   }
-  
+
   /**
    * Gets the name of a class based on its index. By default, a Weka
    * {@link Classifier} returns a <tt>double</tt> value when given an instance;
@@ -104,5 +108,125 @@ public class WekaUtils
   {
     Attribute att = attributes[attributes.length - 1];
     return att.value((int) d); 
+  }
+
+  public static class EvaluateClassifier extends BinaryFunction<Classifier,Object,String>
+  {
+    /*@ non_null @*/ protected Instances m_dataSet;
+
+    /*@ non_null @*/ protected Attribute[] m_attributes;
+
+    public EvaluateClassifier(/*@ non_null @*/ Instances dataset, Attribute ... attributes)
+    {
+      super(Classifier.class, Object.class, String.class);
+      m_dataSet = dataset;
+      m_attributes = attributes;
+    }
+
+    @Override
+    public String getValue(Classifier c, Object y)
+    {
+      Instance ins = WekaUtils.createInstanceFromArray(m_dataSet, createArray(null, y), m_attributes);
+      try
+      {
+        double d = c.classifyInstance(ins);
+        return getClassValue(d, m_attributes);
+      }
+      catch (Exception e)
+      {
+        throw new FunctionException(e);
+      }
+    }
+    
+    @Override
+    public EvaluateClassifier duplicate(boolean with_state)
+    {
+      return this;
+    }
+  }
+
+  /**
+   * Special-purpose function that merges a scalar value <i>x</i> and a
+   * collection <i>y</i> of size <i>n</i> and a* scalar value <i>x</i> into an
+   * array of size <i>n</i>+1 where
+   * <i>x</i> is placed at the last position. This is just a {@link Function}
+   * wrapper around {@link WekaUtils#createArray(Object, Object)}.
+   */
+  public static class MergeIntoArray extends BinaryFunction<Object,Object,Object[]>
+  {
+    /**
+     * A reference to a single instance of the function
+     */
+    public static final transient MergeIntoArray instance = new MergeIntoArray();
+
+    protected MergeIntoArray()
+    {
+      super(Object.class, Object.class, Object[].class);
+    }
+
+    @Override
+    public Object[] getValue(Object x, Object y)
+    {
+      return createArray(x, y);
+    }
+  }
+
+  /**
+   * Special-purpose function that merges a scalar value <i>x</i> and a
+   * collection <i>y</i> of size <i>n</i> and a* scalar value <i>x</i> into an
+   * array of size <i>n</i>+1 where
+   * <i>x</i> is placed at the last position.
+   * @param x The scalar value
+   * @param y The array
+   */
+  public static Object[] createArray(Object x, Object y)
+  {
+    if (y instanceof Collection<?>)
+    {
+      Collection<?> c = (Collection<?>) y;
+      Object[] z = new Object[c.size() + 1];
+      int i = 0;
+      for (Object o : c)
+      {
+        z[i] = o;
+        i++;
+      }
+      z[i] = x;
+      return z;
+    }
+    if (y.getClass().isArray())
+    {
+      Object[] c = (Object[]) y;
+      Object[] z = new Object[c.length + 1];
+      for (int i = 0; i < c.length; i++)
+      {
+        z[i] = c[i];
+      }
+      z[c.length] = x;
+      return z;
+    }
+    return new Object[] {y, x};    
+  }
+  
+  /**
+   * Creates a Weka {@link Instances} object for use with a classifier.
+   * @param dataset_name The name of the dataset
+   * @param capacity A capacity for the {@link Instances} object
+   * @param attributes THe list of attributes to use in this dataset
+   * @return The correctly instantiated {@link Instances} object
+   */
+  /*@ requires capacity > 0 @*/
+  /*@ non_null @*/ public static Instances createInstances(/*@ non_null @*/ String dataset_name, 
+      int capacity, Attribute ... attributes)
+  {
+    FastVector att_info = new FastVector();
+    for (Attribute att : attributes)
+    {
+      att_info.addElement(att);
+    }
+    Instances instances = new Instances(dataset_name, att_info, capacity);
+    // By convention, the last attribute is the class
+    instances.setClassIndex(attributes.length - 1);
+    return instances;
   }
 }

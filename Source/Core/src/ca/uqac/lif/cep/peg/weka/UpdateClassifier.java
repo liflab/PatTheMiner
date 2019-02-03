@@ -21,7 +21,6 @@ import ca.uqac.lif.cep.ProcessorException;
 import ca.uqac.lif.cep.UniformProcessor;
 import weka.classifiers.Classifier;
 import weka.core.Attribute;
-import weka.core.FastVector;
 import weka.core.Instance;
 import weka.core.Instances;
 
@@ -122,14 +121,7 @@ public class UpdateClassifier extends UniformProcessor
     m_dataSetName = name;
     m_attributes = attributes;
     m_updateInterval = update_interval;
-    FastVector att_info = new FastVector();
-    for (Attribute att : attributes)
-    {
-      att_info.addElement(att);
-    }
-    m_instances = new Instances(name, att_info, s_capacity);
-    // By convention, the last attribute is the class
-    m_instances.setClassIndex(attributes.length - 1);
+    m_instances = WekaUtils.createInstances(m_dataSetName, s_capacity, m_attributes);
   }
 
   /**
@@ -181,7 +173,7 @@ public class UpdateClassifier extends UniformProcessor
       throw new ProcessorException(e);
     }
     m_instances.add(new_instance);
-    if (m_eventsSinceUpdate > m_updateInterval)
+    if (m_eventsSinceUpdate >= m_updateInterval)
     {
       m_eventsSinceUpdate = 0;
     }
@@ -231,5 +223,14 @@ public class UpdateClassifier extends UniformProcessor
   /*@ pure non_null @*/ public Instances getDataset()
   {
     return m_instances;
+  }
+  
+  /**
+   * Gets the attributes handled by the classifier used by this processor
+   * @return The attributes
+   */
+  /*@ pure non_null @*/ public Attribute[] getAttributes()
+  {
+    return m_attributes;
   }
 }

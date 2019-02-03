@@ -26,18 +26,18 @@ import ca.uqac.lif.cep.Connector;
 import ca.uqac.lif.cep.GroupProcessor;
 import ca.uqac.lif.cep.Processor;
 import ca.uqac.lif.cep.functions.ApplyFunction;
-import ca.uqac.lif.cep.functions.BinaryFunction;
 import ca.uqac.lif.cep.tmf.Fork;
 import ca.uqac.lif.cep.tmf.Trim;
 import ca.uqac.lif.cep.tmf.Window;
-import java.util.Collection;
+import weka.core.Attribute;
+import weka.core.Instances;
 
 /**
  * Processor chain that trains a classifier by associating a collection of
  * feature values computed by a processor &beta; on a window, to a
  * <em>class</em> computed by a processor &kappa; on a subsequent window.
  * <p>
- * <img src="{@docRoot}/doc-files/ClassifierTraining.svg" alt="Processor chain">
+ * <img src="{@docRoot}/doc-files/ClassifierTraining.png" alt="Processor chain">
  * <p>
  * The process can be illustrated in the figure above. In this workflow, a
  * first copy of the stream is trimmed from its first $t$ events (box #1);
@@ -60,6 +60,11 @@ import java.util.Collection;
  * from various means, such as the use of a machine learning algorithm. The 
  * output of this processor is therefore a stream of <em>classifiers</em>
  * (i.e. functions).
+ * <p>
+ * When represented as a single box, this processor used the following diagram:
+ * <p>
+ * <img src="{@docRoot}/doc-files/ClassifierTraining-box.png" alt="Processor">
+ * <p>
  * @param beta The processor computing the trend over the window. This
  * corresponds to &beta; in the diagram
  * @param kappa The processor used as the oracle. This
@@ -73,10 +78,28 @@ import java.util.Collection;
  */
 public class ClassifierTraining extends GroupProcessor
 {
+  protected UpdateClassifier m_uc;
+  
+  protected Processor m_beta;
+  
+  protected Processor m_kappa;
+  
+  protected int m_t;
+  
+  protected int m_n;
+  
+  protected int m_m;
+  
   public ClassifierTraining(Processor beta, Processor kappa, 
       UpdateClassifier uc, int t, int n, int m)
   {
     super(1, 1);
+    m_beta = beta;
+    m_kappa = kappa;
+    m_uc = uc;
+    m_t = t;
+    m_n = n;
+    m_m = m;
     Fork f1 = new Fork(2);
     Trim trim = new Trim(t);
     Connector.connect(f1, TOP, trim, INPUT);
@@ -84,7 +107,7 @@ public class ClassifierTraining extends GroupProcessor
     Connector.connect(trim, win_top);
     Window win_bot = new Window(beta, m);
     Connector.connect(f1, BOTTOM, win_bot, INPUT);
-    ApplyFunction merge = new ApplyFunction(MergeIntoArray.instance);
+    ApplyFunction merge = new ApplyFunction(WekaUtils.MergeIntoArray.instance);
     Connector.connect(win_top, OUTPUT, merge, TOP);
     Connector.connect(win_bot, OUTPUT, merge, BOTTOM);
     Connector.connect(merge, uc);
@@ -93,52 +116,28 @@ public class ClassifierTraining extends GroupProcessor
     associateOutput(OUTPUT, uc, OUTPUT);
   }
   
-  /**
-   * Special-purpose function that merges a scalar value <i>x</i> and a
-   * collection <i>y</i> of size <i>n</i> and a* scalar value <i>x</i> into an
-   * array of size <i>n</i>+1 where
-   * <i>x</i> is placed at the last position.
-   */
-  protected static class MergeIntoArray extends BinaryFunction<Object,Object,Object[]>
+  @Override
+  public ClassifierTraining duplicate(boolean with_state)
   {
-    /**
-     * A reference to a single instance of the function
-     */
-    public static final transient MergeIntoArray instance = new MergeIntoArray();
-    
-    protected MergeIntoArray()
-    {
-      super(Object.class, Object.class, Object[].class);
-    }
-
-    @Override
-    public Object[] getValue(Object x, Object y)
-    {
-      if (y instanceof Collection<?>)
-      {
-        Collection<?> c = (Collection<?>) y;
-        Object[] z = new Object[c.size() + 1];
-        int i = 0;
-        for (Object o : c)
-        {
-          z[i] = o;
-          i++;
-        }
-        z[i] = x;
-        return z;
-      }
-      if (y.getClass().isArray())
-      {
-        Object[] c = (Object[]) y;
-        Object[] z = new Object[c.length + 1];
-        for (int i = 0; i < c.length; i++)
-        {
-          z[i] = c[i];
-        }
-        z[c.length] = x;
-        return z;
-      }
-      return new Object[] {y, x};
-    }
+    return new ClassifierTraining(m_beta.duplicate(with_state), m_kappa.duplicate(with_state), 
+        m_uc.duplicate(with_state), m_t, m_n, m_m);
+  }
+  
+  /**
+   * Returns the dataset associated to the internal classifier
+   * @return The dataset
+   */
+  public Instances getDataset()
+  {
+    return m_uc.getDataset();
+  }
+  
+  /**
+   * Returns the attributes associated to the internal classifier
+   * @return The attributes
+   */
+  public Attribute[] getAttributes()
+  {
+    return m_uc.getAttributes();
   }
 }
