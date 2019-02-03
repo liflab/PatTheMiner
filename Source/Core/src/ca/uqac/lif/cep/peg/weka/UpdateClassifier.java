@@ -25,15 +25,48 @@ import weka.core.FastVector;
 import weka.core.Instance;
 import weka.core.Instances;
 
+/**
+ * Updates a Weka {@link Classifier} using input events as its instances.
+ * Graphically, this processor is illustrated as follows:
+ * <p>
+ * <img src="{@docRoot}/doc-files/UpdateClassifier.png" alt="Processor">
+ * <p>
+ * The classification process is based on <i>n</i> {@link Attribute}s, named
+ * <i>A</i><sub>1</sub>, &hellip; <i>A</i><sub><i>n</i></sub>. Each attribute
+ * can be either numerical or categorical (i.e. taking its value from a list
+ * of predefined constants). One of these attributes, <i>A</i><sub><i>c</i></sub>,
+ * is called the <em>class attribute</em>. The learning process consists of
+ * finding a function (the "classifier") which can predict the value of
+ * <i>A</i><sub><i>c</i></sub> based on the value of the other attributes.
+ * <p>
+ * The processor receives an input stream made of an ordered collection
+ * of <i>n</i> elements. This collection can be either an array, or a
+ * descendant of the Java {@link Collection} class (ideally an ordered
+ * collection such as a {@link List}). This collection represents an
+ * <em>instance</em>: the element at position <i>i</i> in the collection
+ * corresponds to the value of attribute <i>A</i><sub><i>i</i></sub>. By
+ * convention, the class attribute is taken to be the last element of the
+ * collection.
+ * <p>
+ * Every time a new such instance is given to the processor, it creates an
+ * {@link Instance} from it, and then updates a Weka {@link Classifier} object.
+ * The processor thus produces a stream of classifiers. Since updating a
+ * classifier can be a time consuming operation, the processor can be told to
+ * accumulate instances for some time, and only update the classifier every
+ * <i>n</i> events. In all cases, the processor outputs a classifier upon every
+ * output event: either an updated classifier, or the last output classifier. 
+ */
 public class UpdateClassifier extends UniformProcessor
 {
   /**
-   * A name given to the dataset
+   * A name given to the dataset. This is because Weka requires sets of
+   * instances to be given a name.
    */
   /*@ non_null @*/ protected String m_dataSetName;
 
   /**
-   * The set of instances
+   * The set of instances. Input events will be converted into instances and
+   * accumulated into this object.
    */
   /*@ non_null @*/ protected Instances m_instances;
 
@@ -68,11 +101,14 @@ public class UpdateClassifier extends UniformProcessor
    * Creates a new update classifier processor.
    * @param c The classifier used to classify the instances. Depending on the
    * actual {@link Classifier} instance used, a different classification
-   * algorithm will be used to classify the instances.
+   * algorithm will be used to classify the instances. Please refer to Weka's
+   * documentation for information about how to create a classifier.
    * @param update_interval The number of new input events required to
    * update the classifier. Between these, the classifier from the last
-   * update will be output.
-   * @param name A name given to the dataset corresponding to the input events
+   * update will be output. By default, the interval is 1 (i.e. the processor
+   * updates the classifier upon every input event).
+   * @param name A name given to the dataset corresponding to the input events.
+   * This is because Weka requires sets of instances to be given a name.
    * @param attributes A list of {@link Attribute}s describing the elements
    * of the array given as input to the processor. The <i>i</i>-th attribute
    * object describes the contents of the <i>i</i>-th element of the input
@@ -101,8 +137,10 @@ public class UpdateClassifier extends UniformProcessor
    * upon every input event.
    * @param c The classifier used to classify the instances. Depending on the
    * actual {@link Classifier} instance used, a different classification
-   * algorithm will be used to classify the instances.
-   * @param name A name given to the dataset corresponding to the input events
+   * algorithm will be used to classify the instances. Please refer to Weka's
+   * documentation for information about how to create a classifier.
+   * @param name A name given to the dataset corresponding to the input events.
+   * This is because Weka requires sets of instances to be given a name.
    * @param attributes A list of {@link Attribute}s describing the elements
    * of the array given as input to the processor. The <i>i</i>-th attribute
    * object describes the contents of the <i>i</i>-th element of the input

@@ -15,7 +15,7 @@
     You should have received a copy of the GNU Lesser General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package ca.uqac.lif.cep.peg.ml;
+package ca.uqac.lif.cep.peg.weka;
 
 import static ca.uqac.lif.cep.Connector.BOTTOM;
 import static ca.uqac.lif.cep.Connector.INPUT;
@@ -27,7 +27,6 @@ import ca.uqac.lif.cep.GroupProcessor;
 import ca.uqac.lif.cep.Processor;
 import ca.uqac.lif.cep.functions.ApplyFunction;
 import ca.uqac.lif.cep.functions.BinaryFunction;
-import ca.uqac.lif.cep.peg.weka.UpdateClassifier;
 import ca.uqac.lif.cep.tmf.Fork;
 import ca.uqac.lif.cep.tmf.Trim;
 import ca.uqac.lif.cep.tmf.Window;
@@ -37,10 +36,34 @@ import java.util.Collection;
  * Processor chain that trains a classifier by associating a collection of
  * feature values computed by a processor &beta; on a window, to a
  * <em>class</em> computed by a processor &kappa; on a subsequent window.
- * @param beta The processor calculating the feature values on a window
- * of events. It can produce either a collection/array or a single value.
- * @param kappa The processor calculating the class from a window of
- * events.
+ * <p>
+ * <img src="{@docRoot}/doc-files/ClassifierTraining.svg" alt="Processor chain">
+ * <p>
+ * The process can be illustrated in the figure above. In this workflow, a
+ * first copy of the stream is trimmed from its first $t$ events (box #1);
+ * a sliding window of $m$ events (box #2) is submitted to a {@link Classifier},
+ * noted by &kappa; (box #3). This processor acts as an oracle, which
+ * assigns a label to each successive window of width <i>m</i> inside
+ * the stream. In a second copy of the stream, an arbitrary trend
+ * is computed over a sliding window of <i>n</i> events by a trend processor &beta;
+ * (boxes #4 and #5). This trend $a$ and the classification
+ * <i>c</i> computed from &kappa; are combined into a tuple
+ * (<i>a</i>,<i>c</i>) &in; <i>A</i> &times; <i>C</i>, where <i>A</i> is the
+ * set of trends, and <i>C</i> is the set of possible categories returned by
+ * &kappa;.
+ * <p>
+ * This stream of tuples is accumulated into a set (box #6), and this
+ * set is submitted to an {@link UpdateClassifier} processor, represented 
+ * by box #7. Upon receiving these tuples, the learning processor's task 
+ * is to update a classification function 
+ * <i>f</i> : <i>A</i> &rarr; <i>C</i>, which can be obtained 
+ * from various means, such as the use of a machine learning algorithm. The 
+ * output of this processor is therefore a stream of <em>classifiers</em>
+ * (i.e. functions).
+ * @param beta The processor computing the trend over the window. This
+ * corresponds to &beta; in the diagram
+ * @param kappa The processor used as the oracle. This
+ * corresponds to &kappa; in the diagram
  * @param uc A processor that updates a classifier based on the
  * feature/class pairs produced by &beta; and &kappa;
  * @param t The offset (in number of events) between the "feature" window

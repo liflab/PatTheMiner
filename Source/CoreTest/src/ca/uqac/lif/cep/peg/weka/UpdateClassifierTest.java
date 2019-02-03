@@ -30,13 +30,11 @@ import weka.classifiers.trees.Id3;
 import weka.core.Attribute;
 import weka.core.Instance;
 
+/**
+ * Unit tests for the {@link UpdateClassifier} processor.
+ */
 public class UpdateClassifierTest
 {
-  /**
-   * Comparing doubles with assertEquals requires a precision parameter
-   */
-  protected static final double EPSILON = 0.1d;
-  
   @Test
   public void testUpdate1() throws Exception
   {
@@ -56,7 +54,7 @@ public class UpdateClassifierTest
     // Create an instance and check what the classifier does with it
     Instance inst = WekaUtils.createInstanceFromArray(uc.getDataset(), new Object[] {10, null}, attributes);
     double d = cl_out.classifyInstance(inst);
-    assertEquals(0, d, EPSILON); // a=10 should be associated to class A
+    assertEquals("A", WekaUtils.getClassValue(d, attributes)); // a=10 should be associated to class A
   }
   
   @Test
@@ -80,9 +78,9 @@ public class UpdateClassifierTest
     // Create an instance and check what the classifier does with it
     inst = WekaUtils.createInstanceFromArray(uc.getDataset(), new Object[] {"foo", null}, attributes);
     d = cl_out.classifyInstance(inst);
-    assertEquals(0, d, EPSILON); // A=foo should be associated to class Y
+    assertEquals("Y", WekaUtils.getClassValue(d, attributes)); // A=foo should be associated to class Y
     inst = WekaUtils.createInstanceFromArray(uc.getDataset(), new Object[] {"bar", null}, attributes);
     d = cl_out.classifyInstance(inst);
-    assertEquals(1, d, EPSILON); // A=bar should be associated to class Z
+    assertEquals("Z", WekaUtils.getClassValue(d, attributes)); // A=bar should be associated to class Z
   }
 }

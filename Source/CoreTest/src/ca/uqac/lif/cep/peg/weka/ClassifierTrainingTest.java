@@ -20,7 +20,6 @@ package ca.uqac.lif.cep.peg.weka;
 import ca.uqac.lif.cep.Connector;
 import ca.uqac.lif.cep.Pushable;
 import ca.uqac.lif.cep.functions.ApplyFunction;
-import ca.uqac.lif.cep.peg.ml.ClassifierTraining;
 import ca.uqac.lif.cep.tmf.SinkLast;
 import ca.uqac.lif.cep.util.NthElement;
 import static org.junit.Assert.*;
@@ -30,13 +29,11 @@ import weka.classifiers.trees.Id3;
 import weka.core.Attribute;
 import weka.core.Instance;
 
+/**
+ * Unit tests for the {@link ClassifierTraining} processor.
+ */
 public class ClassifierTrainingTest
 {
-  /**
-   * Comparing doubles with assertEquals requires a precision parameter
-   */
-  protected static final double EPSILON = 0.1d;
-  
   /**
    * Simple test. Input events are arrays made of 0/1 (attribute "A")
    * and a Boolean (attribute "B"). The classifier is trained by trying to
@@ -65,16 +62,16 @@ public class ClassifierTrainingTest
     assertNotNull(cl_out);
     // The classifier should associate (0,?) to class T (index 0)
     inst = WekaUtils.createInstanceFromArray(uc.getDataset(), new Object[] {"0", null}, attributes);
-    assertEquals(0, cl_out.classifyInstance(inst), EPSILON);
+    assertEquals("true", WekaUtils.getClassValue(cl_out.classifyInstance(inst), attributes));
     // Push (1,F)
     p.push(new Object[] {"1", "false"});
     cl_out = (Classifier) sink.getLast()[0];
     assertNotNull(cl_out);
     // The classifier should associate (0,?) to class T (index 0)
     inst = WekaUtils.createInstanceFromArray(uc.getDataset(), new Object[] {"0", null}, attributes);
-    assertEquals(0, cl_out.classifyInstance(inst), EPSILON);
+    assertEquals("true", WekaUtils.getClassValue(cl_out.classifyInstance(inst), attributes));
     // The classifier should associate (1,?) to class F (index 1)
     inst = WekaUtils.createInstanceFromArray(uc.getDataset(), new Object[] {"1", null}, attributes);
-    assertEquals(1, cl_out.classifyInstance(inst), EPSILON);
+    assertEquals("false", WekaUtils.getClassValue(cl_out.classifyInstance(inst), attributes));
   }
 }

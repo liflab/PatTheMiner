@@ -27,7 +27,7 @@ import org.apache.commons.math3.ml.distance.ManhattanDistance;
 import org.junit.Test;
 
 /**
- * Unit tests for the set point distance 
+ * Unit tests for the {@link SetPointDistance} function.
  */
 public class SetPointDistanceTest
 {
