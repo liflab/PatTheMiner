@@ -22,7 +22,9 @@ import static org.junit.Assert.*;
 import ca.uqac.lif.cep.Connector;
 import ca.uqac.lif.cep.Pushable;
 import ca.uqac.lif.cep.functions.ApplyFunction;
+import ca.uqac.lif.cep.functions.FunctionTree;
 import ca.uqac.lif.cep.tmf.SinkLast;
+import ca.uqac.lif.cep.util.Bags;
 import ca.uqac.lif.cep.util.NthElement;
 import org.junit.Test;
 import weka.classifiers.Classifier;
@@ -46,7 +48,7 @@ public class SelfTrainedClassPredictionTest
     ApplyFunction beta = new ApplyFunction(new NthElement(0));
     ApplyFunction kappa = new ApplyFunction(new NthElement(1));
     ClassifierTraining ct = new ClassifierTraining(beta.duplicate(), kappa.duplicate(), uc, t, n, m);
-    SelfTrainedClassPrediction stcp = new SelfTrainedClassPrediction(ct, beta.duplicate(), new Id3(), t, n, m);
+    SelfTrainedClassPrediction stcp = new SelfTrainedClassPrediction(ct, beta.duplicate(), t, n, m);
     SinkLast sink = new SinkLast();
     Connector.connect(stcp, sink);
     Pushable p = stcp.getPushableInput();
@@ -63,22 +65,31 @@ public class SelfTrainedClassPredictionTest
   {
     int t = 1, m = 1, n = 1;
     Attribute[] attributes = new Attribute[] {
-        WekaUtils.createAttribute("A", "foo", "bar"), 
+        WekaUtils.createAttribute("A", "foo", "bar"),
+        WekaUtils.createAttribute("B", "0", "1"), 
         WekaUtils.createAttribute("class", "Y", "Z")};
     Classifier cl = new Id3();
     UpdateClassifier uc = new UpdateClassifier(cl, "test", attributes);
-    ApplyFunction beta = new ApplyFunction(new NthElement(0));
-    ApplyFunction kappa = new ApplyFunction(new NthElement(1));
+    ApplyFunction beta = new ApplyFunction(new FunctionTree(
+        new Bags.ToArray(String.class, String.class),
+        new NthElement(0),
+        new NthElement(1)));
+    ApplyFunction kappa = new ApplyFunction(new NthElement(2));
     ClassifierTraining ct = new ClassifierTraining(beta.duplicate(), kappa.duplicate(), uc, t, n, m);
-    SelfTrainedClassPrediction stcp = new SelfTrainedClassPrediction(ct, beta.duplicate(), new Id3(), t, n, m);
+    SelfTrainedClassPrediction stcp = new SelfTrainedClassPrediction(ct, beta.duplicate(), t, n, m);
     SinkLast sink = new SinkLast();
     Connector.connect(stcp, sink);
     Pushable p = stcp.getPushableInput();
-    p.push(new Object[] {"foo", "Y"});
+    p.push(new Object[] {"foo", "0", "Y"});
+    assertEquals(0l, uc.getInstanceCount());
+    assertNull(sink.getLast()); // The chain does not output a class before t+n-m events
+    p.push(new Object[] {"bar", "1", "Y"});
+    assertEquals(1l, uc.getInstanceCount());
     assertEquals("Y", sink.getLast()[0]);
-    p.push(new Object[] {"foo", "Y"});
-    assertEquals("Y", sink.getLast()[0]);
-    p.push(new Object[] {"bar", "Z"});
+    p.push(new Object[] {"bar", "1", "Z"});
+    assertEquals(2l, uc.getInstanceCount());
     assertEquals("Z", sink.getLast()[0]);
+    p.push(new Object[] {"foo", "1", "Z"});
+    assertEquals("Y", sink.getLast()[0]);
   }
 }

@@ -97,6 +97,11 @@ public class UpdateClassifier extends UniformProcessor
   protected int m_eventsSinceUpdate = 0;
   
   /**
+   * The number of input events received so far
+   */
+  protected long m_instanceCount = 0;
+  
+  /**
    * Creates a new update classifier processor.
    * @param c The classifier used to classify the instances. Depending on the
    * actual {@link Classifier} instance used, a different classification
@@ -162,6 +167,7 @@ public class UpdateClassifier extends UniformProcessor
   protected boolean compute(Object[] inputs, Object[] outputs)
   {
     m_eventsSinceUpdate++;
+    m_instanceCount++;
     Object[] input_array = (Object[]) inputs[0];
     Instance new_instance = null;
     try
@@ -193,6 +199,15 @@ public class UpdateClassifier extends UniformProcessor
     }
     outputs[0] = m_classifier;
     return true;
+  }
+  
+  /**
+   * Gets the number of instances fed to the classifier
+   * @return The number of instances received so far
+   */
+  /*@ pure @*/ long getInstanceCount()
+  {
+    return m_instanceCount;
   }
   
   @Override
@@ -232,5 +247,26 @@ public class UpdateClassifier extends UniformProcessor
   /*@ pure non_null @*/ public Attribute[] getAttributes()
   {
     return m_attributes;
+  }
+
+  /**
+   * Gets the classifier used by this processor chain in its current state.
+   * Note that this method should normally be used only for debugging purposes;
+   * to use the classifier in a processor chain, simply connect the output of
+   * the processor to a downstream processor chain.
+   * @return The classifier
+   */
+  /*@ pure non_null @*/ Classifier getClassifier()
+  {
+    return m_classifier;
+  }
+  
+  @Override
+  public void reset()
+  {
+    super.reset();
+    m_instanceCount = 0;
+    m_eventsSinceUpdate = 0;
+    m_instances = WekaUtils.createInstances(m_dataSetName, s_capacity, m_attributes);
   }
 }

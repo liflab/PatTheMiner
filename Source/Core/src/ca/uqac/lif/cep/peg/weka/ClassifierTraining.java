@@ -29,6 +29,7 @@ import ca.uqac.lif.cep.functions.ApplyFunction;
 import ca.uqac.lif.cep.tmf.Fork;
 import ca.uqac.lif.cep.tmf.Trim;
 import ca.uqac.lif.cep.tmf.Window;
+import weka.classifiers.Classifier;
 import weka.core.Attribute;
 import weka.core.Instances;
 
@@ -61,37 +62,82 @@ import weka.core.Instances;
  * output of this processor is therefore a stream of <em>classifiers</em>
  * (i.e. functions).
  * <p>
- * When represented as a single box, this processor used the following diagram:
+ * In other words, at each position <i>i</i> in the input stream, this
+ * chain considers two windows:
+ * <ul>
+ * <li>a first window <i>W</i><sub>1</sub>,
+ * comprising events <i>i</i> to <i>i</i>+<i>m</i>, over which a set of
+ * features is calculated by processor &beta;</li>
+ * <li>a second window <i>W</i><sub>2</sub>,
+ * comprising events <i>i</i>+<i>t</i> to <i>i</i>+<i>t</i>+<i>n</i>, over which the
+ * class is calculated by the "oracle" processor &kappa;</li>
+ * </ul>
+ * This is illustrated by the diagram below:
+ * <p>
+ * <img src="{@docRoot}/doc-files/Anticipation.png" alt="Anticipation">
+ * <p>
+ * A quick calculation reveals that the output of this chain is offset by
+ * <i>t</i>+<i>n</i>-<i>m</i> events with respect to the input (in other
+ * words, the first window for which an output classifier will be produced
+ * starts at position <i>t</i>+<i>n</i>-<i>m</i>). This also corresponds to
+ * the offset (in number of events) between the start of the "trend" window
+ * and the start of the "oracle" window.
+ * <p>
+ * When represented as a single box, this processor uses the following diagram:
  * <p>
  * <img src="{@docRoot}/doc-files/ClassifierTraining-box.png" alt="Processor">
- * <p>
- * @param beta The processor computing the trend over the window. This
- * corresponds to &beta; in the diagram
- * @param kappa The processor used as the oracle. This
- * corresponds to &kappa; in the diagram
- * @param uc A processor that updates a classifier based on the
- * feature/class pairs produced by &beta; and &kappa;
- * @param t The offset (in number of events) between the "feature" window
- * and the "class" window
- * @param n The width of the "class" window
- * @param m The width of the "feature" window
  */
 public class ClassifierTraining extends GroupProcessor
 {
-  protected UpdateClassifier m_uc;
-  
+  /**
+   * A reference to the &beta; processor in the chain
+   */
   protected Processor m_beta;
-  
+
+  /**
+   * A reference to the &kappa; processor in the chain
+   */
   protected Processor m_kappa;
-  
+
+  /**
+   * A reference to the instance of {@link UpdateClassifier} in the chain
+   */
+  protected UpdateClassifier m_uc;
+
+  /**
+   * The offset (in number of events) between the "feature" window
+   * and the "class" window
+   */
   protected int m_t;
-  
+
+  /**
+   * The width of the "class" window
+   */
   protected int m_n;
-  
+
+  /**
+   * The width of the "feature" window
+   */
   protected int m_m;
-  
-  public ClassifierTraining(Processor beta, Processor kappa, 
-      UpdateClassifier uc, int t, int n, int m)
+
+  /**
+   * Creates a new instance of the classifier training processor chain.
+   * The parameters <tt>t</tt>, <tt>m</tt> and <tt>n</tt> must satisfy the
+   * condition <tt>t</tt>+<tt>n</tt> &geq; <tt>m</tt>.
+   * @param beta The processor computing the trend over the window. This
+   * corresponds to &beta; in the diagram
+   * @param kappa The processor used as the oracle. This
+   * corresponds to &kappa; in the diagram
+   * @param uc A processor that updates a classifier based on the
+   * feature/class pairs produced by &beta; and &kappa;
+   * @param t The offset (in number of events) between the "feature" window
+   * and the "class" window
+   * @param n The width of the "class" window
+   * @param m The width of the "feature" window
+   */
+  /*@ requires t + n >= m @*/
+  public ClassifierTraining(/*@ non_null @*/ Processor beta, /*@ non_null @*/ Processor kappa, 
+      /*@ non_null @*/ UpdateClassifier uc, int t, int n, int m)
   {
     super(1, 1);
     m_beta = beta;
@@ -115,14 +161,14 @@ public class ClassifierTraining extends GroupProcessor
     associateInput(INPUT, f1, INPUT);
     associateOutput(OUTPUT, uc, OUTPUT);
   }
-  
+
   @Override
   public ClassifierTraining duplicate(boolean with_state)
   {
     return new ClassifierTraining(m_beta.duplicate(with_state), m_kappa.duplicate(with_state), 
         m_uc.duplicate(with_state), m_t, m_n, m_m);
   }
-  
+
   /**
    * Returns the dataset associated to the internal classifier
    * @return The dataset
@@ -131,7 +177,7 @@ public class ClassifierTraining extends GroupProcessor
   {
     return m_uc.getDataset();
   }
-  
+
   /**
    * Returns the attributes associated to the internal classifier
    * @return The attributes
@@ -139,5 +185,17 @@ public class ClassifierTraining extends GroupProcessor
   public Attribute[] getAttributes()
   {
     return m_uc.getAttributes();
+  }
+  
+  /**
+   * Returns the classifier used by the processor chain in its current state
+   * Note that this method should normally be used only for debugging purposes;
+   * to use the classifier in a processor chain, simply connect the output of
+   * the processor to a downstream processor chain.
+   * @return The classifier
+   */
+  /*@ pure non_null @*/ Classifier getClassifier()
+  {
+    return m_uc.getClassifier();
   }
 }
