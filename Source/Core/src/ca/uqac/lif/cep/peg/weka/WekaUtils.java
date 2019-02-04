@@ -19,9 +19,11 @@ package ca.uqac.lif.cep.peg.weka;
 
 import ca.uqac.lif.cep.functions.BinaryFunction;
 import ca.uqac.lif.cep.functions.FunctionException;
+import ca.uqac.lif.cep.functions.UnaryFunction;
 import java.util.Collection;
 import weka.classifiers.Classifier;
 import weka.core.Attribute;
+import weka.core.Drawable;
 import weka.core.FastVector;
 import weka.core.Instance;
 import weka.core.Instances;
@@ -228,5 +230,28 @@ public class WekaUtils
     // By convention, the last attribute is the class
     instances.setClassIndex(attributes.length - 1);
     return instances;
+  }
+  
+  public static class GetGraph extends UnaryFunction<Drawable,String>
+  {
+    public static final transient GetGraph instance = new GetGraph();
+    
+    private GetGraph()
+    {
+      super(Drawable.class, String.class);
+    }
+    
+    @Override
+    public String getValue(Drawable x)
+    {
+      try
+      {
+        return x.graph();
+      }
+      catch (Exception e)
+      {
+        throw new FunctionException(e);
+      }
+    }
   }
 }
