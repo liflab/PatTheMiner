@@ -13,7 +13,7 @@ Please refer to the following research paper for detailed information and
 examples of what this extension can do.
 
 > M. Roudjane, D. Rebaïne, R. Khoury, S. Hallé. (2018). *Real-Time Data Mining
-> for Event Streams*. Proc. EDOC 2018. To appear. DOI: 10.1109/EDOC.2018.00025.
+> for Event Streams*. Proc. EDOC 2018. DOI: 10.1109/EDOC.2018.00025.
 > [ResearchGate](https://www.researchgate.net/publication/328172038)
 
 Further documentation might be added to this Readme some time in the future
@@ -33,8 +33,10 @@ The palette also requires the following Java libraries:
 - The latest version of [BeepBeep 3](https://liflab.github.io/beepbeep-3)
 - The latest version of
   [Apache Commons Math 3](http://commons.apache.org/proper/commons-math)
+- Version 3.6.x of [Weka](https://www.cs.waikato.ac.nz/ml/weka/index.html)
+  (not the latest version, so that Java 1.6 is supported)
 
-These two dependencies can be automatically downloaded and placed in the
+These three dependencies can be automatically downloaded and placed in the
 `dep` folder of the project by typing:
 
     ant download-deps
@@ -46,7 +48,7 @@ typing:
 
 This will produce a file called `pattheminer.jar` in the folder. This file
 is *not* runnable and stand-alone. It is meant to be used in a Java project
-alongside `beepbeep-3.jar` and `commons-math3-x.x.x.jar` (the JAR files
-downloaded by the Ant build script).
+alongside `beepbeep-3.jar`, `commons-math3-x.x.x.jar` and `weka.jar` (the JAR
+files downloaded by the Ant build script).
 
 <!-- :maxLineLen=78: -->
