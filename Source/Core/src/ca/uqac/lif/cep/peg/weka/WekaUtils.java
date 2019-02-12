@@ -21,6 +21,7 @@ import ca.uqac.lif.cep.functions.BinaryFunction;
 import ca.uqac.lif.cep.functions.FunctionException;
 import ca.uqac.lif.cep.functions.UnaryFunction;
 import java.util.Collection;
+import java.util.Enumeration;
 import weka.classifiers.Classifier;
 import weka.classifiers.trees.J48;
 import weka.core.Attribute;
@@ -270,5 +271,23 @@ public class WekaUtils
       return new J48();
     }
     return null;
+  }
+  
+  /**
+   * Counts the instances in a dataset
+   * @param i The dataset
+   * @return The number of instances
+   */
+  public static int countInstances(/*@ non_null @*/ Instances i)
+  {
+    int n = 0;
+    @SuppressWarnings("rawtypes")
+    Enumeration en = i.enumerateInstances();
+    while (en.hasMoreElements())
+    {
+      en.nextElement();
+      n++;
+    }
+    return n;
   }
 }

@@ -198,11 +198,15 @@ public class UpdateClassifier extends UniformProcessor
     {
       throw new ProcessorException(e);
     }
-    m_instances.add(new_instance);
-    m_instanceSize++;
-    if (m_rollWidth > 0 && m_instanceSize == m_rollWidth + 1)
+    if (m_rollWidth > 0 && m_instanceSize == m_rollWidth)
     {
       m_instances.delete(0);
+      m_instances.add(new_instance);
+    }
+    else
+    {
+      m_instances.add(new_instance);
+      m_instanceSize++;  
     }
     if (m_eventsSinceUpdate >= m_updateInterval)
     {
