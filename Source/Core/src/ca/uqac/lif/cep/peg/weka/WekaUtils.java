@@ -22,6 +22,7 @@ import ca.uqac.lif.cep.functions.FunctionException;
 import ca.uqac.lif.cep.functions.UnaryFunction;
 import java.util.Collection;
 import weka.classifiers.Classifier;
+import weka.classifiers.trees.J48;
 import weka.core.Attribute;
 import weka.core.Drawable;
 import weka.core.FastVector;
@@ -139,7 +140,7 @@ public class WekaUtils
         throw new FunctionException(e);
       }
     }
-    
+
     @Override
     public EvaluateClassifier duplicate(boolean with_state)
     {
@@ -209,7 +210,7 @@ public class WekaUtils
     }
     return new Object[] {y, x};    
   }
-  
+
   /**
    * Creates a Weka {@link Instances} object for use with a classifier.
    * @param dataset_name The name of the dataset
@@ -231,16 +232,16 @@ public class WekaUtils
     instances.setClassIndex(attributes.length - 1);
     return instances;
   }
-  
+
   public static class GetGraph extends UnaryFunction<Drawable,String>
   {
     public static final transient GetGraph instance = new GetGraph();
-    
+
     private GetGraph()
     {
       super(Drawable.class, String.class);
     }
-    
+
     @Override
     public String getValue(Drawable x)
     {
@@ -253,5 +254,21 @@ public class WekaUtils
         throw new FunctionException(e);
       }
     }
+  }
+
+  /**
+   * Gets a "vanilla" instance of a classifier object based on its generic
+   * name.
+   * @param name The name of the classifier
+   * @return An instance of the classifier, or <tt>null</tt> if the given
+   * name does not correspond to a supported classifier.
+   */
+  /*@ null @*/ public static Classifier getClassifier(/*@ non_null @*/ String name)
+  {
+    if (name.compareTo("J48") == 0)
+    {
+      return new J48();
+    }
+    return null;
   }
 }

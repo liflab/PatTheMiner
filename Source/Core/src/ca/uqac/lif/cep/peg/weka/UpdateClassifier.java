@@ -19,6 +19,7 @@ package ca.uqac.lif.cep.peg.weka;
 
 import ca.uqac.lif.cep.ProcessorException;
 import ca.uqac.lif.cep.UniformProcessor;
+import java.util.List;
 import weka.classifiers.Classifier;
 import weka.core.Attribute;
 import weka.core.Instance;
@@ -64,10 +65,23 @@ public class UpdateClassifier extends UniformProcessor
   /*@ non_null @*/ protected String m_dataSetName;
 
   /**
-   * The set of instances. Input events will be converted into instances and
+   * The list of instances given to the processor.
+   * Input events will be converted into instances and
    * accumulated into this object.
    */
+  protected int m_instanceSize = 0;
+
+  /**
+   * The set of instances. Accumulated instances are sent to the classifier
+   * through this object.
+   */
   /*@ non_null @*/ protected Instances m_instances;
+
+  /**
+   * The size of the circular buffer storing the instances
+   * to be learned.
+   */
+  protected int m_rollWidth = 0;
 
   /**
    * A capacity value, necessary when creating the {@link Instances}
@@ -84,23 +98,23 @@ public class UpdateClassifier extends UniformProcessor
    * The classifier that will be applied on the instances
    */
   /*@ non_null @*/ protected Classifier m_classifier;
-  
+
   /**
    * The number of new input events required to update the classifier.
    */
   protected int m_updateInterval = 1;
-  
+
   /**
    * The number of input events since the last time the classifier has
    * been updated.
    */
   protected int m_eventsSinceUpdate = 0;
-  
+
   /**
    * The number of input events received so far
    */
   protected long m_instanceCount = 0;
-  
+
   /**
    * Creates a new update classifier processor.
    * @param c The classifier used to classify the instances. Depending on the
@@ -111,6 +125,10 @@ public class UpdateClassifier extends UniformProcessor
    * update the classifier. Between these, the classifier from the last
    * update will be output. By default, the interval is 1 (i.e. the processor
    * updates the classifier upon every input event).
+   * @param roll_width The size of the circular buffer storing the instances
+   * to be learned. If set to a number less than 1, the buffer will store all
+   * the instances. Otherwise, only the last <tt>roll_width</tt> instances are
+   * kept.
    * @param name A name given to the dataset corresponding to the input events.
    * This is because Weka requires sets of instances to be given a name.
    * @param attributes A list of {@link Attribute}s describing the elements
@@ -118,14 +136,16 @@ public class UpdateClassifier extends UniformProcessor
    * object describes the contents of the <i>i</i>-th element of the input
    * array.
    */
-  public UpdateClassifier(/*@ non_null @*/ Classifier c, int update_interval, 
-      /*@ non_null @*/ String name, Attribute ... attributes)
+  public UpdateClassifier(/*@ non_null @*/ Classifier c, int update_interval,
+      int roll_width, /*@ non_null @*/ String name, Attribute ... attributes)
   {
     super(1, 1);
     m_classifier = c;
     m_dataSetName = name;
     m_attributes = attributes;
     m_updateInterval = update_interval;
+    m_rollWidth = roll_width;
+    m_instanceSize = 0;
     m_instances = WekaUtils.createInstances(m_dataSetName, s_capacity, m_attributes);
   }
 
@@ -146,9 +166,9 @@ public class UpdateClassifier extends UniformProcessor
   public UpdateClassifier(/*@ non_null @*/ Classifier c, 
       /*@ non_null @*/ String name, Attribute ... attributes)
   {
-    this(c, 1, name, attributes);
+    this(c, 1, 0, name, attributes);
   }
-  
+
   /**
    * Sets the number of new input events required to update the internal
    * classifier.
@@ -179,6 +199,11 @@ public class UpdateClassifier extends UniformProcessor
       throw new ProcessorException(e);
     }
     m_instances.add(new_instance);
+    m_instanceSize++;
+    if (m_rollWidth > 0 && m_instanceSize == m_rollWidth + 1)
+    {
+      m_instances.delete(0);
+    }
     if (m_eventsSinceUpdate >= m_updateInterval)
     {
       m_eventsSinceUpdate = 0;
@@ -200,7 +225,7 @@ public class UpdateClassifier extends UniformProcessor
     outputs[0] = m_classifier;
     return true;
   }
-  
+
   /**
    * Gets the number of instances fed to the classifier
    * @return The number of instances received so far
@@ -209,7 +234,7 @@ public class UpdateClassifier extends UniformProcessor
   {
     return m_instanceCount;
   }
-  
+
   @Override
   public UpdateClassifier duplicate(boolean with_state)
   {
@@ -222,7 +247,7 @@ public class UpdateClassifier extends UniformProcessor
     {
       throw new UnsupportedOperationException("Cannot make a copy of classifier " + m_classifier);
     }
-    UpdateClassifier uc = new UpdateClassifier(new_c, m_updateInterval, m_dataSetName, m_attributes);
+    UpdateClassifier uc = new UpdateClassifier(new_c, m_updateInterval, m_rollWidth, m_dataSetName, m_attributes);
     if (with_state)
     {
       uc.m_instances = new Instances(m_instances);
@@ -230,7 +255,7 @@ public class UpdateClassifier extends UniformProcessor
     }
     return uc;
   }
-  
+
   /**
    * Gets the dataset created by this processor
    * @return The dataset
@@ -239,7 +264,7 @@ public class UpdateClassifier extends UniformProcessor
   {
     return m_instances;
   }
-  
+
   /**
    * Gets the attributes handled by the classifier used by this processor
    * @return The attributes
@@ -260,7 +285,7 @@ public class UpdateClassifier extends UniformProcessor
   {
     return m_classifier;
   }
-  
+
   @Override
   public void reset()
   {
@@ -268,5 +293,6 @@ public class UpdateClassifier extends UniformProcessor
     m_instanceCount = 0;
     m_eventsSinceUpdate = 0;
     m_instances = WekaUtils.createInstances(m_dataSetName, s_capacity, m_attributes);
+    m_instanceSize = 0;
   }
 }
