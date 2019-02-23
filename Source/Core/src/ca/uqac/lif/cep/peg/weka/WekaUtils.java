@@ -23,6 +23,7 @@ import ca.uqac.lif.cep.functions.UnaryFunction;
 import java.util.Collection;
 import java.util.Enumeration;
 import weka.classifiers.Classifier;
+import weka.classifiers.functions.VotedPerceptron;
 import weka.classifiers.trees.J48;
 import weka.core.Attribute;
 import weka.core.Drawable;
@@ -269,6 +270,10 @@ public class WekaUtils
     if (name.compareTo("J48") == 0)
     {
       return new J48();
+    }
+    if (name.compareTo("Voted Perceptron") == 0)
+    {
+      return new VotedPerceptron();
     }
     return null;
   }
