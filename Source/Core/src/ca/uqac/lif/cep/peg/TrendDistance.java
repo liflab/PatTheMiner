@@ -115,6 +115,11 @@ public class TrendDistance<P,Q,R> extends GroupProcessor
     Window wp = new Window(beta, n);
     build(wp, pattern, delta, d, comp);
   }
+  
+  protected TrendDistance()
+  {
+    super(1, 1);
+  }
 
   /**
    * Instantiates a new trend distance processor.
@@ -146,5 +151,13 @@ public class TrendDistance<P,Q,R> extends GroupProcessor
     Connector.connect(distance, too_far);
     associateOutput(OUTPUT, too_far, OUTPUT);
     addProcessors(window, distance, too_far);
+  }
+  
+  @Override
+  public TrendDistance<P,Q,R> duplicate(boolean with_state)
+  {
+    TrendDistance<P,Q,R> new_td = new TrendDistance<P,Q,R>();
+    cloneInto(new_td, with_state);
+    return new_td;
   }
 }
