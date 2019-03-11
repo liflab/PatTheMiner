@@ -42,25 +42,31 @@ import ca.uqac.lif.cep.tmf.Window;
  * A classic example is taking the value
  * associated with the closest context in func's map. The trend and the value
  * extracted from context can then be operated on with, for example, a
- * subtraction and then compared like in the TrendDistance processor. 
+ * subtraction and then compared like in the TrendDistance processor.
+ * 
+ * @param <Q> The type of the context value
+ * @param <R> The type of the trend value
+ * 
+ * @author Alexandre Larouche
  */
 @SuppressWarnings("rawtypes")
 public class ContextRef<Q, R> extends GroupProcessor
 {
   /**
    * Creates a new contextual processor.
-   * 
-   * @param betaC
-   *          The processor that computes the context on each window (extracts the
-   *          keys of the trace)
-   * @param func
-   *          Processors which select the right value to pick depending on which
-   *          context (/key) was extracted from betaC
-   * @param n
-   *          The width of the window
-   * @param betaT
+   * @param trend_proc
    *          The processor that computes the trend on each window (extracts the
    *          values of the trace)
+   * @param n
+   *          The width of the window for the trend processor
+   * @param context_proc
+   *          The processor that computes the context on each window (extracts the
+   *          keys of the trace)
+   * @param m
+   *          The width of the window for the context processor
+   * @param func
+   *          Processors which select the right value to pick depending on which
+   *          context (key) was extracted from betaC
    * @param delta
    *          The distance metric
    * @param d
@@ -69,15 +75,35 @@ public class ContextRef<Q, R> extends GroupProcessor
    *          The comparison function between the computed distance and the
    *          maximum distance threshold
    */
-  public ContextRef(int n, int m, Processor betaT, Processor betaC, ChoiceFunction<?, ?> func,
+  public ContextRef(Processor trend_proc, int n, Processor context_proc, int m, ChoiceFunction<Q,R> func,
       Function delta, R d, BinaryFunction<R, R, Boolean> comp)
   {
     super(1, 1);
-    Window wp = new Window(betaT, n);
-    Window xp = new Window(betaC, m);
+    Window wp = new Window(trend_proc, n);
+    Window xp = new Window(context_proc, m);
     build(wp, xp, func, delta, d, comp);
   }
 
+  /**
+   * Creates a new contextual processor.
+   * 
+   * @param window
+   *          The processor that computes the trend on each window (extracts the
+   *          values of the trace)
+   * @param contextWindow
+   *          The processor that computes the context on each window (extracts the
+   *          keys of the trace)
+   * @param func
+   *          Processors which select the right value to pick depending on which
+   *          context (/key) was extracted from betaC
+   * @param delta
+   *          The distance metric
+   * @param d
+   *          The maximum distance threshold
+   * @param comp
+   *          The comparison function between the computed distance and the
+   *          maximum distance threshold
+   */
   public ContextRef(Processor window, Processor contextWindow, ChoiceFunction func, Function delta,
       R d, BinaryFunction<R, R, Boolean> comp)
   {

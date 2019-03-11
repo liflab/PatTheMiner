@@ -17,12 +17,7 @@
  */
 package ca.uqac.lif.cep.peg;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
+import java.util.Map;
 import ca.uqac.lif.cep.functions.UnaryFunction;
 
 /**
@@ -49,54 +44,58 @@ import ca.uqac.lif.cep.functions.UnaryFunction;
  * 
  * @author Alexandre Larouche
  */
-@SuppressWarnings("rawtypes")
-public class ChoiceFunction<Q, R> extends UnaryFunction
+public class ChoiceFunction<Q,R> extends UnaryFunction<Q,R>
 {
-  protected HashMap<Q, R> m_map;
-  protected Calendar cal;
+  /**
+   * An associative map between contexts (keys) and their associated
+   * trends (values) 
+   */
+  protected Map<Q,R> m_choices;
+  
+  /**
+   * A default value to return if the computed context is not any of the map's
+   * keys
+   */
+  protected R m_default;
 
-  @SuppressWarnings("unchecked")
-  public ChoiceFunction(Class t, Class u, HashMap map)
+  /**
+   * Creates a new instance of a choice function
+   * @param clazz_q The class for the keys of the map
+   * @param clazz_r The class for the values of the map
+   * @param map The associative map between contexts (keys) and their associated
+   * trends (values) 
+   * @param def_value A default value to return if the computed context is not
+   * any of the map's keys. This value is assumed to be <tt>null</tt> if not
+   * specified.
+   */
+  public ChoiceFunction(Class<Q> clazz_q, Class<R> clazz_r, Map<Q,R> map, R def_value)
   {
-    super(t, u);
-    m_map = map;
-    cal = new GregorianCalendar();
+    super(clazz_q, clazz_r);
+    m_choices = map;
+    m_default = def_value;
+  }
+  
+  /**
+   * Creates a new instance of a choice function
+   * @param clazz_q The class for the keys of the map
+   * @param clazz_r The class for the values of the map
+   * @param map The associative map between contexts (keys) and their associated
+   * trends (values) 
+   * @param def_value A default value to return if the computed context is not
+   * any of the map's keys
+   */
+  public ChoiceFunction(Class<Q> clazz_q, Class<R> clazz_r, Map<Q,R> map)
+  {
+    this(clazz_q, clazz_r, map, null);
   }
 
   @Override
-  public Object getValue(Object x)
+  public R getValue(Q x)
   {
-    // Verify if the date sent is a day of the weekend or a work day, send the value
-    // of the key accordingly.
-    if (isWeekend((String) x))
+    if (!m_choices.containsKey(x))
     {
-      return m_map.get("Weekend");
+      return m_default;
     }
-    else
-    {
-      return m_map.get("Workday");
-    }
-  }
-
-  /**
-   * Parse date and figure out if it's a weekend day.
-   * @param dt A string representing the day
-   * @return true if the date is a weekend day, false if not
-   */ 
-  public boolean isWeekend(String dt)
-  {
-    SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
-    Date date = null;
-    try
-    {
-      date = formatter.parse(dt);
-    }
-    catch (ParseException e)
-    {
-      e.printStackTrace();
-    }
-    cal.setTime(date);
-    int day = cal.get(Calendar.DAY_OF_WEEK);
-    return day == Calendar.SUNDAY || day == Calendar.SATURDAY;
+    return m_choices.get(x);
   }
 }
