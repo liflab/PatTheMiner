@@ -15,11 +15,15 @@
     You should have received a copy of the GNU Lesser General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package ca.uqac.lif.cep.peg.weka;
+package ca.uqac.lif.cep.peg.forecast;
 
 import ca.uqac.lif.cep.Connector;
 import ca.uqac.lif.cep.Pushable;
 import ca.uqac.lif.cep.functions.ApplyFunction;
+import ca.uqac.lif.cep.functions.Constant;
+import ca.uqac.lif.cep.functions.RaiseArity;
+import ca.uqac.lif.cep.peg.weka.UpdateClassifier;
+import ca.uqac.lif.cep.peg.weka.WekaUtils;
 import ca.uqac.lif.cep.tmf.SinkLast;
 import ca.uqac.lif.cep.util.NthElement;
 import static org.junit.Assert.*;
@@ -32,7 +36,7 @@ import weka.core.Instance;
 /**
  * Unit tests for the {@link ClassifierTraining} processor.
  */
-public class ClassifierTrainingTest
+public class PredictiveLearningTest
 {
   /**
    * Simple test. Input events are arrays made of 0/1 (attribute "A")
@@ -52,7 +56,7 @@ public class ClassifierTrainingTest
     ApplyFunction beta = new ApplyFunction(new NthElement(0));
     ApplyFunction kappa = new ApplyFunction(new NthElement(1));
     UpdateClassifier uc = new UpdateClassifier(new Id3(), "test", attributes);
-    ClassifierTraining ct = new ClassifierTraining(beta, kappa, uc, 0, 1, 1);
+    PredictiveLearning ct = new PredictiveLearning(new RaiseArity(1, new Constant(0)), beta, 1, 0, kappa, 1, uc);
     SinkLast sink = new SinkLast();
     Connector.connect(ct, sink);
     Pushable p = ct.getPushableInput();

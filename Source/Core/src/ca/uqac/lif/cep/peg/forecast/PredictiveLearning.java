@@ -51,6 +51,7 @@ public class PredictiveLearning extends GroupProcessor
     Connector.connect(slicer, uc);
     addProcessors(slicer, uc);
     associateInput(0, slicer, 0);
+    associateOutput(0, uc, 0);
   }
   
   public static class LearningSlice extends GroupProcessor

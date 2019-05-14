@@ -254,7 +254,7 @@ public class UpdateClassifier extends UniformProcessor
    * Gets the number of instances fed to the classifier
    * @return The number of instances received so far
    */
-  /*@ pure @*/ long getInstanceCount()
+  /*@ pure @*/ public long getInstanceCount()
   {
     return m_instanceCount;
   }

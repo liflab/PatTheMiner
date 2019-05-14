@@ -15,14 +15,18 @@
     You should have received a copy of the GNU Lesser General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package ca.uqac.lif.cep.peg.weka;
+package ca.uqac.lif.cep.peg.forecast;
 
 import static org.junit.Assert.*;
 
 import ca.uqac.lif.cep.Connector;
 import ca.uqac.lif.cep.Pushable;
 import ca.uqac.lif.cep.functions.ApplyFunction;
+import ca.uqac.lif.cep.functions.Constant;
 import ca.uqac.lif.cep.functions.FunctionTree;
+import ca.uqac.lif.cep.functions.RaiseArity;
+import ca.uqac.lif.cep.peg.weka.UpdateClassifier;
+import ca.uqac.lif.cep.peg.weka.WekaUtils;
 import ca.uqac.lif.cep.tmf.SinkLast;
 import ca.uqac.lif.cep.util.Bags;
 import ca.uqac.lif.cep.util.NthElement;
@@ -34,7 +38,7 @@ import weka.core.Attribute;
 /**
  * Unit tests for the {@link SelfTrainedClassPrediction} processor.
  */
-public class SelfTrainedClassPredictionTest
+public class SelfLearningPredictionTest
 {
   @Test
   public void test1()
@@ -45,10 +49,9 @@ public class SelfTrainedClassPredictionTest
         WekaUtils.createAttribute("class", "Y", "Z")};
     Classifier cl = new Id3();
     UpdateClassifier uc = new UpdateClassifier(cl, "test", attributes);
-    ApplyFunction beta = new ApplyFunction(new NthElement(0));
+    ApplyFunction phi = new ApplyFunction(new NthElement(0));
     ApplyFunction kappa = new ApplyFunction(new NthElement(1));
-    ClassifierTraining ct = new ClassifierTraining(beta.duplicate(), kappa.duplicate(), uc, t, n, m);
-    SelfTrainedClassPrediction stcp = new SelfTrainedClassPrediction(ct, beta.duplicate(), t, n, m);
+    SelfLearningPrediction stcp = new SelfLearningPrediction(new RaiseArity(1, new Constant(0)), phi.duplicate(), m, t, kappa.duplicate(), n, uc);
     SinkLast sink = new SinkLast();
     Connector.connect(stcp, sink);
     Pushable p = stcp.getPushableInput();
@@ -70,13 +73,12 @@ public class SelfTrainedClassPredictionTest
         WekaUtils.createAttribute("class", "Y", "Z")};
     Classifier cl = new Id3();
     UpdateClassifier uc = new UpdateClassifier(cl, "test", attributes);
-    ApplyFunction beta = new ApplyFunction(new FunctionTree(
+    ApplyFunction phi = new ApplyFunction(new FunctionTree(
         new Bags.ToArray(String.class, String.class),
         new NthElement(0),
         new NthElement(1)));
     ApplyFunction kappa = new ApplyFunction(new NthElement(2));
-    ClassifierTraining ct = new ClassifierTraining(beta.duplicate(), kappa.duplicate(), uc, t, n, m);
-    SelfTrainedClassPrediction stcp = new SelfTrainedClassPrediction(ct, beta.duplicate(), t, n, m);
+    SelfLearningPrediction stcp = new SelfLearningPrediction(new RaiseArity(1, new Constant(0)), phi.duplicate(), m, t, kappa.duplicate(), n, uc);
     SinkLast sink = new SinkLast();
     Connector.connect(stcp, sink);
     Pushable p = stcp.getPushableInput();
