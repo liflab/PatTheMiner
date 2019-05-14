@@ -19,7 +19,8 @@ package ca.uqac.lif.cep.peg.weka;
 
 import ca.uqac.lif.cep.ProcessorException;
 import ca.uqac.lif.cep.UniformProcessor;
-import java.util.List;
+import java.util.ArrayList;
+import java.util.Collection;
 import weka.classifiers.Classifier;
 import weka.core.Attribute;
 import weka.core.Instance;
@@ -39,18 +40,19 @@ import weka.core.Instances;
  * finding a function (the "classifier") which can predict the value of
  * <i>A</i><sub><i>c</i></sub> based on the value of the other attributes.
  * <p>
- * The processor receives an input stream made of an ordered collection
- * of <i>n</i> elements. This collection can be either an array, or a
- * descendant of the Java {@link Collection} class (ideally an ordered
- * collection such as a {@link List}). This collection represents an
+ * The processor receives an input stream which can be made of two things:
+ * <ol>
+ * <li>An array of of <i>n</i> elements. This array represents an
  * <em>instance</em>: the element at position <i>i</i> in the collection
  * corresponds to the value of attribute <i>A</i><sub><i>i</i></sub>. By
  * convention, the class attribute is taken to be the last element of the
- * collection.
+ * collection.</li>
+ * <li>A {@link Collection} of such arrays.</li>
+ * </ol> 
  * <p>
- * Every time a new such instance is given to the processor, it creates an
- * {@link Instance} from it, and then updates a Weka {@link Classifier} object.
- * The processor thus produces a stream of classifiers. Since updating a
+ * Every time a new instance (or set of instances) is given to the processor, it
+ * creates an {@link Instance} from it, and then updates a Weka {@link Classifier}
+ * object. The processor thus produces a stream of classifiers. Since updating a
  * classifier can be a time consuming operation, the processor can be told to
  * accumulate instances for some time, and only update the classifier every
  * <i>n</i> events. In all cases, the processor outputs a classifier upon every
@@ -183,30 +185,48 @@ public class UpdateClassifier extends UniformProcessor
     return this;
   }
 
+  @SuppressWarnings("unchecked")
   @Override
   protected boolean compute(Object[] inputs, Object[] outputs)
   {
     m_eventsSinceUpdate++;
     m_instanceCount++;
-    Object[] input_array = (Object[]) inputs[0];
-    Instance new_instance = null;
-    try
+    Collection<Object> collection = null;
+    if (inputs[0] instanceof Collection)
     {
-      new_instance = WekaUtils.createInstanceFromArray(m_instances, input_array, m_attributes);
-    }
-    catch (IllegalArgumentException e)
-    {
-      throw new ProcessorException(e);
-    }
-    if (m_rollWidth > 0 && m_instanceSize == m_rollWidth)
-    {
-      m_instances.delete(0);
-      m_instances.add(new_instance);
+      collection = (Collection<Object>) inputs[0];
     }
     else
     {
-      m_instances.add(new_instance);
-      m_instanceSize++;  
+      collection = new ArrayList<Object>(1);
+      collection.add(inputs[0]);
+    }
+    for (Object o : collection)
+    {
+      if (o == null || !o.getClass().isArray())
+      {
+        throw new ProcessorException("The input event to UpdateClassifier is null or is not an array");
+      }
+      Object[] input_array = (Object[]) o;
+      Instance new_instance = null;
+      try
+      {
+        new_instance = WekaUtils.createInstanceFromArray(m_instances, input_array, m_attributes);
+      }
+      catch (IllegalArgumentException e)
+      {
+        throw new ProcessorException(e);
+      }
+      if (m_rollWidth > 0 && m_instanceSize == m_rollWidth)
+      {
+        m_instances.delete(0);
+        m_instances.add(new_instance);
+      }
+      else
+      {
+        m_instances.add(new_instance);
+        m_instanceSize++;  
+      }
     }
     if (m_eventsSinceUpdate >= m_updateInterval)
     {
