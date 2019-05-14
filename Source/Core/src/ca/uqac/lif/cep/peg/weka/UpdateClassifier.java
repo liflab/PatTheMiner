@@ -116,6 +116,13 @@ public class UpdateClassifier extends UniformProcessor
    * The number of input events received so far
    */
   protected long m_instanceCount = 0;
+  
+  /**
+   * Whether to output the classifier, or a <em>clone</em> of the classifier.
+   * Setting this parameter to <tt>true</tt> obviously has consequences on the
+   * throughput of the processor.
+   */
+  protected boolean m_makeCopy = false;
 
   /**
    * Creates a new update classifier processor.
@@ -246,8 +253,38 @@ public class UpdateClassifier extends UniformProcessor
         throw new ProcessorException(e);
       }
     }
-    outputs[0] = m_classifier;
+    if (m_makeCopy)
+    {
+      try
+      {
+        outputs[0] = Classifier.makeCopy(m_classifier);
+      }
+      catch (Exception e)
+      {
+        throw new ProcessorException(e);
+      }
+    }
+    else
+    {
+      outputs[0] = m_classifier;
+    }
     return true;
+  }
+  
+  /**
+   * Sets whether the processor should output its own internal classifier,
+   * or a <em>clone</em> of this classifier.
+   * 
+   * @param b Set to <tt>true</tt> to create a copy of the internal
+   * classifier, <tt>false</tt> otherwise (default). Setting this parameter
+   * to <tt>true</tt> obviously has consequences on the throughput of the
+   * processor.
+   * @return This processor
+   */
+  public UpdateClassifier makeCopy(boolean b)
+  {
+    m_makeCopy = b;
+    return this;
   }
 
   /**

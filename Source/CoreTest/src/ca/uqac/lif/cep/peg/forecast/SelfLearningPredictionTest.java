@@ -20,6 +20,7 @@ package ca.uqac.lif.cep.peg.forecast;
 import static org.junit.Assert.*;
 
 import ca.uqac.lif.cep.Connector;
+import ca.uqac.lif.cep.GroupProcessor;
 import ca.uqac.lif.cep.Pushable;
 import ca.uqac.lif.cep.functions.ApplyFunction;
 import ca.uqac.lif.cep.functions.Constant;
@@ -34,6 +35,7 @@ import org.junit.Test;
 import weka.classifiers.Classifier;
 import weka.classifiers.trees.Id3;
 import weka.core.Attribute;
+import weka.core.Instances;
 
 /**
  * Unit tests for the {@link SelfTrainedClassPrediction} processor.
@@ -47,11 +49,20 @@ public class SelfLearningPredictionTest
     Attribute[] attributes = new Attribute[] {
         WekaUtils.createAttribute("A", "foo", "bar"), 
         WekaUtils.createAttribute("class", "Y", "Z")};
-    Classifier cl = new Id3();
-    UpdateClassifier uc = new UpdateClassifier(cl, "test", attributes);
+    Instances dataset = WekaUtils.createInstances("test", 10, attributes);
+    GroupProcessor classifier = new GroupProcessor(1, 1);
+    {
+      Classifier cl = new Id3();
+      UpdateClassifier uc = new UpdateClassifier(cl, "test", attributes);
+      ApplyFunction to_fct = new ApplyFunction(new WekaUtils.CastClassifierToFunction(dataset, attributes));
+      Connector.connect(uc, to_fct);
+      classifier.addProcessors(uc, to_fct);
+      classifier.associateInput(0, uc, 0);
+      classifier.associateOutput(0, to_fct, 0);
+    }
     ApplyFunction phi = new ApplyFunction(new NthElement(0));
     ApplyFunction kappa = new ApplyFunction(new NthElement(1));
-    SelfLearningPrediction stcp = new SelfLearningPrediction(new RaiseArity(1, new Constant(0)), phi.duplicate(), m, t, kappa.duplicate(), n, uc);
+    SelfLearningPrediction stcp = new SelfLearningPrediction(new RaiseArity(1, new Constant(0)), phi.duplicate(), m, t, kappa.duplicate(), n, classifier);
     SinkLast sink = new SinkLast();
     Connector.connect(stcp, sink);
     Pushable p = stcp.getPushableInput();
@@ -71,14 +82,23 @@ public class SelfLearningPredictionTest
         WekaUtils.createAttribute("A", "foo", "bar"),
         WekaUtils.createAttribute("B", "0", "1"), 
         WekaUtils.createAttribute("class", "Y", "Z")};
+    Instances dataset = WekaUtils.createInstances("test", 10, attributes);
     Classifier cl = new Id3();
     UpdateClassifier uc = new UpdateClassifier(cl, "test", attributes);
+    GroupProcessor classifier = new GroupProcessor(1, 1);
+    {
+      ApplyFunction to_fct = new ApplyFunction(new WekaUtils.CastClassifierToFunction(dataset, attributes));
+      Connector.connect(uc, to_fct);
+      classifier.addProcessors(uc, to_fct);
+      classifier.associateInput(0, uc, 0);
+      classifier.associateOutput(0, to_fct, 0);
+    }
     ApplyFunction phi = new ApplyFunction(new FunctionTree(
         new Bags.ToArray(String.class, String.class),
         new NthElement(0),
         new NthElement(1)));
     ApplyFunction kappa = new ApplyFunction(new NthElement(2));
-    SelfLearningPrediction stcp = new SelfLearningPrediction(new RaiseArity(1, new Constant(0)), phi.duplicate(), m, t, kappa.duplicate(), n, uc);
+    SelfLearningPrediction stcp = new SelfLearningPrediction(new RaiseArity(1, new Constant(0)), phi.duplicate(), m, t, kappa.duplicate(), n, classifier);
     SinkLast sink = new SinkLast();
     Connector.connect(stcp, sink);
     Pushable p = stcp.getPushableInput();

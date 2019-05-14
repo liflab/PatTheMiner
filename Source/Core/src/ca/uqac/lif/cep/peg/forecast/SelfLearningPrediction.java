@@ -28,7 +28,6 @@ import ca.uqac.lif.cep.functions.CumulativeFunction;
 import ca.uqac.lif.cep.functions.Function;
 import ca.uqac.lif.cep.functions.FunctionTree;
 import ca.uqac.lif.cep.functions.TurnInto;
-import ca.uqac.lif.cep.peg.weka.UpdateClassifier;
 import ca.uqac.lif.cep.tmf.Filter;
 import ca.uqac.lif.cep.tmf.Fork;
 import ca.uqac.lif.cep.tmf.Slice;
@@ -43,16 +42,17 @@ import java.util.Set;
 
 public class SelfLearningPrediction extends GroupProcessor
 {
-  public SelfLearningPrediction(Function slice, Processor phi, int m, int t, Processor kappa, int n, UpdateClassifier uc)
+  public SelfLearningPrediction(Function slice, Processor phi, int m, int t, Processor kappa, int n, Processor classifier)
   {
     super(1, 1);
     Fork main_fork = new Fork(3);
     // Branch 1
     SliceLast s_last = new SliceLast(slice, new PredictiveLearning.LearningSlice(phi, m, t, kappa, n));
     Connector.connect(main_fork, 0, s_last, 0);
-    Connector.connect(s_last, uc);
+    Connector.connect(s_last, classifier);
     // Branch 2
     Slice s_pred = new Slice(slice, new Window(phi, m));
+    Connector.connect(main_fork, 1, s_pred, 0);
     Filter filter = new Filter();
     Connector.connect(s_pred, 0, filter, 0);
     // Branch 3
@@ -66,14 +66,16 @@ public class SelfLearningPrediction extends GroupProcessor
       sum.addProcessors(to, add);
     }
     Slice s_count = new Slice(slice, sum);
+    Connector.connect(main_fork, 2, s_count, 0);
     ApplyFunction count = new ApplyFunction(new FunctionTree(Numbers.isGreaterOrEqual,
         new FunctionTree(Bags.maxValue, Maps.values),
         new Constant(t + m - n)));
     Connector.connect(s_count, count);
     Connector.connect(count, 0, filter, 1);
     ApplyToValues av = new ApplyToValues();
-    Connector.connect(uc, 0, av, 0);
-    addProcessors(main_fork, s_last, uc, s_pred, filter, s_count, count, av);
+    Connector.connect(classifier, 0, av, 0);
+    Connector.connect(filter, 0, av, 1);
+    addProcessors(main_fork, s_last, classifier, s_pred, filter, s_count, count, av);
     associateInput(0, main_fork, 0);
     associateOutput(0, av, 0);
   }

@@ -27,7 +27,6 @@ import ca.uqac.lif.cep.GroupProcessor;
 import ca.uqac.lif.cep.Processor;
 import ca.uqac.lif.cep.functions.ApplyFunction;
 import ca.uqac.lif.cep.functions.Function;
-import ca.uqac.lif.cep.peg.weka.UpdateClassifier;
 import ca.uqac.lif.cep.peg.weka.WekaUtils;
 import ca.uqac.lif.cep.tmf.Fork;
 import ca.uqac.lif.cep.tmf.SliceLast;
@@ -44,7 +43,7 @@ import ca.uqac.lif.cep.tmf.Window;
  */
 public class PredictiveLearning extends GroupProcessor
 {
-  public PredictiveLearning(Function slice, Processor phi, int m, int t, Processor kappa, int n, UpdateClassifier uc)
+  public PredictiveLearning(Function slice, Processor phi, int m, int t, Processor kappa, int n, Processor uc)
   {
     super(1, 1);
     SliceLast slicer = new SliceLast(slice, new LearningSlice(phi, m, t, kappa, n));

@@ -20,6 +20,7 @@ package ca.uqac.lif.cep.peg.weka;
 import ca.uqac.lif.cep.functions.BinaryFunction;
 import ca.uqac.lif.cep.functions.FunctionException;
 import ca.uqac.lif.cep.functions.UnaryFunction;
+
 import java.util.Collection;
 import java.util.Enumeration;
 import weka.classifiers.Classifier;
@@ -115,38 +116,70 @@ public class WekaUtils
     return att.value((int) d); 
   }
 
-  public static class EvaluateClassifier extends BinaryFunction<Classifier,Object,String>
+
+  
+  /**
+   * Wraps its argument (a Weka {@link Classifier} object) 
+   * into a BeepBeep {@link ClassifierFunction}.
+   */
+  public static class CastClassifierToFunction extends UnaryFunction<Classifier,ClassifierFunction>
   {
     /*@ non_null @*/ protected Instances m_dataSet;
 
     /*@ non_null @*/ protected Attribute[] m_attributes;
-
-    public EvaluateClassifier(/*@ non_null @*/ Instances dataset, Attribute ... attributes)
+    
+    public CastClassifierToFunction(/*@ non_null @*/ Instances dataset, Attribute ... attributes)
     {
-      super(Classifier.class, Object.class, String.class);
+      super(Classifier.class, ClassifierFunction.class);
       m_dataSet = dataset;
       m_attributes = attributes;
     }
 
     @Override
-    public String getValue(Classifier c, Object y)
+    public ClassifierFunction getValue(Classifier x)
     {
-      Instance ins = WekaUtils.createInstanceFromArray(m_dataSet, createArray(null, y), m_attributes);
+     return new ClassifierFunction(x, m_dataSet, m_attributes);
+    }
+  }
+  
+  /**
+   * A Weka {@link Classifier} object wrapped into a BeepBeep {@link Function}.
+   */
+  public static class ClassifierFunction extends UnaryFunction<Object,String>
+  {
+    /*@ non_null @*/ protected Instances m_dataSet;
+
+    /*@ non_null @*/ protected Attribute[] m_attributes;
+    
+    /*@ non_null @*/ protected Classifier m_classifier;
+    
+    /**
+     * Creates a new classifier function
+     * @param classifier The classifier used to classify the instances
+     * @param dataset
+     * @param attributes
+     */
+    public ClassifierFunction(/*@ non_null @*/ Classifier classifier, /*@ non_null @*/ Instances dataset, Attribute ... attributes)
+    {
+      super(Object.class, String.class);
+      m_classifier = classifier;
+      m_dataSet = dataset;
+      m_attributes = attributes;
+    }
+
+    @Override
+    public String getValue(Object x)
+    {
+      Instance ins = WekaUtils.createInstanceFromArray(m_dataSet, createArray(null, x), m_attributes);
       try
       {
-        double d = c.classifyInstance(ins);
+        double d = m_classifier.classifyInstance(ins);
         return getClassValue(d, m_attributes);
       }
       catch (Exception e)
       {
         throw new FunctionException(e);
       }
-    }
-
-    @Override
-    public EvaluateClassifier duplicate(boolean with_state)
-    {
-      return this;
     }
   }
 
@@ -294,5 +327,24 @@ public class WekaUtils
       n++;
     }
     return n;
+  }
+  
+  /**
+   * Determines if two instances are equal according to a list of attributes
+   * @param x The first instance
+   * @param y The second instance
+   * @param attributes The list of attributes
+   * @return <tt>true</tt> if the instances are equal, <tt>false</tt> otherwise
+   */
+  public static boolean isEqual(Instance x, Instance y, Attribute ... attributes)
+  {
+    for (int i = 0; i < attributes.length - 1; i++)
+    {
+      if (x.value(i) != y.value(i))
+      {
+        return false;
+      }
+    }
+    return true;
   }
 }

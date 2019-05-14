@@ -20,6 +20,10 @@ package ca.uqac.lif.cep.peg.weka;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+
+import ca.uqac.lif.cep.functions.ApplyFunctionArgument;
+import ca.uqac.lif.cep.functions.FunctionTree;
+import ca.uqac.lif.cep.functions.StreamVariable;
 import weka.classifiers.Classifier;
 import weka.classifiers.trees.Id3;
 import weka.core.Attribute;
@@ -42,7 +46,9 @@ public class WekaUtilsTest
     dataset.add(WekaUtils.createInstanceFromArray(dataset, new Object[] {"0", "true"}, attributes));
     dataset.add(WekaUtils.createInstanceFromArray(dataset, new Object[] {"1", "false"}, attributes));
     cl.buildClassifier(dataset);
-    WekaUtils.EvaluateClassifier ev_c = new WekaUtils.EvaluateClassifier(dataset, attributes);
+    FunctionTree ev_c = new FunctionTree(ApplyFunctionArgument.instance,
+        new FunctionTree(new WekaUtils.CastClassifierToFunction(dataset, attributes), StreamVariable.X),
+        StreamVariable.Y);
     Object[] out_array = new Object[1];
     ev_c.evaluate(new Object[] {cl, new Object[] {"0", null}}, out_array);
     assertEquals("true", out_array[0]);
@@ -63,7 +69,9 @@ public class WekaUtilsTest
     dataset.add(WekaUtils.createInstanceFromArray(dataset, new Object[] {"0", "0", "true"}, attributes));
     dataset.add(WekaUtils.createInstanceFromArray(dataset, new Object[] {"1", "0", "false"}, attributes));
     cl.buildClassifier(dataset);
-    WekaUtils.EvaluateClassifier ev_c = new WekaUtils.EvaluateClassifier(dataset, attributes);
+    FunctionTree ev_c = new FunctionTree(ApplyFunctionArgument.instance,
+        new FunctionTree(new WekaUtils.CastClassifierToFunction(dataset, attributes), StreamVariable.X),
+        StreamVariable.Y);
     Object[] out_array = new Object[1];
     ev_c.evaluate(new Object[] {cl, new Object[] {"0", "0", null}}, out_array);
     assertEquals("true", out_array[0]);
