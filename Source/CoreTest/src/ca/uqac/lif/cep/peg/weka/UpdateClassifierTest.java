@@ -27,6 +27,7 @@ import ca.uqac.lif.cep.peg.weka.UpdateClassifier;
 import ca.uqac.lif.cep.tmf.SinkLast;
 import weka.classifiers.Classifier;
 import weka.classifiers.trees.Id3;
+import weka.classifiers.trees.J48;
 import weka.core.Attribute;
 import weka.core.Instance;
 
@@ -41,7 +42,7 @@ public class UpdateClassifierTest
     Attribute[] attributes = new Attribute[] {
         new Attribute("a"), 
         WekaUtils.createAttribute("class", "A", "B")};
-    Classifier cl = new Id3();
+    Classifier cl = new J48();
     Classifier cl_out;
     UpdateClassifier uc = new UpdateClassifier(cl, "test", attributes);
     SinkLast sink = new SinkLast();

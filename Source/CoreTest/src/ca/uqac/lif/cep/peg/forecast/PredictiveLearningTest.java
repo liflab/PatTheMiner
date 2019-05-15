@@ -21,11 +21,16 @@ import ca.uqac.lif.cep.Connector;
 import ca.uqac.lif.cep.Pushable;
 import ca.uqac.lif.cep.functions.ApplyFunction;
 import ca.uqac.lif.cep.functions.Constant;
+import ca.uqac.lif.cep.functions.FunctionTree;
 import ca.uqac.lif.cep.functions.RaiseArity;
 import ca.uqac.lif.cep.peg.weka.UpdateClassifier;
 import ca.uqac.lif.cep.peg.weka.WekaUtils;
+import ca.uqac.lif.cep.tmf.QueueSink;
 import ca.uqac.lif.cep.tmf.SinkLast;
+import ca.uqac.lif.cep.util.Bags;
 import ca.uqac.lif.cep.util.NthElement;
+import java.util.Queue;
+
 import static org.junit.Assert.*;
 import org.junit.Test;
 import weka.classifiers.Classifier;
@@ -47,6 +52,7 @@ public class PredictiveLearningTest
   @Test
   public void test1() throws Exception
   {
+    int m = 1, t = 0, n = 1;
     Classifier cl_out;
     Instance inst;
     Attribute[] attributes = new Attribute[] {
@@ -56,7 +62,7 @@ public class PredictiveLearningTest
     ApplyFunction beta = new ApplyFunction(new NthElement(0));
     ApplyFunction kappa = new ApplyFunction(new NthElement(1));
     UpdateClassifier uc = new UpdateClassifier(new Id3(), "test", attributes);
-    PredictiveLearning ct = new PredictiveLearning(new RaiseArity(1, new Constant(0)), beta, 1, 0, kappa, 1, uc);
+    PredictiveLearning ct = new PredictiveLearning(new RaiseArity(1, new Constant(0)), beta, m, t, kappa, n, uc);
     SinkLast sink = new SinkLast();
     Connector.connect(ct, sink);
     Pushable p = ct.getPushableInput();
@@ -77,5 +83,51 @@ public class PredictiveLearningTest
     // The classifier should associate (1,?) to class F (index 1)
     inst = WekaUtils.createInstanceFromArray(uc.getDataset(), new Object[] {"1", null}, attributes);
     assertEquals("false", WekaUtils.getClassValue(cl_out.classifyInstance(inst), attributes));
+  }
+  
+  @Test
+  public void testLearningSlice1()
+  {
+    int t = 1, m = 1, n = 1;
+    ApplyFunction phi = new ApplyFunction(new FunctionTree(
+        new Bags.ToArray(String.class, String.class),
+        new NthElement(0),
+        new NthElement(1)));
+    ApplyFunction kappa = new ApplyFunction(new NthElement(2));
+    PredictiveLearning.LearningSlice ls = new PredictiveLearning.LearningSlice(phi, m, t, kappa, n);
+    QueueSink sink = new QueueSink();
+    Connector.connect(ls, sink);
+    Queue<Object> q = sink.getQueue();
+    Pushable p = ls.getPushableInput();
+    // Here t=1, so no classifier is output before the 2nd event
+    p.push(new Object[] {"foo", "0", "Y"});
+    assertTrue(q.isEmpty());
+    p.push(new Object[] {"bar", "1", "Y"});
+    assertEquals(1, q.size());
+  }
+  
+  @Test
+  public void testLearningSlice2()
+  {
+    int t = 3, m = 1, n = 1;
+    ApplyFunction phi = new ApplyFunction(new FunctionTree(
+        new Bags.ToArray(String.class, String.class),
+        new NthElement(0),
+        new NthElement(1)));
+    ApplyFunction kappa = new ApplyFunction(new NthElement(2));
+    PredictiveLearning.LearningSlice ls = new PredictiveLearning.LearningSlice(phi, m, t, kappa, n);
+    QueueSink sink = new QueueSink();
+    Connector.connect(ls, sink);
+    Queue<Object> q = sink.getQueue();
+    Pushable p = ls.getPushableInput();
+    // Here t=3, so no classifier is output before the 4th event
+    p.push(new Object[] {"foo", "0", "Y"});
+    assertTrue(q.isEmpty());
+    p.push(new Object[] {"bar", "1", "Y"});
+    assertTrue(q.isEmpty());
+    p.push(new Object[] {"foo", "0", "Y"});
+    assertTrue(q.isEmpty());
+    p.push(new Object[] {"foo", "0", "Y"});
+    assertEquals(1, q.size());
   }
 }

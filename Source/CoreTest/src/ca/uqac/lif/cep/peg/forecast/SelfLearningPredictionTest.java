@@ -27,10 +27,14 @@ import ca.uqac.lif.cep.functions.Constant;
 import ca.uqac.lif.cep.functions.FunctionTree;
 import ca.uqac.lif.cep.functions.RaiseArity;
 import ca.uqac.lif.cep.peg.weka.UpdateClassifier;
+import ca.uqac.lif.cep.peg.weka.UpdateClassifierFunction;
 import ca.uqac.lif.cep.peg.weka.WekaUtils;
+import ca.uqac.lif.cep.tmf.QueueSink;
 import ca.uqac.lif.cep.tmf.SinkLast;
 import ca.uqac.lif.cep.util.Bags;
 import ca.uqac.lif.cep.util.NthElement;
+import java.util.Map;
+import java.util.Queue;
 import org.junit.Test;
 import weka.classifiers.Classifier;
 import weka.classifiers.trees.Id3;
@@ -42,6 +46,7 @@ import weka.core.Instances;
  */
 public class SelfLearningPredictionTest
 {
+  @SuppressWarnings("unchecked")
   @Test
   public void test1()
   {
@@ -67,51 +72,49 @@ public class SelfLearningPredictionTest
     Connector.connect(stcp, sink);
     Pushable p = stcp.getPushableInput();
     p.push(new Object[] {"foo", "Y"});
-    assertEquals("Y", sink.getLast()[0]);
+    assertEquals("Y", ((Map<Object,Object>) (sink.getLast()[0])).get(0));
     p.push(new Object[] {"foo", "Y"});
-    assertEquals("Y", sink.getLast()[0]);
+    assertEquals("Y", ((Map<Object,Object>) (sink.getLast()[0])).get(0));
     p.push(new Object[] {"bar", "Z"});
-    assertEquals("Z", sink.getLast()[0]);
+    assertEquals("Z", ((Map<Object,Object>) (sink.getLast()[0])).get(0));
   }
   
+  @SuppressWarnings("unchecked")
   @Test
   public void test2()
   {
     int t = 1, m = 1, n = 1;
+    Map<Object,Object> map;
     Attribute[] attributes = new Attribute[] {
         WekaUtils.createAttribute("A", "foo", "bar"),
         WekaUtils.createAttribute("B", "0", "1"), 
         WekaUtils.createAttribute("class", "Y", "Z")};
-    Instances dataset = WekaUtils.createInstances("test", 10, attributes);
     Classifier cl = new Id3();
-    UpdateClassifier uc = new UpdateClassifier(cl, "test", attributes);
-    GroupProcessor classifier = new GroupProcessor(1, 1);
-    {
-      ApplyFunction to_fct = new ApplyFunction(new WekaUtils.CastClassifierToFunction(dataset, attributes));
-      Connector.connect(uc, to_fct);
-      classifier.addProcessors(uc, to_fct);
-      classifier.associateInput(0, uc, 0);
-      classifier.associateOutput(0, to_fct, 0);
-    }
+    UpdateClassifierFunction uc = new UpdateClassifierFunction(cl, "test", attributes);
     ApplyFunction phi = new ApplyFunction(new FunctionTree(
         new Bags.ToArray(String.class, String.class),
         new NthElement(0),
         new NthElement(1)));
     ApplyFunction kappa = new ApplyFunction(new NthElement(2));
-    SelfLearningPrediction stcp = new SelfLearningPrediction(new RaiseArity(1, new Constant(0)), phi.duplicate(), m, t, kappa.duplicate(), n, classifier);
-    SinkLast sink = new SinkLast();
+    SelfLearningPrediction stcp = new SelfLearningPrediction(new RaiseArity(1, new Constant(0)), phi.duplicate(), m, t, kappa.duplicate(), n, uc);
+    QueueSink sink = new QueueSink();
+    Queue<Object> q = sink.getQueue();
     Connector.connect(stcp, sink);
     Pushable p = stcp.getPushableInput();
+    assertEquals(0l, uc.getInstanceCount());
     p.push(new Object[] {"foo", "0", "Y"});
     assertEquals(0l, uc.getInstanceCount());
-    assertNull(sink.getLast()); // The chain does not output a class before t+n-m events
+    assertTrue(q.isEmpty());
     p.push(new Object[] {"bar", "1", "Y"});
     assertEquals(1l, uc.getInstanceCount());
-    assertEquals("Y", sink.getLast()[0]);
+    map = (Map<Object,Object>) q.remove(); 
+    assertEquals("Y", map.get(0));
     p.push(new Object[] {"bar", "1", "Z"});
     assertEquals(2l, uc.getInstanceCount());
-    assertEquals("Z", sink.getLast()[0]);
+    map = (Map<Object,Object>) q.remove();
+    assertEquals("Z", map.get(0));
     p.push(new Object[] {"foo", "1", "Z"});
-    assertEquals("Y", sink.getLast()[0]);
+    map = (Map<Object,Object>) q.remove();
+    assertEquals("Z", map.get(0));
   }
 }

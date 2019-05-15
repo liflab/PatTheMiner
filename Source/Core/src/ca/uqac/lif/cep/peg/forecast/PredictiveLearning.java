@@ -53,6 +53,16 @@ public class PredictiveLearning extends GroupProcessor
     associateOutput(0, uc, 0);
   }
   
+  public PredictiveLearning(Processor phi, int m, int t, Processor kappa, int n, Processor uc)
+  {
+    super(1, 1);
+    LearningSlice ls = new LearningSlice(phi, m, t, kappa, n);
+    Connector.connect(ls, uc);
+    addProcessors(ls, uc);
+    associateInput(0, ls, 0);
+    associateOutput(0, uc, 0);
+  }
+  
   public static class LearningSlice extends GroupProcessor
   {
     public LearningSlice(Processor phi, int m, int t, Processor kappa, int n)
