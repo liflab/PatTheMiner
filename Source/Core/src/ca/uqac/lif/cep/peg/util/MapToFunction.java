@@ -17,59 +17,49 @@
  */
 package ca.uqac.lif.cep.peg.util;
 
-import ca.uqac.lif.cep.Context;
-import ca.uqac.lif.cep.Connector.Variant;
 import ca.uqac.lif.cep.functions.Function;
-import java.util.Set;
+import ca.uqac.lif.cep.functions.UnaryFunction;
 
-public class EvaluateAt extends Function
+import java.util.Map;
+
+/**
+ * Turns a {@link Map} object into a {@link Function} that fetches the
+ * value associated to its argument in the map.
+ */
+@SuppressWarnings("rawtypes")
+public class MapToFunction extends UnaryFunction<Map,Function>
 {
-  protected Object[] m_inputValues;
+  public static transient MapToFunction instance = new MapToFunction();
   
-  public EvaluateAt(Object ... input_values)
+  MapToFunction()
   {
-    super();
-    m_inputValues = input_values;
+    super(Map.class, Function.class);
+  }
+  
+  @Override
+  public MapFunction getValue(Map x)
+  {
+    return new MapFunction(x);
   }
 
-  @Override
-  public void getInputTypesFor(Set<Class<?>> classes, int index)
+  protected class MapFunction extends UnaryFunction<Object,Object>
   {
-    if (index == 0)
+    protected Map<?,?> m_map;
+    
+    public MapFunction(Map<?,?> map)
     {
-      classes.add(Function.class);
+      super(Object.class, Object.class);
+      m_map = map;
+    }
+
+    @Override
+    public Object getValue(Object x)
+    {
+      if (!m_map.containsKey(x))
+      {
+        return m_map.get(x);
+      }
+      return null;
     }
   }
-
-  @Override
-  public void evaluate(Object[] inputs, Object[] outputs, Context context)
-  {
-    Function fct = (Function) inputs[0];
-    fct.evaluate(m_inputValues, outputs, context);
-  }
-
-  @Override
-  public int getInputArity()
-  {
-    return 1;
-  }
-
-  @Override
-  public int getOutputArity()
-  {
-    return 1;
-  }
-
-  @Override
-  public Class<?> getOutputTypeFor(int index)
-  {
-    return Variant.class;
-  }
-
-  @Override
-  public EvaluateAt duplicate(boolean with_state)
-  {
-    return this;
-  }
-
 }
