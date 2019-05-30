@@ -24,6 +24,7 @@ import ca.uqac.lif.cep.functions.ApplyFunction;
 import ca.uqac.lif.cep.functions.Function;
 import ca.uqac.lif.cep.tmf.Slice;
 import ca.uqac.lif.cep.tmf.Window;
+import ca.uqac.lif.cep.tmf.WindowFunction;
 import ca.uqac.lif.cep.util.Maps;
 
 /**
@@ -38,10 +39,11 @@ public class StaticPrediction extends GroupProcessor
    * Creates a new instance of the static prediction workflow.
    * @param slicing A slicing function, which
    * associates each incoming event to a slice identifier <i>s</i> ∈ <i>S</i>
-   * @param phi A feature extraction processor φ : Σ<sup>m</sup> → <i>V</i>, which takes a
+   * @param phi A feature extraction <strong>processor</strong>
+   * φ : Σ<sup>m</sup> → <i>V</i>, which takes a
    * window of m successive events and computes a feature value <i>v</i> ∈ <i>V</i>
    * @param m A window width
-   * @param pi A predictive function π : <i>V</i> → <i>P</i>, which associates a
+   * @param pi A predictive processor π : <i>V</i> → <i>P</i>, which associates a
    * feature value <i>v</i> ∈ <i>V</i> to a prediction <i>p</i> ∈ <i>P</i>.
    */
   public StaticPrediction(Function slicing, Processor phi, int m, Function pi)
@@ -49,6 +51,28 @@ public class StaticPrediction extends GroupProcessor
     super(1, 1);
     notifySources(true);
     Window feature = new Window(phi, m);
+    Slice slice = new Slice(slicing, feature);
+    ApplyFunction af = new ApplyFunction(new Maps.ApplyAll(pi));
+    Connector.connect(slice, af);
+    addProcessors(slice, af);
+    associateInput(0, slice, 0);
+    associateOutput(0, af, 0);
+  }
+  
+  /**
+   * Creates a new instance of the static prediction workflow.
+   * @param slicing A slicing function, which
+   * associates each incoming event to a slice identifier <i>s</i> ∈ <i>S</i>
+   * @param phi A feature extraction <strong>function</strong> φ : Σ<sup>m</sup> → <i>V</i>, which takes a
+   * window of m successive events and computes a feature value <i>v</i> ∈ <i>V</i>
+   * @param pi A predictive processor π : <i>V</i> → <i>P</i>, which associates a
+   * feature value <i>v</i> ∈ <i>V</i> to a prediction <i>p</i> ∈ <i>P</i>.
+   */
+  public StaticPrediction(Function slicing, Function phi, Function pi)
+  {
+    super(1, 1);
+    notifySources(true);
+    WindowFunction feature = new WindowFunction(phi);
     Slice slice = new Slice(slicing, feature);
     ApplyFunction af = new ApplyFunction(new Maps.ApplyAll(pi));
     Connector.connect(slice, af);

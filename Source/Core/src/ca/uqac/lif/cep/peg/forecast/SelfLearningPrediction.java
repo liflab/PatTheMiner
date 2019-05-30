@@ -28,12 +28,14 @@ import ca.uqac.lif.cep.functions.CumulativeFunction;
 import ca.uqac.lif.cep.functions.Function;
 import ca.uqac.lif.cep.functions.FunctionTree;
 import ca.uqac.lif.cep.functions.TurnInto;
+import ca.uqac.lif.cep.peg.weka.WekaUtils;
 import ca.uqac.lif.cep.tmf.Filter;
 import ca.uqac.lif.cep.tmf.Fork;
 import ca.uqac.lif.cep.tmf.Slice;
 import ca.uqac.lif.cep.tmf.SliceLast;
 import ca.uqac.lif.cep.tmf.Window;
 import ca.uqac.lif.cep.util.Bags;
+import ca.uqac.lif.cep.util.Lists;
 import ca.uqac.lif.cep.util.Maps;
 import ca.uqac.lif.cep.util.Numbers;
 import java.util.HashMap;
@@ -49,7 +51,9 @@ public class SelfLearningPrediction extends GroupProcessor
     // Branch 1
     SliceLast s_last = new SliceLast(slice, new PredictiveLearning.LearningSlice(phi, m, t, kappa, n));
     Connector.connect(main_fork, 0, s_last, 0);
-    Connector.connect(s_last, classifier);
+    Lists.Unpack unpack = new Lists.Unpack();
+    Connector.connect(s_last, unpack);
+    Connector.connect(unpack, classifier);
     // Branch 2
     Slice s_pred = new Slice(slice, new Window(phi, m));
     Connector.connect(main_fork, 1, s_pred, 0);

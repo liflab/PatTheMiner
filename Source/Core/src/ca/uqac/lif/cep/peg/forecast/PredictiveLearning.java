@@ -32,6 +32,7 @@ import ca.uqac.lif.cep.tmf.Fork;
 import ca.uqac.lif.cep.tmf.SliceLast;
 import ca.uqac.lif.cep.tmf.Trim;
 import ca.uqac.lif.cep.tmf.Window;
+import ca.uqac.lif.cep.util.Lists;
 
 /**
  * Processor chain that trains a classifier by associating a collection of
@@ -47,8 +48,10 @@ public class PredictiveLearning extends GroupProcessor
   {
     super(1, 1);
     SliceLast slicer = new SliceLast(slice, new LearningSlice(phi, m, t, kappa, n));
-    Connector.connect(slicer, uc);
-    addProcessors(slicer, uc);
+    Lists.Unpack unpack = new Lists.Unpack();
+    Connector.connect(slicer, unpack);
+    Connector.connect(unpack, uc);
+    addProcessors(slicer, unpack, uc);
     associateInput(0, slicer, 0);
     associateOutput(0, uc, 0);
   }

@@ -176,8 +176,16 @@ public class WekaUtils
         double d = m_classifier.classifyInstance(ins);
         return getClassValue(d, m_attributes);
       }
+      catch (NullPointerException e)
+      {
+        // This exception is thrown by Weka if m_classifier is a valid Classifier object,
+        // but which has not yet built a classifier from its input data. In this case,
+        // we return the empty string.
+        return "";
+      }
       catch (Exception e)
       {
+        // Other exceptions are propagated normally
         throw new FunctionException(e);
       }
     }
