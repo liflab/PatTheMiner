@@ -1,0 +1,1525 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="163.65198mm"
+   height="111.73725mm"
+   viewBox="0 0 163.65198 111.73725"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   sodipodi:docname="PredictiveWindowClassification.svg"
+   inkscape:export-filename="/home/sylvain/Workspaces/Articles/patterns-rv/Source/fig/PredictiveWindowClassification.png"
+   inkscape:export-xdpi="64"
+   inkscape:export-ydpi="64">
+  <defs
+     id="defs2">
+    <symbol
+       id="symbol118131">
+      <circle
+         r="2.3991394"
+         cy="88.467102"
+         cx="148.45486"
+         id="proc-param"
+         style="display:inline;fill:#c8b7b7;fill-opacity:1;stroke:#241c1c;stroke-width:0.31750003;stroke-miterlimit:22.92558479;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         inkscape:label="#circle17345">
+        <title
+           id="title118129">Processor parameter</title>
+      </circle>
+    </symbol>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.99"
+     inkscape:cx="398.20493"
+     inkscape:cy="175.69183"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     fit-margin-top="1"
+     fit-margin-left="1"
+     fit-margin-right="1"
+     fit-margin-bottom="1"
+     inkscape:window-width="1920"
+     inkscape:window-height="1053"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-31.70338,-7.3953943)">
+    <path
+       inkscape:connector-curvature="0"
+       id="path37071"
+       d="M 134.1489,38.475626 V 25.435446"
+       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <path
+       style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:normal;font-family:sans-serif;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;text-orientation:mixed;dominant-baseline:auto;baseline-shift:baseline;text-anchor:start;white-space:normal;shape-padding:0;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;vector-effect:none;fill:#e6e6e6;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.52916664;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
+       d="m 182.71364,59.050664 -7.40833,0.267081 v 20.90724 H 89.063567 l 0.534513,7.408333 h 89.41139 c 2.04568,-2.01e-4 3.70396,-1.658504 3.70417,-3.704167 z"
+       id="path37003"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccccccc">
+      <title
+         id="title12699">Elbow</title>
+    </path>
+    <g
+       style="fill:#a05a2c;fill-opacity:1;stroke-width:0.66646695"
+       id="g16216"
+       transform="matrix(2.2513486,0,0,1,-64.543872,-15.829458)">
+      <path
+         inkscape:label="#path18480"
+         inkscape:connector-curvature="0"
+         id="path16214"
+         d="m 71.900521,57.914585 v 7.408333 h 30.658589 v -7.408333 z"
+         style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:normal;font-family:sans-serif;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;text-orientation:mixed;dominant-baseline:auto;baseline-shift:baseline;text-anchor:start;white-space:normal;shape-padding:0;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;vector-effect:none;fill:#a05a2c;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.35267207;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate">
+        <title
+           id="title16212">Pipe without head</title>
+      </path>
+    </g>
+    <path
+       inkscape:connector-curvature="0"
+       id="path13809"
+       d="M 96.030012,104.33652 V 91.29634"
+       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <g
+       id="use7430"
+       transform="translate(-35.281861,-14.969773)"
+       style="fill:#ffffff;fill-opacity:1">
+      <path
+         inkscape:label="#path20693"
+         inkscape:connector-curvature="0"
+         id="path7446"
+         d="m 82.351562,57.319497 a 3.7045371,3.7045371 0 0 0 -3.704166,3.704167 v 14.188281 h 7.408333 V 64.727831 h 12.170833 v -7.408334 z"
+         style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:normal;font-family:sans-serif;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;text-orientation:mixed;dominant-baseline:auto;baseline-shift:baseline;text-anchor:start;white-space:normal;shape-padding:0;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;vector-effect:none;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.52916664;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate">
+        <title
+           id="title7444">Elbow</title>
+      </path>
+    </g>
+    <path
+       inkscape:label="#path20693"
+       inkscape:connector-curvature="0"
+       id="path12703"
+       d="m 47.069701,87.633323 c -2.04567,-2.05e-4 -3.703962,-1.658497 -3.704166,-3.704167 V 69.740875 h 7.408333 v 10.484114 h 31.146001 l -0.534511,7.408334 z"
+       style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:normal;font-family:sans-serif;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;text-orientation:mixed;dominant-baseline:auto;baseline-shift:baseline;text-anchor:start;white-space:normal;shape-padding:0;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;vector-effect:none;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.52916664;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
+       sodipodi:nodetypes="cccccccc">
+      <title
+         id="title12701">Elbow</title>
+    </path>
+    <g
+       id="g12362"
+       transform="translate(32.70338,-152.24185)"
+       style="fill:#ffffff;fill-opacity:1">
+      <path
+         inkscape:label="#rect49161"
+         d="M 5.0270833,213.75417 H 15.08125 v 7.40833 H 5.0270833 Z M 0.26458333,212.43125 H 5.0270833 v 10.05417 H 0.26458333 Z"
+         style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.52916664;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         id="path12360"
+         inkscape:connector-curvature="0">
+        <title
+           id="title12358">Pipe head</title>
+      </path>
+    </g>
+    <g
+       inkscape:label="#g26903"
+       transform="matrix(2.7906592,0,0,2.9512792,-3.54983,-28.20136)"
+       id="g12370">
+      <title
+         id="title12364">Input triangle</title>
+      <path
+         inkscape:label="#path18312"
+         sodipodi:type="star"
+         style="display:inline;opacity:1;fill:#ff0000;fill-opacity:1;stroke:#000000;stroke-width:8.3162508;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         id="path12368"
+         sodipodi:sides="3"
+         sodipodi:cx="33.57143"
+         sodipodi:cy="365.2193"
+         sodipodi:r1="27.19919"
+         sodipodi:r2="13.599595"
+         sodipodi:arg1="0.52359878"
+         sodipodi:arg2="1.5707963"
+         inkscape:flatsided="true"
+         inkscape:rounded="0"
+         inkscape:randomized="0"
+         d="m 57.12662,378.81889 -47.110379,0 23.555189,-40.79878 z"
+         transform="matrix(0,0.01220215,-0.02266204,0,22.073386,31.243696)"
+         inkscape:transform-center-x="-0.54601409">
+        <title
+           id="title12366">Input pipe indicator</title>
+      </path>
+    </g>
+    <path
+       inkscape:connector-curvature="0"
+       id="path12372"
+       d="m 51.83221,57.596337 -10.25006,2.719895 v 1.074907 7.64617 1.074907 l 10.25006,2.724256 v -6.519058 -2.202022 z"
+       style="display:inline;fill:#677821;fill-opacity:1;stroke:#22280b;stroke-width:0.5817858;stroke-miterlimit:22.92558479;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    <g
+       transform="rotate(180,56.562439,150.6575)"
+       id="g7242"
+       style="fill:#e6e6e6;fill-opacity:1">
+      <path
+         inkscape:connector-curvature="0"
+         id="path7240"
+         style="opacity:1;fill:#e6e6e6;fill-opacity:1;stroke:#000000;stroke-width:0.52916664;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         d="M 5.0270833,213.75417 H 15.08125 v 7.40833 H 5.0270833 Z M 0.26458333,212.43125 H 5.0270833 v 10.05417 H 0.26458333 Z"
+         inkscape:label="#rect49161">
+        <title
+           id="title7238">Pipe head</title>
+      </path>
+    </g>
+    <g
+       id="g7250"
+       transform="matrix(2.7906592,0,0,-2.9512792,71.513868,177.27448)"
+       inkscape:label="#g26903"
+       style="fill:#00ff00">
+      <title
+         id="title7244">Input triangle</title>
+      <path
+         inkscape:transform-center-x="-0.54601409"
+         transform="matrix(0,0.01220215,-0.02266204,0,22.073386,31.243696)"
+         d="m 57.12662,378.81889 -47.110379,0 23.555189,-40.79878 z"
+         inkscape:randomized="0"
+         inkscape:rounded="0"
+         inkscape:flatsided="true"
+         sodipodi:arg2="1.5707963"
+         sodipodi:arg1="0.52359878"
+         sodipodi:r2="13.599595"
+         sodipodi:r1="27.19919"
+         sodipodi:cy="365.2193"
+         sodipodi:cx="33.57143"
+         sodipodi:sides="3"
+         id="path7248"
+         style="display:inline;opacity:1;fill:#00ff00;fill-opacity:1;stroke:#000000;stroke-width:8.3162508;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         sodipodi:type="star"
+         inkscape:label="#path18312">
+        <title
+           id="title7246">Input pipe indicator</title>
+      </path>
+    </g>
+    <g
+       transform="translate(78.860058,-133.60167)"
+       id="g7256">
+      <path
+         inkscape:connector-curvature="0"
+         id="path7254"
+         style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.52916664;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         d="M 5.0270833,213.75417 H 15.08125 v 7.40833 H 5.0270833 Z M 0.26458333,212.43125 H 5.0270833 v 10.05417 H 0.26458333 Z"
+         inkscape:label="#rect49161">
+        <title
+           id="title7252">Pipe head</title>
+      </path>
+    </g>
+    <g
+       id="g7264"
+       transform="matrix(2.7906592,0,0,2.9512792,42.606858,-9.5611722)"
+       inkscape:label="#g26903">
+      <title
+         id="title7258">Input triangle</title>
+      <path
+         inkscape:transform-center-x="-0.54601409"
+         transform="matrix(0,0.01220215,-0.02266204,0,22.073386,31.243696)"
+         d="m 57.12662,378.81889 -47.110379,0 23.555189,-40.79878 z"
+         inkscape:randomized="0"
+         inkscape:rounded="0"
+         inkscape:flatsided="true"
+         sodipodi:arg2="1.5707963"
+         sodipodi:arg1="0.52359878"
+         sodipodi:r2="13.599595"
+         sodipodi:r1="27.19919"
+         sodipodi:cy="365.2193"
+         sodipodi:cx="33.57143"
+         sodipodi:sides="3"
+         id="path7262"
+         style="display:inline;opacity:1;fill:#ff0000;fill-opacity:1;stroke:#000000;stroke-width:8.3162508;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         sodipodi:type="star"
+         inkscape:label="#path18312">
+        <title
+           id="title7260">Input pipe indicator</title>
+      </path>
+    </g>
+    <g
+       transform="translate(74.503888,52.457115)"
+       id="g7270">
+      <rect
+         style="opacity:1;fill:#93ac93;fill-opacity:1;stroke:#000000;stroke-width:0.52916664;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         id="rect7268"
+         width="18.994061"
+         height="15.345831"
+         x="12.029093"
+         y="23.726639"
+         inkscape:label="#rect44671">
+        <title
+           id="title7266">Generic processor box</title>
+      </rect>
+    </g>
+    <rect
+       y="73.349037"
+       x="91.309837"
+       height="3.8532865"
+       width="4.0445585"
+       id="rect7272"
+       style="fill:#eeffaa;fill-opacity:1;stroke:#22280b;stroke-width:0.34310022;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       ry="0.86645883" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:2.12723947px;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.17726995"
+       x="87.844002"
+       y="79.753616"
+       id="text7276"
+       transform="scale(1.0449299,0.95700199)"><tspan
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.0102942px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:sans-serif;stroke-width:0.17726995"
+         sodipodi:role="line"
+         id="tspan7274"
+         x="87.844002"
+         y="79.753616">m</tspan></text>
+    <rect
+       style="display:inline;opacity:1;fill:#e6e6e6;fill-opacity:1;stroke:#000000;stroke-width:0.42333332;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect7280"
+       width="4.0942607"
+       height="5.730535"
+       x="88.523247"
+       y="81.740013"
+       ry="0.75042719" />
+    <rect
+       ry="0.75042719"
+       y="81.740013"
+       x="93.941322"
+       height="5.730535"
+       width="4.0942607"
+       id="rect7282"
+       style="display:inline;opacity:1;fill:#e6e6e6;fill-opacity:1;stroke:#000000;stroke-width:0.42333332;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    <rect
+       style="display:inline;opacity:1;fill:#e6e6e6;fill-opacity:1;stroke:#000000;stroke-width:0.42333332;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect7284"
+       width="4.0942607"
+       height="5.730535"
+       x="99.359444"
+       y="81.740013"
+       ry="0.75042719" />
+    <text
+       transform="matrix(0,0.8460186,1.1820071,0,0,0)"
+       id="text7288"
+       y="81.53952"
+       x="91.147858"
+       style="font-style:normal;font-weight:normal;font-size:2.5400002px;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.70075774;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       xml:space="preserve"><tspan
+         y="81.53952"
+         x="91.147858"
+         id="tspan7286"
+         sodipodi:role="line"
+         style="font-size:9.03137684px;line-height:1.25;stroke-width:0.70075774">{</tspan></text>
+    <use
+       id="use7377"
+       xlink:href="#symbol118131"
+       x="0"
+       y="0"
+       width="100%"
+       height="100%"
+       transform="translate(-52.424846,3.0298558)" />
+    <g
+       id="g13829"
+       transform="translate(19.300845,-3.1084212)">
+      <path
+         inkscape:connector-curvature="0"
+         id="path8155"
+         style="opacity:1;fill:#e6e6e6;fill-opacity:1;stroke:#000000;stroke-width:0.52916664;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         d="M 87.048559,117.00771 H 76.994395 v -7.40833 h 10.054164 z m 4.7625,1.32292 h -4.7625 v -10.05417 h 4.7625 z"
+         inkscape:label="#rect49161">
+        <title
+           id="title8153">Pipe head</title>
+      </path>
+      <g
+         style="fill:#00ff00"
+         inkscape:label="#g26903"
+         transform="matrix(0.98448254,0,0,-1.0411457,50.464625,206.7214)"
+         id="g8165">
+        <title
+           id="title8159">Input triangle</title>
+        <path
+           inkscape:label="#path18312"
+           sodipodi:type="star"
+           style="display:inline;opacity:1;fill:#00ff00;fill-opacity:1;stroke:#000000;stroke-width:8.3162508;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+           id="path8163"
+           sodipodi:sides="3"
+           sodipodi:cx="33.57143"
+           sodipodi:cy="365.2193"
+           sodipodi:r1="27.19919"
+           sodipodi:r2="13.599595"
+           sodipodi:arg1="0.52359878"
+           sodipodi:arg2="1.5707963"
+           inkscape:flatsided="true"
+           inkscape:rounded="0"
+           inkscape:randomized="0"
+           d="m 57.12662,378.81889 -47.110379,0 23.555189,-40.79878 z"
+           transform="matrix(0,0.03458876,-0.06423885,0,62.570228,88.564808)"
+           inkscape:transform-center-x="-1.5477565">
+          <title
+             id="title8161">Input pipe indicator</title>
+        </path>
+      </g>
+      <g
+         id="g8171"
+         transform="matrix(0.35277777,0,0,0.35277777,61.382691,-104.15476)">
+        <path
+           inkscape:label="#rect49161"
+           d="m 14.25,605.91733 h 28.5 v 21 h -28.5 z m -13.5,-3.75 h 13.5 v 28.5 H 0.75 Z"
+           style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:1.5;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+           id="path8169"
+           inkscape:connector-curvature="0">
+          <title
+             id="title8167">Pipe head</title>
+        </path>
+      </g>
+      <g
+         inkscape:label="#g26903"
+         transform="matrix(0.98448254,0,0,1.0411457,25.129491,19.88573)"
+         id="g8179">
+        <title
+           id="title8173">Input triangle</title>
+        <path
+           inkscape:label="#path18312"
+           sodipodi:type="star"
+           style="display:inline;opacity:1;fill:#ff0000;fill-opacity:1;stroke:#000000;stroke-width:8.3162508;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+           id="path8177"
+           sodipodi:sides="3"
+           sodipodi:cx="33.57143"
+           sodipodi:cy="365.2193"
+           sodipodi:r1="27.19919"
+           sodipodi:r2="13.599595"
+           sodipodi:arg1="0.52359878"
+           sodipodi:arg2="1.5707963"
+           inkscape:flatsided="true"
+           inkscape:rounded="0"
+           inkscape:randomized="0"
+           d="m 57.12662,378.81889 -47.110379,0 23.555189,-40.79878 z"
+           transform="matrix(0,0.03458876,-0.06423885,0,62.570228,88.564808)"
+           inkscape:transform-center-x="-1.5477565">
+          <title
+             id="title8175">Input pipe indicator</title>
+        </path>
+      </g>
+      <g
+         id="g8185"
+         transform="matrix(0.35277777,0,0,0.35277777,57.026513,81.904017)">
+        <rect
+           inkscape:label="#rect44671"
+           y="67.256615"
+           x="34.098217"
+           height="43.499996"
+           width="43.499996"
+           id="rect8183"
+           style="opacity:1;fill:#93ac93;fill-opacity:1;stroke:#000000;stroke-width:1.49999988;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1">
+          <title
+             id="title8181">Generic processor box</title>
+        </rect>
+      </g>
+      <text
+         id="text7344"
+         y="116.43978"
+         x="73.216476"
+         style="font-style:normal;font-weight:normal;font-size:10.34716511px;line-height:1;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000080;fill-opacity:1;stroke:#000000;stroke-width:0.52916664;stroke-miterlimit:4;stroke-dasharray:none"
+         xml:space="preserve"><tspan
+           style="font-weight:bold;fill:#000080;stroke:#000000;stroke-width:0.52916664;stroke-miterlimit:4;stroke-dasharray:none"
+           y="116.43978"
+           x="73.216476"
+           id="tspan7342"
+           sodipodi:role="line">β</tspan></text>
+    </g>
+    <g
+       style="fill:#a05a2c;fill-opacity:1"
+       id="g16160"
+       transform="matrix(0.35277777,0,0,0.35277777,163.66368,-171.66903)">
+      <path
+         inkscape:label="#rect49161"
+         d="m 14.25,605.91733 h 28.5 v 21 h -28.5 z m -13.5,-3.75 h 13.5 v 28.5 H 0.75 Z"
+         style="opacity:1;fill:#a05a2c;fill-opacity:1;stroke:#000000;stroke-width:1.5;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         id="path16158"
+         inkscape:connector-curvature="0">
+        <title
+           id="title16156">Pipe head</title>
+      </path>
+    </g>
+    <g
+       inkscape:label="#g26903"
+       transform="matrix(0.98448254,0,0,1.0411457,127.41048,-47.628541)"
+       id="g16168">
+      <title
+         id="title16162">Input triangle</title>
+      <path
+         inkscape:label="#path18312"
+         sodipodi:type="star"
+         style="display:inline;opacity:1;fill:#ff0000;fill-opacity:1;stroke:#000000;stroke-width:8.3162508;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         id="path16166"
+         sodipodi:sides="3"
+         sodipodi:cx="33.57143"
+         sodipodi:cy="365.2193"
+         sodipodi:r1="27.19919"
+         sodipodi:r2="13.599595"
+         sodipodi:arg1="0.52359878"
+         sodipodi:arg2="1.5707963"
+         inkscape:flatsided="true"
+         inkscape:rounded="0"
+         inkscape:randomized="0"
+         d="m 57.12662,378.81889 -47.110379,0 23.555189,-40.79878 z"
+         transform="matrix(0,0.03458876,-0.06423885,0,62.570228,88.564808)"
+         inkscape:transform-center-x="-1.5477565">
+        <title
+           id="title16164">Input pipe indicator</title>
+      </path>
+    </g>
+    <g
+       style="fill:#e6e6e6;fill-opacity:1"
+       id="g16174"
+       transform="rotate(-90,11.21082,49.659682)">
+      <path
+         inkscape:label="#rect49161"
+         d="M 5.0270833,213.75417 H 15.08125 v 7.40833 H 5.0270833 Z M 0.26458333,212.43125 H 5.0270833 v 10.05417 H 0.26458333 Z"
+         style="opacity:1;fill:#e6e6e6;fill-opacity:1;stroke:#000000;stroke-width:0.52916664;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         id="path16172"
+         inkscape:connector-curvature="0">
+        <title
+           id="title16170">Pipe head</title>
+      </path>
+    </g>
+    <g
+       inkscape:label="#g26903"
+       transform="matrix(0,-2.7906592,2.9512792,0,85.591647,97.123707)"
+       id="g16182">
+      <title
+         id="title16176">Input triangle</title>
+      <path
+         inkscape:label="#path18312"
+         sodipodi:type="star"
+         style="display:inline;opacity:1;fill:#ff0000;fill-opacity:1;stroke:#000000;stroke-width:8.3162508;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         id="path16180"
+         sodipodi:sides="3"
+         sodipodi:cx="33.57143"
+         sodipodi:cy="365.2193"
+         sodipodi:r1="27.19919"
+         sodipodi:r2="13.599595"
+         sodipodi:arg1="0.52359878"
+         sodipodi:arg2="1.5707963"
+         inkscape:flatsided="true"
+         inkscape:rounded="0"
+         inkscape:randomized="0"
+         d="m 57.12662,378.81889 -47.110379,0 23.555189,-40.79878 z"
+         transform="matrix(0,0.01220215,-0.02266204,0,22.073386,31.243696)"
+         inkscape:transform-center-x="-0.54601409">
+        <title
+           id="title16178">Input pipe indicator</title>
+      </path>
+    </g>
+    <g
+       transform="matrix(-0.35277777,0,0,-0.35277777,194.35535,263.24763)"
+       id="g16188"
+       style="fill:#e9c6af;fill-opacity:1">
+      <path
+         inkscape:connector-curvature="0"
+         id="path16186"
+         style="opacity:1;fill:#e9c6af;fill-opacity:1;stroke:#000000;stroke-width:1.5;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         d="m 14.25,605.91733 h 28.5 v 21 h -28.5 z m -13.5,-3.75 h 13.5 v 28.5 H 0.75 Z"
+         inkscape:label="#rect49161">
+        <title
+           id="title16184">Pipe head</title>
+      </path>
+    </g>
+    <g
+       id="g16196"
+       transform="matrix(2.7906592,0,0,-2.9512792,152.7456,139.20711)"
+       inkscape:label="#g26903"
+       style="fill:#00ff00">
+      <title
+         id="title16190">Input triangle</title>
+      <path
+         inkscape:transform-center-x="-0.54601409"
+         transform="matrix(0,0.01220215,-0.02266204,0,22.073386,31.243696)"
+         d="m 57.12662,378.81889 -47.110379,0 23.555189,-40.79878 z"
+         inkscape:randomized="0"
+         inkscape:rounded="0"
+         inkscape:flatsided="true"
+         sodipodi:arg2="1.5707963"
+         sodipodi:arg1="0.52359878"
+         sodipodi:r2="13.599595"
+         sodipodi:r1="27.19919"
+         sodipodi:cy="365.2193"
+         sodipodi:cx="33.57143"
+         sodipodi:sides="3"
+         id="path16194"
+         style="display:inline;opacity:1;fill:#00ff00;fill-opacity:1;stroke:#000000;stroke-width:8.3162508;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         sodipodi:type="star"
+         inkscape:label="#path18312">
+        <title
+           id="title16192">Input pipe indicator</title>
+      </path>
+    </g>
+    <g
+       transform="translate(159.30749,14.389737)"
+       id="g16202">
+      <rect
+         style="opacity:1;fill:#93ac93;fill-opacity:1;stroke:#000000;stroke-width:0.52916664;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         id="rect16200"
+         width="15.345832"
+         height="15.345832"
+         x="12.029093"
+         y="23.726639"
+         inkscape:label="#rect44671">
+        <title
+           id="title16198">Generic processor box</title>
+      </rect>
+    </g>
+    <g
+       id="g22481"
+       transform="translate(-122.79808,-41.478167)">
+      <rect
+         style="opacity:1;fill:#e9c6af;fill-opacity:1;stroke:#000000;stroke-width:0.52718472;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         id="rect22414"
+         width="10.248167"
+         height="6.1755929"
+         x="251.82289"
+         y="63.265972"
+         ry="3.0877964" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path22416"
+         d="m 251.83597,66.218159 c -0.007,0.08464 -0.0132,0.169711 -0.0132,0.25619 0,1.710631 1.37709,3.087743 3.08773,3.087743 h 4.0725 c 1.71064,0 3.08816,-1.377112 3.08816,-3.087743 0,-0.08648 -0.006,-0.171546 -0.0132,-0.25619 z"
+         style="opacity:1;fill:#e6e6e6;fill-opacity:1;stroke:none;stroke-width:0.52718472;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <rect
+         ry="3.0877964"
+         y="63.265972"
+         x="251.82289"
+         height="6.1755929"
+         width="10.248167"
+         id="rect22418"
+         style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.52718472;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <g
+         transform="translate(-0.41662471,10.76518)"
+         id="g22469">
+        <rect
+           transform="matrix(0.83701259,0.54718363,-0.83701259,0.54718363,0,0)"
+           y="-104.90638"
+           x="202.57239"
+           height="3.9243643"
+           width="3.9243643"
+           id="rect22446"
+           style="opacity:1;fill:#a05a2c;fill-opacity:1;stroke:#000000;stroke-width:0.36859867;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:1.47439446, 0.36859862;stroke-dashoffset:0;stroke-opacity:1" />
+        <text
+           id="text22450"
+           y="56.887768"
+           x="256.34137"
+           style="font-style:normal;font-weight:normal;font-size:3.5009408px;line-height:1;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffff00;fill-opacity:1;stroke:none;stroke-width:0.26458335"
+           xml:space="preserve"><tspan
+             style="font-weight:bold;fill:#ffff00;stroke-width:0.26458335"
+             y="56.887768"
+             x="256.34137"
+             id="tspan22448"
+             sodipodi:role="line">?</tspan></text>
+      </g>
+    </g>
+    <g
+       id="g29503"
+       transform="matrix(0.09891841,0,0,0.09891841,164.54126,-42.63362)">
+      <circle
+         style="stroke-width:0.73967892"
+         r="26.875"
+         cy="817.7868"
+         cx="236.45111"
+         id="circle29497" />
+      <text
+         id="text29501"
+         y="831.45563"
+         x="236.13068"
+         style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.93750006"
+         xml:space="preserve"><tspan
+           style="text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.93750006"
+           y="831.45563"
+           x="236.13068"
+           id="tspan29499"
+           sodipodi:role="line">5</tspan></text>
+    </g>
+    <g
+       id="g30044"
+       transform="translate(-79.040525,-39.573978)">
+      <path
+         d="m 254.8399,88.32284 q 0.27515,0 0.4368,-0.19949 0.16165,-0.19604 0.24764,-0.63972 l 0.65348,-3.35337 h -0.54342 l 0.0791,-0.41617 h 0.54342 l 0.0894,-0.45743 q 0.11694,-0.60877 0.5675,-0.92175 0.45055,-0.31642 1.20377,-0.31642 0.29235,0 0.56406,0.0344 0.27171,0.031 0.52966,0.0963 l -0.15477,0.78417 h -0.38521 q 0.007,-0.0516 0.007,-0.0963 0,-0.19605 -0.086,-0.30267 -0.10319,-0.13069 -0.3405,-0.13069 -0.27515,0 -0.4368,0.19948 -0.16165,0.19605 -0.24763,0.63972 l -0.0929,0.47119 h 0.91831 l -0.0791,0.41617 h -0.91831 l -0.65004,3.33962 q -0.14102,0.71882 -0.56749,0.92518 -0.6638,0.31299 -1.41702,0.31299 0.0378,-0.19261 0.0791,-0.38521 z"
+         style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:26.62227249px;line-height:1.25;font-family:'DejaVu Serif';-inkscape-font-specification:'DejaVu Serif Italic';fill:#ffff00;stroke:#000000;stroke-width:0.31750003;stroke-miterlimit:4;stroke-dasharray:none"
+         id="path22412"
+         inkscape:connector-curvature="0" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path30040"
+         style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:26.62227249px;line-height:1.25;font-family:'DejaVu Serif';-inkscape-font-specification:'DejaVu Serif Italic';fill:#ffff00;stroke:#000000;stroke-width:0.31750003;stroke-miterlimit:4;stroke-dasharray:none"
+         d="m 256.97579,88.32284 q 0.27515,0 0.4368,-0.19949 0.16165,-0.19604 0.24764,-0.63972 l 0.65348,-3.35337 h -0.54342 l 0.0791,-0.41617 h 0.54342 l 0.0894,-0.45743 q 0.11694,-0.60877 0.5675,-0.92175 0.45055,-0.31642 1.20377,-0.31642 0.29235,0 0.56406,0.0344 0.27171,0.031 0.52966,0.0963 l -0.15477,0.78417 h -0.38521 q 0.007,-0.0516 0.007,-0.0963 0,-0.19605 -0.086,-0.30267 -0.10319,-0.13069 -0.3405,-0.13069 -0.27515,0 -0.4368,0.19948 -0.16165,0.19605 -0.24763,0.63972 l -0.0929,0.47119 h 0.91831 l -0.0791,0.41617 h -0.91831 l -0.65004,3.33962 q -0.14102,0.71882 -0.56749,0.92518 -0.6638,0.31299 -1.41702,0.31299 0.0378,-0.19261 0.0791,-0.38521 z" />
+    </g>
+    <g
+       style="fill:#a05a2c;fill-opacity:1"
+       id="g36928"
+       transform="matrix(0.35277777,0,0,0.35277777,118.80308,-171.66903)">
+      <path
+         inkscape:label="#rect49161"
+         d="m 14.25,605.91733 h 28.5 v 21 h -28.5 z m -13.5,-3.75 h 13.5 v 28.5 H 0.75 Z"
+         style="opacity:1;fill:#a05a2c;fill-opacity:1;stroke:#000000;stroke-width:1.5;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         id="path36926"
+         inkscape:connector-curvature="0">
+        <title
+           id="title36924">Pipe head</title>
+      </path>
+    </g>
+    <g
+       inkscape:label="#g26903"
+       transform="matrix(0.98448254,0,0,1.0411457,82.549877,-47.628541)"
+       id="g36936">
+      <title
+         id="title36930">Input triangle</title>
+      <path
+         inkscape:label="#path18312"
+         sodipodi:type="star"
+         style="display:inline;opacity:1;fill:#ff0000;fill-opacity:1;stroke:#000000;stroke-width:8.3162508;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         id="path36934"
+         sodipodi:sides="3"
+         sodipodi:cx="33.57143"
+         sodipodi:cy="365.2193"
+         sodipodi:r1="27.19919"
+         sodipodi:r2="13.599595"
+         sodipodi:arg1="0.52359878"
+         sodipodi:arg2="1.5707963"
+         inkscape:flatsided="true"
+         inkscape:rounded="0"
+         inkscape:randomized="0"
+         d="m 57.12662,378.81889 -47.110379,0 23.555189,-40.79878 z"
+         transform="matrix(0,0.03458876,-0.06423885,0,62.570228,88.564808)"
+         inkscape:transform-center-x="-1.5477565">
+        <title
+           id="title36932">Input pipe indicator</title>
+      </path>
+    </g>
+    <g
+       transform="matrix(-0.35277777,0,0,-0.35277777,149.49475,263.24763)"
+       id="g36942"
+       style="fill:#a05a2c;fill-opacity:1">
+      <path
+         inkscape:connector-curvature="0"
+         id="path36940"
+         style="opacity:1;fill:#a05a2c;fill-opacity:1;stroke:#000000;stroke-width:1.5;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         d="m 14.25,605.91733 h 28.5 v 21 h -28.5 z m -13.5,-3.75 h 13.5 v 28.5 H 0.75 Z"
+         inkscape:label="#rect49161">
+        <title
+           id="title36938">Pipe head</title>
+      </path>
+    </g>
+    <g
+       id="g36950"
+       transform="matrix(2.7906592,0,0,-2.9512792,107.885,139.20711)"
+       inkscape:label="#g26903"
+       style="fill:#00ff00">
+      <title
+         id="title36944">Input triangle</title>
+      <path
+         inkscape:transform-center-x="-0.54601409"
+         transform="matrix(0,0.01220215,-0.02266204,0,22.073386,31.243696)"
+         d="m 57.12662,378.81889 -47.110379,0 23.555189,-40.79878 z"
+         inkscape:randomized="0"
+         inkscape:rounded="0"
+         inkscape:flatsided="true"
+         sodipodi:arg2="1.5707963"
+         sodipodi:arg1="0.52359878"
+         sodipodi:r2="13.599595"
+         sodipodi:r1="27.19919"
+         sodipodi:cy="365.2193"
+         sodipodi:cx="33.57143"
+         sodipodi:sides="3"
+         id="path36948"
+         style="display:inline;opacity:1;fill:#00ff00;fill-opacity:1;stroke:#000000;stroke-width:8.3162508;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         sodipodi:type="star"
+         inkscape:label="#path18312">
+        <title
+           id="title36946">Input pipe indicator</title>
+      </path>
+    </g>
+    <g
+       transform="translate(114.44689,14.389737)"
+       id="g36956">
+      <rect
+         style="opacity:1;fill:#93ac93;fill-opacity:1;stroke:#000000;stroke-width:0.52916664;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         id="rect36954"
+         width="15.345832"
+         height="15.345832"
+         x="12.029093"
+         y="23.726639"
+         inkscape:label="#rect44671">
+        <title
+           id="title36952">Generic processor box</title>
+      </rect>
+    </g>
+    <g
+       id="g36978"
+       transform="matrix(0.09891841,0,0,0.09891841,118.91954,-42.63362)">
+      <circle
+         style="stroke-width:0.73967892"
+         r="26.875"
+         cy="817.7868"
+         cx="236.45111"
+         id="circle36972" />
+      <text
+         id="text36976"
+         y="831.45563"
+         x="236.13068"
+         style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.93750006"
+         xml:space="preserve"><tspan
+           style="text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.93750006"
+           y="831.45563"
+           x="236.13068"
+           id="tspan36974"
+           sodipodi:role="line">4</tspan></text>
+    </g>
+    <g
+       id="use37035"
+       style="stroke-width:0.4586111;stroke-miterlimit:4;stroke-dasharray:none"
+       transform="translate(-3.9636033,6.300947)">
+      <title
+         id="title37057">Insert</title>
+      <rect
+         style="display:inline;opacity:1;fill:none;fill-opacity:1;stroke:#ff0000;stroke-width:0.4586111;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         id="rect37059"
+         width="3.4812357"
+         height="5.0267396"
+         x="131.96266"
+         y="37.107441"
+         ry="0.65826356" />
+      <rect
+         ry="0.65826356"
+         y="37.107441"
+         x="140.7811"
+         height="5.0267396"
+         width="3.4812357"
+         id="rect37061"
+         style="display:inline;opacity:1;fill:#eeffaa;fill-opacity:1;stroke:#000000;stroke-width:0.4586111;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <rect
+         ry="0.65826356"
+         y="37.107441"
+         x="136.37187"
+         height="5.0267396"
+         width="3.4812357"
+         id="rect37063"
+         style="display:inline;opacity:1;fill:none;fill-opacity:1;stroke:#ff0000;stroke-width:0.4586111;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <path
+         sodipodi:type="star"
+         style="display:inline;fill:#ffff00;fill-opacity:1;stroke:#000000;stroke-width:1.6175015;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+         id="path37065"
+         sodipodi:sides="5"
+         sodipodi:cx="401.48868"
+         sodipodi:cy="424.03159"
+         sodipodi:r1="5.7914667"
+         sodipodi:r2="2.8957331"
+         sodipodi:arg1="0.78539816"
+         sodipodi:arg2="1.4137167"
+         inkscape:flatsided="false"
+         inkscape:rounded="0"
+         inkscape:randomized="0"
+         d="m 405.58386,428.12677 -3.64219,-1.2351 -3.08226,2.30015 0.0491,-3.8456 -3.14005,-2.22062 3.67258,-1.14161 1.1416,-3.67257 2.22062,3.14005 3.8456,-0.0492 -2.30015,3.08227 z"
+         inkscape:transform-center-x="0.19829615"
+         inkscape:transform-center-y="-0.19832037"
+         transform="matrix(0.28255222,0,0,0.28451231,21.63092,-83.59444)" />
+      <path
+         transform="matrix(0.28255222,0,0,0.28451231,25.59967,-83.59444)"
+         inkscape:transform-center-y="-0.19832037"
+         inkscape:transform-center-x="0.19829615"
+         d="m 405.58386,428.12677 -3.64219,-1.2351 -3.08226,2.30015 0.0491,-3.8456 -3.14005,-2.22062 3.67258,-1.14161 1.1416,-3.67257 2.22062,3.14005 3.8456,-0.0492 -2.30015,3.08227 z"
+         inkscape:randomized="0"
+         inkscape:rounded="0"
+         inkscape:flatsided="false"
+         sodipodi:arg2="1.4137167"
+         sodipodi:arg1="0.78539816"
+         sodipodi:r2="2.8957331"
+         sodipodi:r1="5.7914667"
+         sodipodi:cy="424.03159"
+         sodipodi:cx="401.48868"
+         sodipodi:sides="5"
+         id="path37067"
+         style="display:inline;fill:#ffff00;fill-opacity:1;stroke:#000000;stroke-width:1.6175015;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+         sodipodi:type="star" />
+    </g>
+    <use
+       id="use37073"
+       xlink:href="#symbol118131"
+       x="0"
+       y="0"
+       width="100%"
+       height="100%"
+       transform="translate(-14.305973,-49.899436)" />
+    <g
+       id="g37138"
+       transform="translate(-121.58428,-39.05912)">
+      <rect
+         y="91.992165"
+         x="246.62825"
+         height="3.8532867"
+         width="18.209841"
+         id="rect37085"
+         style="fill:#eeffaa;fill-opacity:1;stroke:#22280b;stroke-width:0.34310022;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         ry="0.86645889" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:2.05860138px;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.17155011"
+         x="198.57979"
+         y="118.7762"
+         id="text37089"
+         transform="scale(1.2476837,0.80148518)"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.59439921px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:sans-serif;stroke-width:0.17155011"
+           sodipodi:role="line"
+           id="tspan37087"
+           x="198.57979"
+           y="118.7762">t+n−m</tspan></text>
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:2.5400002px;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.80000001px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="109.16357"
+       y="63.188049"
+       id="text37128"
+       transform="scale(0.9978365,1.0021682)"><tspan
+         sodipodi:role="line"
+         id="tspan37126"
+         x="109.16357"
+         y="63.188049"
+         style="font-size:5.99783373px;line-height:1.25;text-align:center;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke-width:0.80000001px">−</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 62.742039,20.533266 v 8.29216 h 11.758918 v 5.34796"
+       id="path10409"
+       inkscape:connector-curvature="0" />
+    <g
+       id="g13829-5"
+       transform="translate(-14.021675,-96.970655)">
+      <path
+         inkscape:connector-curvature="0"
+         id="path8155-3"
+         style="opacity:1;fill:#e6e6e6;fill-opacity:1;stroke:#000000;stroke-width:0.52916664;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         d="M 87.048559,117.00771 H 76.994395 v -7.40833 h 10.054164 z m 4.7625,1.32292 h -4.7625 v -10.05417 h 4.7625 z"
+         inkscape:label="#rect49161">
+        <title
+           id="title8153-5">Pipe head</title>
+      </path>
+      <g
+         style="fill:#00ff00"
+         inkscape:label="#g26903"
+         transform="matrix(0.98448254,0,0,-1.0411457,50.464625,206.7214)"
+         id="g8165-6">
+        <title
+           id="title8159-2">Input triangle</title>
+        <path
+           inkscape:label="#path18312"
+           sodipodi:type="star"
+           style="display:inline;opacity:1;fill:#00ff00;fill-opacity:1;stroke:#000000;stroke-width:8.3162508;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+           id="path8163-9"
+           sodipodi:sides="3"
+           sodipodi:cx="33.57143"
+           sodipodi:cy="365.2193"
+           sodipodi:r1="27.19919"
+           sodipodi:r2="13.599595"
+           sodipodi:arg1="0.52359878"
+           sodipodi:arg2="1.5707963"
+           inkscape:flatsided="true"
+           inkscape:rounded="0"
+           inkscape:randomized="0"
+           d="m 57.12662,378.81889 -47.110379,0 23.555189,-40.79878 z"
+           transform="matrix(0,0.03458876,-0.06423885,0,62.570228,88.564808)"
+           inkscape:transform-center-x="-1.5477565">
+          <title
+             id="title8161-1">Input pipe indicator</title>
+        </path>
+      </g>
+      <g
+         id="g8171-2"
+         transform="matrix(0.35277777,0,0,0.35277777,61.382691,-104.15476)">
+        <path
+           inkscape:label="#rect49161"
+           d="m 14.25,605.91733 h 28.5 v 21 h -28.5 z m -13.5,-3.75 h 13.5 v 28.5 H 0.75 Z"
+           style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:1.5;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+           id="path8169-7"
+           inkscape:connector-curvature="0">
+          <title
+             id="title8167-0">Pipe head</title>
+        </path>
+      </g>
+      <g
+         inkscape:label="#g26903"
+         transform="matrix(0.98448254,0,0,1.0411457,25.129491,19.88573)"
+         id="g8179-9">
+        <title
+           id="title8173-3">Input triangle</title>
+        <path
+           inkscape:label="#path18312"
+           sodipodi:type="star"
+           style="display:inline;opacity:1;fill:#ff0000;fill-opacity:1;stroke:#000000;stroke-width:8.3162508;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+           id="path8177-6"
+           sodipodi:sides="3"
+           sodipodi:cx="33.57143"
+           sodipodi:cy="365.2193"
+           sodipodi:r1="27.19919"
+           sodipodi:r2="13.599595"
+           sodipodi:arg1="0.52359878"
+           sodipodi:arg2="1.5707963"
+           inkscape:flatsided="true"
+           inkscape:rounded="0"
+           inkscape:randomized="0"
+           d="m 57.12662,378.81889 -47.110379,0 23.555189,-40.79878 z"
+           transform="matrix(0,0.03458876,-0.06423885,0,62.570228,88.564808)"
+           inkscape:transform-center-x="-1.5477565">
+          <title
+             id="title8175-0">Input pipe indicator</title>
+        </path>
+      </g>
+      <g
+         id="g8185-6"
+         transform="matrix(0.35277777,0,0,0.35277777,57.026513,81.904017)">
+        <rect
+           inkscape:label="#rect44671"
+           y="67.256615"
+           x="34.098217"
+           height="43.499996"
+           width="43.499996"
+           id="rect8183-2"
+           style="opacity:1;fill:#93ac93;fill-opacity:1;stroke:#000000;stroke-width:1.49999988;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1">
+          <title
+             id="title8181-6">Generic processor box</title>
+        </rect>
+      </g>
+      <text
+         id="text7344-1"
+         y="116.43978"
+         x="73.216476"
+         style="font-style:normal;font-weight:normal;font-size:10.34716511px;line-height:1;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000080;fill-opacity:1;stroke:#000000;stroke-width:0.52916664;stroke-miterlimit:4;stroke-dasharray:none"
+         xml:space="preserve"><tspan
+           style="font-weight:bold;fill:#000080;stroke:#000000;stroke-width:0.52916664;stroke-miterlimit:4;stroke-dasharray:none"
+           y="116.43978"
+           x="73.216476"
+           id="tspan7342-8"
+           sodipodi:role="line">β</tspan></text>
+    </g>
+    <path
+       inkscape:connector-curvature="0"
+       id="path10411"
+       d="m 101.24076,20.533266 v 8.29216 H 89.481847 v 5.34796"
+       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <g
+       id="g13807-7"
+       transform="translate(-22.479725,1.3031321)">
+      <path
+         inkscape:label="#rect49161"
+         d="m 133.91761,18.7339 h -10.05417 v -7.40833 h 10.05417 z m 4.7625,1.32292 h -4.7625 V 10.00265 h 4.7625 z"
+         style="opacity:1;fill:#e9c6af;fill-opacity:1;stroke:#000000;stroke-width:0.52916664;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         id="path13753-9"
+         inkscape:connector-curvature="0">
+        <title
+           id="title13751-2">Pipe head</title>
+      </path>
+      <g
+         id="g13761-0"
+         transform="matrix(0.98448254,0,0,-1.0411457,97.333673,108.44759)"
+         inkscape:label="#g26903"
+         style="fill:#00ff00">
+        <title
+           id="title13755-2">Input triangle</title>
+        <path
+           inkscape:transform-center-x="-1.5477565"
+           transform="matrix(0,0.03458876,-0.06423885,0,62.570228,88.564808)"
+           d="m 57.12662,378.81889 -47.110379,0 23.555189,-40.79878 z"
+           inkscape:randomized="0"
+           inkscape:rounded="0"
+           inkscape:flatsided="true"
+           sodipodi:arg2="1.5707963"
+           sodipodi:arg1="0.52359878"
+           sodipodi:r2="13.599595"
+           sodipodi:r1="27.19919"
+           sodipodi:cy="365.2193"
+           sodipodi:cx="33.57143"
+           sodipodi:sides="3"
+           id="path13759-3"
+           style="display:inline;opacity:1;fill:#00ff00;fill-opacity:1;stroke:#000000;stroke-width:8.3162508;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+           sodipodi:type="star"
+           inkscape:label="#path18312">
+          <title
+             id="title13757-7">Input pipe indicator</title>
+        </path>
+      </g>
+      <g
+         transform="matrix(0.35277777,0,0,0.35277777,108.25174,-202.42857)"
+         id="g13767-5">
+        <path
+           inkscape:connector-curvature="0"
+           id="path13765-9"
+           style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:1.5;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+           d="m 14.25,605.91733 h 28.5 v 21 h -28.5 z m -13.5,-3.75 h 13.5 v 28.5 H 0.75 Z"
+           inkscape:label="#rect49161">
+          <title
+             id="title13763-2">Pipe head</title>
+        </path>
+      </g>
+      <g
+         id="g13775-2"
+         transform="matrix(0.98448254,0,0,1.0411457,71.998539,-78.38808)"
+         inkscape:label="#g26903">
+        <title
+           id="title13769-8">Input triangle</title>
+        <path
+           inkscape:transform-center-x="-1.5477565"
+           transform="matrix(0,0.03458876,-0.06423885,0,62.570228,88.564808)"
+           d="m 57.12662,378.81889 -47.110379,0 23.555189,-40.79878 z"
+           inkscape:randomized="0"
+           inkscape:rounded="0"
+           inkscape:flatsided="true"
+           sodipodi:arg2="1.5707963"
+           sodipodi:arg1="0.52359878"
+           sodipodi:r2="13.599595"
+           sodipodi:r1="27.19919"
+           sodipodi:cy="365.2193"
+           sodipodi:cx="33.57143"
+           sodipodi:sides="3"
+           id="path13773-9"
+           style="display:inline;opacity:1;fill:#ff0000;fill-opacity:1;stroke:#000000;stroke-width:8.3162508;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+           sodipodi:type="star"
+           inkscape:label="#path18312">
+          <title
+             id="title13771-7">Input pipe indicator</title>
+        </path>
+      </g>
+      <g
+         transform="matrix(0.35277777,0,0,0.35277777,103.89556,-16.369793)"
+         id="g13781-3">
+        <rect
+           style="opacity:1;fill:#93ac93;fill-opacity:1;stroke:#000000;stroke-width:1.49999988;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+           id="rect13779-6"
+           width="43.499996"
+           height="43.499996"
+           x="34.098217"
+           y="67.256615"
+           inkscape:label="#rect44671">
+          <title
+             id="title13777-1">Generic processor box</title>
+        </rect>
+      </g>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:10.34716511px;line-height:1;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000080;fill-opacity:1;stroke:#000000;stroke-width:0.52916664;stroke-miterlimit:4;stroke-dasharray:none"
+         x="120.08553"
+         y="18.165972"
+         id="text13785-2"><tspan
+           sodipodi:role="line"
+           id="tspan13783-9"
+           x="120.08553"
+           y="18.165972"
+           style="font-weight:bold;fill:#000080;stroke:#000000;stroke-width:0.52916664;stroke-miterlimit:4;stroke-dasharray:none">κ</tspan></text>
+    </g>
+    <g
+       id="g2771"
+       transform="translate(-64.389695,-166.23439)">
+      <path
+         inkscape:label="#rect49161"
+         d="M 161.71896,215.72785 H 151.6648 v -7.40833 h 10.05416 z m 4.7625,1.32292 h -4.7625 V 206.9966 h 4.7625 z"
+         style="opacity:1;fill:#a05a2c;fill-opacity:1;stroke:#000000;stroke-width:0.52916664;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         id="path2690"
+         inkscape:connector-curvature="0">
+        <title
+           id="title2688">Pipe head</title>
+      </path>
+      <g
+         id="g2698"
+         transform="matrix(0.98448254,0,0,-1.0411457,125.13503,305.44154)"
+         inkscape:label="#g26903"
+         style="fill:#00ff00">
+        <title
+           id="title2692">Input triangle</title>
+        <path
+           inkscape:transform-center-x="-1.5477565"
+           transform="matrix(0,0.03458876,-0.06423885,0,62.570228,88.564808)"
+           d="m 57.12662,378.81889 -47.110379,0 23.555189,-40.79878 z"
+           inkscape:randomized="0"
+           inkscape:rounded="0"
+           inkscape:flatsided="true"
+           sodipodi:arg2="1.5707963"
+           sodipodi:arg1="0.52359878"
+           sodipodi:r2="13.599595"
+           sodipodi:r1="27.19919"
+           sodipodi:cy="365.2193"
+           sodipodi:cx="33.57143"
+           sodipodi:sides="3"
+           id="path2696"
+           style="display:inline;opacity:1;fill:#00ff00;fill-opacity:1;stroke:#000000;stroke-width:8.3162508;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+           sodipodi:type="star"
+           inkscape:label="#path18312">
+          <title
+             id="title2694">Input pipe indicator</title>
+        </path>
+      </g>
+    </g>
+    <g
+       id="g9167"
+       transform="translate(-3.2189867,-166.23441)">
+      <g
+         transform="matrix(0.35277777,0,0,0.35277777,64.840771,-5.43462)"
+         id="g2704">
+        <g
+           id="g9157">
+          <path
+             inkscape:label="#rect49161"
+             d="m 14.25,605.91733 h 28.5 v 21 h -28.5 z m -13.5,-3.75 h 13.5 v 28.5 H 0.75 Z"
+             style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:1.5;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+             id="path2702"
+             inkscape:connector-curvature="0">
+            <title
+               id="title2700">Pipe head</title>
+          </path>
+        </g>
+      </g>
+      <g
+         id="g2712"
+         transform="matrix(0.98448254,0,0,1.0411457,28.587571,118.60587)"
+         inkscape:label="#g26903">
+        <title
+           id="title2706">Input triangle</title>
+        <path
+           inkscape:transform-center-x="-1.5477565"
+           transform="matrix(0,0.03458876,-0.06423885,0,62.570228,88.564808)"
+           d="m 57.12662,378.81889 -47.110379,0 23.555189,-40.79878 z"
+           inkscape:randomized="0"
+           inkscape:rounded="0"
+           inkscape:flatsided="true"
+           sodipodi:arg2="1.5707963"
+           sodipodi:arg1="0.52359878"
+           sodipodi:r2="13.599595"
+           sodipodi:r1="27.19919"
+           sodipodi:cy="365.2193"
+           sodipodi:cx="33.57143"
+           sodipodi:sides="3"
+           id="path2710"
+           style="display:inline;opacity:1;fill:#ff0000;fill-opacity:1;stroke:#000000;stroke-width:8.3162508;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+           sodipodi:type="star"
+           inkscape:label="#path18312">
+          <title
+             id="title2708">Input pipe indicator</title>
+        </path>
+      </g>
+    </g>
+    <g
+       id="g2718"
+       transform="matrix(0.58675283,0,0,0.57261472,49.265007,-5.1771889)"
+       style="stroke-width:0.60861462">
+      <rect
+         inkscape:label="#rect44671"
+         y="67.256615"
+         x="34.098217"
+         height="43.499996"
+         width="43.499996"
+         id="rect2716"
+         style="opacity:1;fill:#93ac93;fill-opacity:1;stroke:#000000;stroke-width:0.91292185;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1">
+        <title
+           id="title2714">Generic processor box</title>
+      </rect>
+    </g>
+    <g
+       id="g9153"
+       transform="translate(-3.4380107,-145.77061)">
+      <g
+         style="display:inline"
+         id="g7222"
+         transform="matrix(0.80000001,0,0,0.80000001,54.582096,-26.324129)">
+        <rect
+           ry="1.0830735"
+           style="fill:#eeffaa;fill-opacity:1;stroke:#22280b;stroke-width:0.42887527;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+           id="rect7216"
+           width="5.0556979"
+           height="4.816608"
+           x="36.084675"
+           y="285.51587" />
+        <text
+           transform="scale(1.2476837,0.80148518)"
+           id="text7220"
+           y="360.87384"
+           x="29.526852"
+           style="font-style:normal;font-weight:normal;font-size:3.17499995px;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+           xml:space="preserve"><tspan
+             y="360.87384"
+             x="29.526852"
+             id="tspan7218"
+             sodipodi:role="line"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.4929986px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:sans-serif;stroke-width:0.26458332">n</tspan></text>
+      </g>
+      <g
+         transform="translate(43.859881,85.129869)"
+         id="g2781">
+        <rect
+           y="116.9587"
+           x="31.277174"
+           height="3.8532865"
+           width="4.0445585"
+           id="rect7272-3"
+           style="fill:#eeffaa;fill-opacity:1;stroke:#22280b;stroke-width:0.34310022;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+           ry="0.86645883" />
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-weight:normal;font-size:2.12723947px;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.17726995"
+           x="30.392626"
+           y="125.32265"
+           id="text7276-1"
+           transform="scale(1.0449299,0.95700199)"><tspan
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.0102942px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:sans-serif;stroke-width:0.17726995"
+             sodipodi:role="line"
+             id="tspan7274-9"
+             x="30.392626"
+             y="125.32265">m</tspan></text>
+      </g>
+      <g
+         transform="translate(-66.476998,92.223551)"
+         id="g2776">
+        <rect
+           y="109.86502"
+           x="158.23962"
+           height="3.853286"
+           width="4.0445585"
+           id="rect7330-3"
+           style="fill:#eeffaa;fill-opacity:1;stroke:#22280b;stroke-width:0.34310022;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+           ry="0.86645889" />
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-weight:normal;font-size:2.05860138px;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.17155011"
+           x="127.73761"
+           y="141.07588"
+           id="text7334"
+           transform="scale(1.2476837,0.80148518)"><tspan
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.59439921px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:sans-serif;stroke-width:0.17155011"
+             sodipodi:role="line"
+             id="tspan7332"
+             x="127.73761"
+             y="141.07588">t</tspan></text>
+      </g>
+    </g>
+    <g
+       id="g25337-4"
+       transform="matrix(0.18832921,0,0,0.18832921,-24.095551,-36.638685)"
+       style="stroke-width:1.87319744">
+      <rect
+         transform="matrix(0.83701259,0.54718362,-0.83701259,0.54718362,0,0)"
+         y="70.130348"
+         x="766.40356"
+         height="20.83779"
+         width="20.83779"
+         id="rect25319-7"
+         style="opacity:1;fill:#a05a2c;fill-opacity:1;stroke:#000000;stroke-width:1.95720387;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:7.82881456, 1.95720365;stroke-dashoffset:0;stroke-opacity:1" />
+      <text
+         id="text25323-8"
+         y="476.03818"
+         x="577.36145"
+         style="font-style:normal;font-weight:normal;font-size:18.58947372px;line-height:1;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffff00;fill-opacity:1;stroke:none;stroke-width:1.40489805"
+         xml:space="preserve"><tspan
+           style="font-weight:bold;fill:#ffff00;stroke-width:1.40489805"
+           y="476.03818"
+           x="577.36145"
+           id="tspan25321-4"
+           sodipodi:role="line">?</tspan></text>
+      <path
+         inkscape:connector-curvature="0"
+         id="path25325-5"
+         d="m 600.23093,469.13974 h 14.20657 v 17.8125"
+         style="fill:none;stroke:#000000;stroke-width:1.40489805px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:1.40489805px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 564.9375,469.13974 h -14.20657 v 17.8125"
+         id="path25327-0"
+         inkscape:connector-curvature="0" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path25329-3"
+         d="M 582.78945,457.73766 V 443.34668"
+         style="fill:none;stroke:#000000;stroke-width:1.40489805px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    </g>
+    <g
+       id="g4655"
+       transform="matrix(0.21195764,0,0,0.20904474,40.638655,12.32416)"
+       style="display:inline;stroke-width:2.42075324">
+      <g
+         transform="translate(17.909472,-4.8786821)"
+         id="g4643"
+         style="stroke-width:2.42075324">
+        <path
+           inkscape:connector-curvature="0"
+           id="path4635"
+           d="m 147.58013,152.3853 c -1.82951,-2.74426 0.30492,-21.95407 0.30492,-21.95407 l 28.05242,-0.91476 c 0,0 20.7344,14.02622 27.13767,14.02622 0,0 12.50162,10.67211 -5.79343,15.24588 -18.29506,4.57376 -49.70158,-6.40327 -49.70158,-6.40327 z"
+           style="fill:#d35f5f;stroke:#000000;stroke-width:1.70797586;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+        <ellipse
+           ry="3.2016351"
+           rx="14.483587"
+           cy="130.27876"
+           cx="162.36864"
+           id="ellipse4637"
+           style="opacity:1;fill:#e3dbdb;fill-opacity:1;stroke:#000000;stroke-width:1.70797586;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+        <path
+           sodipodi:nodetypes="ccc"
+           inkscape:connector-curvature="0"
+           id="path4639"
+           d="m 203.59819,143.76694 c 0,0 -16.12067,-2.13443 -13.01742,15.85571 0,0 29.1543,1.21968 13.01742,-15.85571 z"
+           style="fill:#ffd5d5;stroke:#000000;stroke-width:1.70797586;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+        <ellipse
+           ry="3.6590116"
+           rx="3.5065527"
+           cy="146.28694"
+           cx="153.52603"
+           id="ellipse4641"
+           style="opacity:1;fill:#ffd5d5;fill-opacity:1;stroke:#000000;stroke-width:1.70797586;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      </g>
+      <g
+         id="g4633"
+         style="stroke-width:2.42075324">
+        <path
+           style="fill:#d35f5f;stroke:#000000;stroke-width:1.70797586;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           d="m 147.58013,152.3853 c -1.82951,-2.74426 0.30492,-21.95407 0.30492,-21.95407 l 28.05242,-0.91476 c 0,0 20.7344,14.02622 27.13767,14.02622 0,0 12.50162,10.67211 -5.79343,15.24588 -18.29506,4.57376 -49.70158,-6.40327 -49.70158,-6.40327 z"
+           id="path4623"
+           inkscape:connector-curvature="0" />
+        <ellipse
+           style="opacity:1;fill:#e3dbdb;fill-opacity:1;stroke:#000000;stroke-width:1.70797586;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+           id="path4621"
+           cx="162.36864"
+           cy="130.27876"
+           rx="14.483587"
+           ry="3.2016351" />
+        <path
+           style="fill:#ffd5d5;stroke:#000000;stroke-width:1.70797586;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           d="m 203.59819,143.76694 c 0,0 -16.12067,-2.13443 -13.01742,15.85571 0,0 29.1543,1.21968 13.01742,-15.85571 z"
+           id="path4625"
+           inkscape:connector-curvature="0"
+           sodipodi:nodetypes="ccc" />
+        <ellipse
+           style="opacity:1;fill:#ffd5d5;fill-opacity:1;stroke:#000000;stroke-width:1.70797586;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+           id="path4627"
+           cx="153.52603"
+           cy="146.28694"
+           rx="3.5065527"
+           ry="3.6590116" />
+      </g>
+    </g>
+    <g
+       id="g10381"
+       transform="matrix(4.5351618,0,0,4.5351618,-295.6526,-341.61731)">
+      <g
+         transform="matrix(0.26458333,0,0,0.26458333,42.356267,59.343296)"
+         id="use7377-7">
+        <circle
+           r="2.3991394"
+           cy="88.467102"
+           cx="148.45486"
+           id="circle10374"
+           style="display:inline;fill:#c8b7b7;fill-opacity:1;stroke:#241c1c;stroke-width:0.31750003;stroke-miterlimit:22.92558479;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+           inkscape:label="#circle17345">
+          <title
+             id="title10372">Processor parameter</title>
+        </circle>
+      </g>
+    </g>
+    <g
+       transform="matrix(4.5351618,0,0,4.5351618,-295.6526,-341.61731)"
+       id="g10389">
+      <g
+         id="g10387"
+         transform="matrix(0.26458333,0,0,0.26458333,42.356267,59.343296)">
+        <circle
+           inkscape:label="#circle17345"
+           style="display:inline;fill:#c8b7b7;fill-opacity:1;stroke:#241c1c;stroke-width:0.31750003;stroke-miterlimit:22.92558479;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+           id="circle10385"
+           cx="160.88727"
+           cy="88.467102"
+           r="2.3991394">
+          <title
+             id="title10383">Processor parameter</title>
+        </circle>
+      </g>
+    </g>
+    <g
+       transform="matrix(0.09891841,0,0,0.09891841,44.622402,-26.331011)"
+       id="g12718">
+      <circle
+         id="circle12712"
+         cx="236.45111"
+         cy="817.7868"
+         r="26.875"
+         style="stroke-width:0.73967892" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.93750006"
+         x="236.13068"
+         y="831.45563"
+         id="text12716"><tspan
+           sodipodi:role="line"
+           id="tspan12714"
+           x="236.13068"
+           y="831.45563"
+           style="text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.93750006">2</tspan></text>
+    </g>
+    <g
+       id="g12726"
+       transform="matrix(0.09891841,0,0,0.09891841,82.038227,-4.9505396)">
+      <circle
+         style="stroke-width:0.73967892"
+         r="26.875"
+         cy="817.7868"
+         cx="236.45111"
+         id="circle12720" />
+      <text
+         id="text12724"
+         y="831.45563"
+         x="236.13068"
+         style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.93750006"
+         xml:space="preserve"><tspan
+           style="text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.93750006"
+           y="831.45563"
+           x="236.13068"
+           id="tspan12722"
+           sodipodi:role="line">3</tspan></text>
+    </g>
+    <g
+       id="g12734"
+       transform="matrix(0.09891841,0,0,0.09891841,23.509187,-15.640775)">
+      <circle
+         style="stroke-width:0.73967892"
+         r="26.875"
+         cy="817.7868"
+         cx="236.45111"
+         id="circle12728" />
+      <text
+         id="text12732"
+         y="831.45563"
+         x="236.13068"
+         style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.93750006"
+         xml:space="preserve"><tspan
+           style="text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.93750006"
+           y="831.45563"
+           x="236.13068"
+           id="tspan12730"
+           sodipodi:role="line">1</tspan></text>
+    </g>
+  </g>
+</svg>

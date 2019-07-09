@@ -1,2 +1,6 @@
 ca.uqac.lif.cep.peg
+ca.uqac.lif.cep.peg.forecast
 ca.uqac.lif.cep.peg.ml
+ca.uqac.lif.cep.peg.util
+ca.uqac.lif.cep.peg.weka
+ca.uqac.lif.structures
