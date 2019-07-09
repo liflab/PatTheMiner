@@ -1,6 +1,6 @@
 /*
     A BeepBeep palette for mining event traces
-    Copyright (C) 2017 Sylvain Hallé
+    Copyright (C) 2017-2019 Sylvain Hallé
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Lesser General Public License as published
@@ -56,14 +56,14 @@ public class MapDistance extends BinaryFunction<HashMap,HashMap,Number>
 	@Override
 	public Number getValue(HashMap x, HashMap y)
 	{
-		int distance = 0;
+		float distance = 0;
 		for (Object k: x.keySet())
 		{
-			int n1 = ((Number) x.get(k)).intValue();
-			int n2 = 0;
+			float n1 = ((Number) x.get(k)).floatValue();
+			float n2 = 0;
 			if (y.containsKey(k))
 			{
-				n2 = ((Number) y.get(k)).intValue();
+				n2 = ((Number) y.get(k)).floatValue();
 			}
 			distance += Math.abs(n1 - n2);
 		}
@@ -72,7 +72,7 @@ public class MapDistance extends BinaryFunction<HashMap,HashMap,Number>
 		  // We count only entries in y that are not in x
       if (!x.containsKey(k))
       {
-        distance += Math.abs(((Number) y.get(k)).intValue());
+        distance += Math.abs(((Number) y.get(k)).floatValue());
       }
     }
 		return distance;
