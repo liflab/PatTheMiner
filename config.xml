@@ -71,7 +71,7 @@
       <name>Apache Commons Math</name>
       <classname>org.apache.commons.math3.ml.clustering.Cluster</classname>
       <files>
-        <zip>http://mirror.csclub.uwaterloo.ca/apache/commons/math/binaries/commons-math3-3.6.1-bin.zip</zip>
+        <zip>https://archive.apache.org/dist/commons/math/binaries/commons-math3-3.6.1-bin.zip</zip>
       </files>
       <bundle>false</bundle>
     </dependency>
@@ -115,7 +115,7 @@
       <name>Weka</name>
       <classname>weka.core.Instances</classname>
       <files>
-        <zip>http://managedway.dl.sourceforge.net/project/weka/weka-3-6/3.6.15/weka-3-6-15.zip</zip>
+        <zip>https://downloads.sourceforge.net/project/weka/weka-3-6/3.6.15/weka-3-6-15.zip</zip>
       </files>
       <bundle>false</bundle>
     </dependency>

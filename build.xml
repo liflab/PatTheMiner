@@ -186,7 +186,7 @@
   <target name="compile" depends="init,junit,check-rt" description="Compile the sources">
     <mkdir dir="${build.bindir}"/>
     <javac
-      target="1.6" source="1.6"
+      target="11" source="11"
       bootclasspath="${java6.boot.classpath}"
       srcdir="${build.srcdir}"
       destdir="${build.bindir}"
@@ -208,7 +208,7 @@
   <target name="compile-tests" depends="init,compile,junit" description="Compile the test sources">
     <mkdir dir="${build.test.bindir}"/>
     <javac
-      target="1.6" source="1.6"
+      target="11" source="11"
       bootclasspath="${java6.boot.classpath}"
       srcdir="${build.test.srcdir}"
       destdir="${build.test.bindir}"
@@ -401,7 +401,7 @@
     description="Install ant-contrib if not present">
     <echo message="ant-contrib is not installed. Downloading..." level="info"/>
     <mkdir dir="${build.libdir}"/>
-    <get src="http://sylvainhalle.github.io/AntRun/dependencies/ant-contrib-1.0b3-bin.zip" dest="${build.libdir}/ant-contrib-1.0b3-bin.zip"/>
+    <get src="https://sylvainhalle.github.io/AntRun/dependencies/ant-contrib-1.0b3-bin.zip" dest="${build.libdir}/ant-contrib-1.0b3-bin.zip"/>
     <unzip src="${build.libdir}/ant-contrib-1.0b3-bin.zip" dest="${build.libdir}">
       <patternset>
         <include name="**/*.jar"/>
@@ -419,14 +419,14 @@
   </condition>
   <target name="xmltask" if="${xmltask.absent}">
     <mkdir dir="${build.libdir}"/>
-    <get src="http://sylvainhalle.github.io/AntRun/dependencies/xmltask.jar" dest="${build.libdir}/${xmltask.jarname}"/>
+    <get src="https://sylvainhalle.github.io/AntRun/dependencies/xmltask.jar" dest="${build.libdir}/${xmltask.jarname}"/>
   </target>
 
   <!-- Target: download-rt6
        Download boot classpath for Java 1.6 and put it in the root folder
   -->
   <target name="download-rt6">
-    <get src="http://sylvainhalle.github.io/AntRun/dependencies/1.6.0_45/rt.jar" dest="${build.rtlocation}"/>
+    <get src="https://sylvainhalle.github.io/AntRun/dependencies/1.6.0_45/rt.jar" dest="${build.rtlocation}"/>
   </target>
 
   
